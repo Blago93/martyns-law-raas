@@ -105,6 +105,21 @@ app.get('/health', (req, res) => {
     res.status(200).send('OK');
 });
 
+const db = require('./db');
+
+app.get('/api/health/db', async (req, res) => {
+    try {
+        const result = await db.query('SELECT NOW()');
+        res.json({
+            status: 'connected',
+            serverTime: result.rows[0].now
+        });
+    } catch (error) {
+        console.error('DB Connection Failed:', error);
+        res.status(500).json({ status: 'error', error: error.message });
+    }
+});
+
 // Route: /api/audit/analyze
 // Triggers AI Risk Assessment on the uploaded video
 const { analyzeRisk } = require('./services/bedrock');
