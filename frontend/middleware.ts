@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// DISABLED: This middleware was blocking the login page
+// Re-enable if you want HTTP Basic Auth on the entire site
 export function middleware(req: NextRequest) {
+    // Allow all requests through - using form-based auth instead
+    return NextResponse.next();
+
+    /* Original Basic Auth Code (disabled)
     const basicAuth = req.headers.get('authorization');
 
     if (basicAuth) {
@@ -19,6 +25,7 @@ export function middleware(req: NextRequest) {
             'WWW-Authenticate': 'Basic realm="Secure Area"',
         },
     });
+    */
 }
 
 export const config = {
