@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PoundSign, CheckCircle, XCircle, ShieldCheck } from 'lucide-react';
+import { CheckCircle, XCircle, ShieldCheck } from 'lucide-react';
 
 export default function CostBenefitVisualizer() {
     const [budget, setBudget] = useState(0);
