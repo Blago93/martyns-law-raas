@@ -24,6 +24,7 @@ export default function ReviewAudit() {
     const [showOverrideModal, setShowOverrideModal] = useState(false);
     const [overrideText, setOverrideText] = useState('');
     const [digitalThreadId, setDigitalThreadId] = useState<string | null>(null);
+    const [userEmail, setUserEmail] = useState('');
 
     // AI Analysis State
     const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -70,7 +71,43 @@ export default function ReviewAudit() {
     };
 
     const handleSubmitToSIA = () => {
-        alert("Generating Regulatory Compliance PDF...\n\n(This would now email the report to you and the Regulator)");
+        if (!userEmail.trim()) {
+            alert('Please enter your email address to receive the report.');
+            return;
+        }
+
+        // Generate PDF using jsPDF
+        const { jsPDF } = require('jspdf');
+        const doc = new jsPDF();
+
+        // Add content to PDF
+        doc.setFontSize(20);
+        doc.text('Martyn\'s Law Compliance Report', 20, 20);
+
+        doc.setFontSize(12);
+        doc.text(`Digital Thread ID: ${digitalThreadId || 'N/A'}`, 20, 35);
+        doc.text(`Generated: ${new Date().toLocaleDateString()}`, 20, 45);
+        doc.text(`Report will be sent to: ${userEmail}`, 20, 55);
+
+        doc.setFontSize(14);
+        doc.text('Findings Summary:', 20, 70);
+
+        let yPos = 85;
+        findings.forEach((finding, index) => {
+            if (yPos > 270) {
+                doc.addPage();
+                yPos = 20;
+            }
+            doc.setFontSize(10);
+            doc.text(`${index + 1}. ${finding.type} - ${finding.severity}`, 20, yPos);
+            doc.text(`   Status: ${finding.status}`, 20, yPos + 5);
+            yPos += 15;
+        });
+
+        // Download PDF
+        doc.save(`compliance-report-${digitalThreadId || 'draft'}.pdf`);
+
+        alert(`PDF downloaded successfully!\n\nA copy will be sent to: ${userEmail}\n\n(Email functionality will be implemented in production)`);
         router.push('/dashboard');
     };
 
@@ -293,15 +330,31 @@ export default function ReviewAudit() {
                             </div>
                         )}
 
-                        {/* SUBMIT BUTTON */}
-                        <div className="mt-4">
+                        {/* SUBMIT SECTION */}
+                        <div className="mt-4 space-y-4">
+                            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6">
+                                <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    Your Email Address
+                                </label>
+                                <input
+                                    type="email"
+                                    value={userEmail}
+                                    onChange={(e) => setUserEmail(e.target.value)}
+                                    placeholder="your.email@example.com"
+                                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                                />
+                                <p className="text-xs text-slate-400 mt-2">
+                                    You'll receive a copy of the compliance report at this address.
+                                </p>
+                            </div>
+
                             <button
                                 disabled={!allReviewed}
                                 onClick={handleSubmitToSIA}
                                 className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 text-lg"
                             >
                                 {allReviewed ? (
-                                    <> <FileText className="w-5 h-5" /> Generate & Submit Report </>
+                                    <> <FileText className="w-5 h-5" /> Download PDF Report </>
                                 ) : (
                                     <> Review {findings.filter(f => f.status === 'PENDING_REVIEW').length} more items to submit </>
                                 )}
