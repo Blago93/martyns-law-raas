@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# This site is under development and not ready for public indexing
