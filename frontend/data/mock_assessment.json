@@ -1,0 +1,31 @@
+{
+    "venueId": "venue_123",
+    "timestamp": "2026-02-06T12:00:00Z",
+    "status": "DRAFT",
+    "findings": [
+        {
+            "id": "f_01",
+            "type": "EVACUATION",
+            "description": "Blocked Fire Exit in East Corridor. Obstruction identified: Cardboard boxes.",
+            "severity": "CRITICAL",
+            "timestamp": "00:12",
+            "status": "PENDING_REVIEW"
+        },
+        {
+            "id": "f_02",
+            "type": "INVACUATION",
+            "description": "Main Function Room windows lack shatter-resistant film. Potential blast hazard.",
+            "severity": "HIGH",
+            "timestamp": "01:45",
+            "status": "PENDING_REVIEW"
+        },
+        {
+            "id": "f_03",
+            "type": "COMMUNICATION",
+            "description": "No visible PA system speakers in the basement storage area.",
+            "severity": "MEDIUM",
+            "timestamp": "03:20",
+            "status": "PENDING_REVIEW"
+        }
+    ]
+}

@@ -1,0 +1,293 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "MartynsLawRaasStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "MartynsLawRaasStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "MartynsLawRaasStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://728768429638/eu-west-2",
+      "properties": {
+        "templateFile": "MartynsLawRaasStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::728768429638:role/cdk-hnb659fds-deploy-role-728768429638-eu-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::728768429638:role/cdk-hnb659fds-cfn-exec-role-728768429638-eu-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-728768429638-eu-west-2/30687191a03dda2990c5bc0cf8045ebcf98889d7a08cff7bbdd13a0c1d6cb2fc.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "MartynsLawRaasStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::728768429638:role/cdk-hnb659fds-lookup-role-728768429638-eu-west-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "MartynsLawRaasStack.assets"
+      ],
+      "metadata": {
+        "/MartynsLawRaasStack/RaasVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpc3D794FF8"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet1SubnetA18ED6AB"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet1RouteTable57DB4997"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet1RouteTableAssociation122B9603"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet1DefaultRoute95A26BCE"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet1EIPD5ADFB92"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet1NATGateway585E085B"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet2Subnet6568C2B5"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet2RouteTableA98E98E9"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet2RouteTableAssociationC9FC7B35"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet2DefaultRoute04BA60CC"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet2EIP618A5F06"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPublicSubnet2NATGateway657EDC85"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet1RouteTable59C51CAD"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet1RouteTableAssociation2DFA0B56"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet1DefaultRoute23D09943"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet2Subnet73518A6A"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet2RouteTableCEB72A58"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet2RouteTableAssociation09263073"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcPrivateSubnet2DefaultRoute445F9583"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcIGWDB28A1F7"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasVpcVPCGW2E0657D2"
+          }
+        ],
+        "/MartynsLawRaasStack/AppRunnerSG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppRunnerSGAFD09FB7"
+          }
+        ],
+        "/MartynsLawRaasStack/OpenSearchSG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenSearchSG4EBDF628"
+          }
+        ],
+        "/MartynsLawRaasStack/OpenSearchSG/from MartynsLawRaasStackAppRunnerSG39B290CE:443": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenSearchSGfromMartynsLawRaasStackAppRunnerSG39B290CE443035442A8"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasSearchDomain/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasSearchDomain3DB3B76C"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasSearchDomain/AccessPolicy/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasSearchDomainAccessPolicy309E091E"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasSearchDomain/AccessPolicy/CustomResourcePolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasSearchDomainAccessPolicyCustomResourcePolicy33C981EC"
+          }
+        ],
+        "/MartynsLawRaasStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+          }
+        ],
+        "/MartynsLawRaasStack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasAppRunnerInstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasAppRunnerInstanceRole59FCBF38"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasAppRunnerInstanceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasAppRunnerInstanceRoleDefaultPolicyF68D5040"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasAppRunnerAccessRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasAppRunnerAccessRoleD01D8CA4"
+          }
+        ],
+        "/MartynsLawRaasStack/VpcConnector": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcConnector"
+          }
+        ],
+        "/MartynsLawRaasStack/RaasBackendService": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RaasBackendService"
+          }
+        ],
+        "/MartynsLawRaasStack/AppRunnerUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppRunnerUrl"
+          }
+        ],
+        "/MartynsLawRaasStack/OpenSearchEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OpenSearchEndpoint"
+          }
+        ],
+        "/MartynsLawRaasStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/MartynsLawRaasStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/MartynsLawRaasStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "MartynsLawRaasStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
