@@ -24,6 +24,15 @@ try {
     console.error("Warning: Could not load legislation context:", err.message);
 }
 
+// Load Fire Safety Context
+const fireExitPath = path.join(__dirname, '../knowledge/fire_exit_requirements.txt');
+let fireExitContext = "Fire exit requirements not found.";
+try {
+    fireExitContext = fs.readFileSync(fireExitPath, 'utf8');
+} catch (err) {
+    console.error("Warning: Could not load fire exit context:", err.message);
+}
+
 async function analyzeRisk(imageBuffer, venueDetails) {
 
     // Convert Image to Base64
@@ -35,6 +44,9 @@ async function analyzeRisk(imageBuffer, venueDetails) {
     LEGAL CONTEXT (THE LAW):
     ${legislationContext}
     
+    FIRE SAFETY CONTEXT (UK STANDARDS):
+    ${fireExitContext}
+    
     VENUE DETAILS:
     - Name: ${venueDetails.name}
     - Capacity: ${venueDetails.capacity} (Tier: ${venueDetails.capacity >= 800 ? 'Enhanced' : 'Standard'})`;
@@ -42,12 +54,20 @@ async function analyzeRisk(imageBuffer, venueDetails) {
     const userMessage = `
         Perform a valid Risk Assessment under Section 27 of the Terrorism (Protection of Premises) Bill.
         
-        INSTRUCTIONS:
+        CRITICAL INSTRUCTIONS FOR FIRE EXIT IDENTIFICATION:
+        - A door is ONLY a fire exit if it has the GREEN "RUNNING MAN" SIGN (BS 5499-4:2013)
+        - Look for: White pictogram of person running toward door, on green background
+        - Also check for: "Fire Exit" or "Emergency Exit" text, directional arrows
+        - DO NOT assume a regular door is a fire exit just because it leads outside
+        - If no fire exit signage is visible, it is NOT a fire exit
+        
+        ANALYSIS STEPS:
         1. Analyze the provided image frame from the video audit.
-        2. Identify the specific security hazard (e.g., blocked exits, lack of searching, hostile reconnaissance opportunities).
-        3. Assess the RISK (Likelihood x Impact).
-        4. Propose a MITIGATION.
-        5. APPLY THE TEST: Is this mitigation "Reasonably Practicable"? 
+        2. Identify specific security hazards (e.g., blocked exits, lack of searching, hostile reconnaissance opportunities).
+        3. For exits: FIRST check for fire exit signage before classifying as fire exit.
+        4. Assess the RISK (Likelihood x Impact).
+        5. Propose a MITIGATION.
+        6. APPLY THE TEST: Is this mitigation "Reasonably Practicable"? 
            - Compare the Cost/Effort vs. the Risk Reduction.
            - If the cost is disproportionate to the risk, state that validly.
         
