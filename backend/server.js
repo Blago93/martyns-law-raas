@@ -9,9 +9,9 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Enable CORS for frontend (Next.js runs on 3000)
+// Enable CORS for frontend (localhost for dev, Vercel for production)
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://martyns-law-raas.vercel.app'],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
