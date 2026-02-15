@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    output: 'export', // For Capacitor (static site generation)
-    images: {
-        unoptimized: true // Mandatory for static export
-    }
+    // Note: 'output: export' removed for Vercel deployment
+    // Re-enable for Capacitor mobile builds if needed
 };
 
 module.exports = nextConfig;
