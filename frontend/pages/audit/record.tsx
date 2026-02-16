@@ -12,13 +12,58 @@ export default function RecordAudit() {
 
     // Live preview ref
     const videoRef = useRef<HTMLVideoElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null); // Hidden canvas for analysis
+
+    // Sharpness Detection (Laplacian Variance)
+    const calculateSharpness = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const data = imageData.data;
+        // Convert to grayscale
+        const gray = new Uint8ClampedArray(width * height);
+        for (let i = 0; i < data.length; i += 4) {
+            gray[i / 4] = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+        }
+
+        // Simple Laplacian convolution kernel
+        // [0,  1, 0]
+        // [1, -4, 1]
+        // [0,  1, 0]
+        let mean = 0;
+        const laplacian = new Float32Array(width * height);
+
+        for (let y = 1; y < height - 1; y++) {
+            for (let x = 1; x < width - 1; x++) {
+                const idx = y * width + x;
+                // Convolve
+                const val =
+                    gray[idx - width] +
+                    gray[idx - 1] - 4 * gray[idx] + gray[idx + 1] +
+                    gray[idx + width];
+
+                laplacian[idx] = val;
+                mean += val;
+            }
+        }
+        mean /= (width * height);
+
+        // Variance
+        let variance = 0;
+        for (let i = 0; i < laplacian.length; i++) {
+            variance += Math.pow(laplacian[i] - mean, 2);
+        }
+        return variance / (width * height);
+    };
 
     // Initial Stream Setup
     const setupStream = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
-                // In production app, we would select the back camera specifically if available
-                video: { facingMode: 'environment' },
+                // HIGH RES CONSTRAINTS
+                video: {
+                    facingMode: 'environment',
+                    width: { ideal: 1920 },
+                    height: { ideal: 1080 }
+                },
                 audio: true
             });
 
@@ -36,7 +81,7 @@ export default function RecordAudit() {
 
             recorder.onstop = async () => {
                 const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                // Hash the blob immediately
+                // Hash the blob
                 const buffer = await blob.arrayBuffer();
                 const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
                 const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -51,6 +96,9 @@ export default function RecordAudit() {
             setMediaRecorder(recorder);
             setStatus('Ready');
 
+            // Start Analysis Loop
+            analyzeFrameLoop();
+
         } catch (err: any) {
             console.error(err);
             let msg = 'Error: Camera/Mic Access Denied';
@@ -60,6 +108,46 @@ export default function RecordAudit() {
             if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost') msg += ' (Hint: HTTPS Required!)';
             setStatus(msg);
         }
+    };
+
+    // Frame Analysis Loop
+    const analyzeFrameLoop = () => {
+        if (!videoRef.current || !canvasRef.current) return;
+
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+
+        const checkFrame = () => {
+            if (video.paused || video.ended) return;
+
+            if (ctx && video.videoWidth > 0) {
+                canvas.width = 320; // Downscale for performance
+                canvas.height = (video.videoHeight / video.videoWidth) * 320;
+
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Check Sharpness
+                const score = calculateSharpness(ctx, canvas.width, canvas.height);
+                // console.log("Sharpness Score:", score); // Debug
+
+                // Threshold e.g. 50? Depends on content. 
+                // If SUPER sharp, save it as potential 'Best Frame' for AI
+                if (score > 100) {
+                    // Capture full res frame
+                    const fullCanvas = document.createElement('canvas');
+                    fullCanvas.width = video.videoWidth;
+                    fullCanvas.height = video.videoHeight;
+                    fullCanvas.getContext('2d')?.drawImage(video, 0, 0);
+                    const base64 = fullCanvas.toDataURL('image/jpeg', 0.9); // Quality 0.9
+
+                    // Store in LocalStorage for Review page to pick up (Simple data passing)
+                    localStorage.setItem('AuditBestFrame', base64);
+                }
+            }
+            requestAnimationFrame(checkFrame);
+        };
+        requestAnimationFrame(checkFrame);
     };
 
     useEffect(() => {
@@ -133,6 +221,7 @@ export default function RecordAudit() {
                             playsInline
                             className="w-full h-full object-cover"
                         ></video>
+                        <canvas ref={canvasRef} className="hidden" /> {/* Analysis Canvas */}
 
                         {/* Status Overlay */}
                         <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono border border-white/10 flex items-center gap-2">

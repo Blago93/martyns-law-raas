@@ -39,13 +39,19 @@ async function analyzeRisk(imageBuffer, venueDetails) {
     const base64Image = imageBuffer.toString('base64');
 
     // 1. Construct the Prompt (The "Blue Team" approach)
-    const systemPrompt = `You are a UK Counter-Terrorism Security Advisor (CTSA) and Legal Expert.
+    // 1. Construct the Prompt (The "Blue Team" approach)
+    const systemPrompt = `You are a UK Counter-Terrorism Security Advisor conduction a Martyn's Law compliance audit.
     
     LEGAL CONTEXT (THE LAW):
     ${legislationContext}
     
-    FIRE SAFETY CONTEXT (UK STANDARDS):
+    FIRE SAFETY & SIGNAGE CONTEXT (BS EN ISO 7010):
     ${fireExitContext}
+    
+    Scan this image for UK standard safety signage adhering to BS EN ISO 7010. 
+    - Fire Exits are rectangular GREEN signs featuring a white pictogram of a person running through a doorway.
+    - Assembly Points are square GREEN signs featuring a white pictogram of four arrows pointing inward toward a central figure.
+    - Fire Equipment signs are RED squares featuring a white flame.
     
     VENUE DETAILS:
     - Name: ${venueDetails.name}
@@ -55,21 +61,16 @@ async function analyzeRisk(imageBuffer, venueDetails) {
         Perform a valid Risk Assessment under Section 27 of the Terrorism (Protection of Premises) Bill.
         
         CRITICAL INSTRUCTIONS FOR FIRE EXIT IDENTIFICATION:
-        - A door is ONLY a fire exit if it has the GREEN "RUNNING MAN" SIGN (BS 5499-4:2013)
-        - Look for: White pictogram of person running toward door, on green background
-        - Also check for: "Fire Exit" or "Emergency Exit" text, directional arrows
-        - DO NOT assume a regular door is a fire exit just because it leads outside
-        - If no fire exit signage is visible, it is NOT a fire exit
-        
+        - A door is ONLY a fire exit if it has the GREEN "RUNNING MAN" SIGN (BS 5499-4:2013 / ISO 7010)
+        - DO NOT assume a regular door is a fire exit just because it leads outside.
+        - If no fire exit signage is visible, it is NOT a fire exit.
+
         ANALYSIS STEPS:
-        1. Analyze the provided image frame from the video audit.
-        2. Identify specific security hazards (e.g., blocked exits, lack of searching, hostile reconnaissance opportunities).
-        3. For exits: FIRST check for fire exit signage before classifying as fire exit.
-        4. Assess the RISK (Likelihood x Impact).
-        5. Propose a MITIGATION.
-        6. APPLY THE TEST: Is this mitigation "Reasonably Practicable"? 
-           - Compare the Cost/Effort vs. the Risk Reduction.
-           - If the cost is disproportionate to the risk, state that validly.
+        1. Analyze the provided image frame.
+        2. Identify specific security hazards.
+        3. Assess the RISK (Likelihood x Impact).
+        4. Propose a MITIGATION.
+        5. APPLY THE TEST: Is this mitigation "Reasonably Practicable"?
         
         OUTPUT FORMAT (JSON ONLY):
         {
@@ -82,6 +83,10 @@ async function analyzeRisk(imageBuffer, venueDetails) {
         }
     `;
 
+    // Reference Images (Placeholders as requested)
+    const REF_FIRE_EXIT_B64 = "PLACEHOLDER_BASE64_FIRE_EXIT_SIGN";
+    const REF_ASSEMBLY_B64 = "PLACEHOLDER_BASE64_ASSEMBLY_POINT_SIGN";
+
     // 2. Call Bedrock
     const input = {
         modelId: MODEL_ID,
@@ -90,11 +95,40 @@ async function analyzeRisk(imageBuffer, venueDetails) {
         body: JSON.stringify({
             anthropic_version: "bedrock-2023-05-31",
             max_tokens: 1000,
-            system: systemPrompt, // Claude 3 uses 'system' field
+            system: systemPrompt,
             messages: [
                 {
                     role: "user",
                     content: [
+                        // Few-Shot: Reference 1 (Fire Exit)
+                        /*
+                        {
+                            type: "image",
+                            source: {
+                                type: "base64",
+                                media_type: "image/jpeg",
+                                data: REF_FIRE_EXIT_B64
+                            }
+                        },
+                        {
+                            type: "text",
+                            text: "Reference: Standard UK Fire Exit Sign (BS EN ISO 7010)"
+                        },
+                        // Few-Shot: Reference 2 (Assembly Point)
+                        {
+                            type: "image",
+                            source: {
+                                type: "base64",
+                                media_type: "image/jpeg",
+                                data: REF_ASSEMBLY_B64
+                            }
+                        },
+                        {
+                            type: "text",
+                            text: "Reference: Standard UK Assembly Point Sign"
+                        },
+                        */
+                        // User Input
                         {
                             type: "image",
                             source: {
