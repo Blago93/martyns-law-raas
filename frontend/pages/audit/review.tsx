@@ -25,16 +25,41 @@ export default function ReviewAudit() {
     const [overrideText, setOverrideText] = useState('');
     const [digitalThreadId, setDigitalThreadId] = useState<string | null>(null);
     const [userEmail, setUserEmail] = useState('');
+    const [capturedImage, setCapturedImage] = useState<string | null>(null);
+
+    // Get API URL from env or default to localhost for dev
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
     // AI Analysis State
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    // FETCH FINDINGS FROM DB
+    const fetchFindings = async () => {
+        try {
+            const res = await fetch(`${API_URL}/api/audit/findings`);
+            if (res.ok) {
+                const data = await res.json();
+                setFindings(data);
+                if (data.length > 0 && !activeFinding) {
+                    setActiveFinding(data[0]);
+                }
+            }
+        } catch (error) {
+            console.error("Failed to fetch findings:", error);
+        }
+    };
+
     useEffect(() => {
-        // Load initial mock data (or empty if we want to start fresh)
-        // For now, let's keep mock data but allow adding to it
-        setFindings(mockData.findings as Finding[]);
-        setActiveFinding(mockData.findings[0] as Finding);
+        // 1. Load persisted findings from DB
+        fetchFindings();
+
+        // 2. Check for Captured Frame from Record Page
+        const storedImage = localStorage.getItem('AuditBestFrame');
+        if (storedImage) {
+            setCapturedImage(storedImage);
+            // We don't clear findings here anymore, we want to see history + new analysis capability
+        }
 
         const storedHash = localStorage.getItem('DigitalThreadStart');
         if (storedHash) {
@@ -42,12 +67,27 @@ export default function ReviewAudit() {
         }
     }, []);
 
-    const handleAccept = (id: string) => {
+    const handleAccept = async (id: string) => {
+        // Optimistic UI Update
         setFindings(prev => prev.map(f =>
             f.id === id ? { ...f, status: 'VALIDATED' } : f
         ));
+
+        // API Call
+        try {
+            await fetch(`${API_URL}/api/audit/findings/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'VALIDATED' })
+            });
+        } catch (e) {
+            console.error("Failed to update status", e);
+        }
+
         const idx = findings.findIndex(f => f.id === id);
+        // If next exists use it, else null
         if (idx < findings.length - 1) setActiveFinding(findings[idx + 1]);
+        else setActiveFinding(null);
     };
 
     const handleOverrideClick = () => {
@@ -55,19 +95,40 @@ export default function ReviewAudit() {
         setOverrideText('');
     };
 
-    const submitOverride = () => {
+    const submitOverride = async () => {
         if (!activeFinding || !overrideText.trim()) return;
+
+        const targetId = activeFinding.id;
+
+        // Optimistic UI
         setFindings(prev => prev.map(f =>
-            f.id === activeFinding.id ? {
+            f.id === targetId ? {
                 ...f,
                 status: 'OVERRIDDEN',
                 severity: 'LOW',
                 justification: overrideText
             } : f
         ));
+
         setShowOverrideModal(false);
-        const idx = findings.findIndex(f => f.id === activeFinding.id);
+
+        // API Call
+        try {
+            await fetch(`${API_URL}/api/audit/findings/${targetId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    status: 'OVERRIDDEN',
+                    justification: overrideText
+                })
+            });
+        } catch (e) {
+            console.error("Failed to update status", e);
+        }
+
+        const idx = findings.findIndex(f => f.id === targetId);
         if (idx < findings.length - 1) setActiveFinding(findings[idx + 1]);
+        else setActiveFinding(null);
     };
 
     const handleSubmitToSIA = () => {
@@ -79,35 +140,82 @@ export default function ReviewAudit() {
         // Generate PDF using jsPDF
         const { jsPDF } = require('jspdf');
         const doc = new jsPDF();
+        const pageWidth = doc.internal.pageSize.width;
 
-        // Add content to PDF
-        doc.setFontSize(20);
-        doc.text('Martyn\'s Law Compliance Report', 20, 20);
+        // --- HEADER ---
+        doc.setFillColor(30, 41, 59); // Slate 800
+        doc.rect(0, 0, pageWidth, 40, 'F');
 
-        doc.setFontSize(12);
-        doc.text(`Digital Thread ID: ${digitalThreadId || 'N/A'}`, 20, 35);
-        doc.text(`Generated: ${new Date().toLocaleDateString()}`, 20, 45);
-        doc.text(`Report will be sent to: ${userEmail}`, 20, 55);
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(22);
+        doc.text('Martyn\'s Law Compliance Report', 20, 25);
 
+        // --- METADATA ---
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(10);
+        doc.text(`Digital Thread ID: ${digitalThreadId || 'N/A'}`, 20, 50);
+        doc.text(`Date: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, 20, 55);
+        doc.text(`Report Recipient: ${userEmail}`, 20, 60);
+
+        // --- EVIDENCE IMAGE ---
+        let contentStartY = 70;
+        if (capturedImage) {
+            try {
+                const imgProps = doc.getImageProperties(capturedImage);
+                const imgWidth = 100;
+                const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+                doc.addImage(capturedImage, 'JPEG', 20, 70, imgWidth, imgHeight);
+                contentStartY = 70 + imgHeight + 10;
+            } catch (e) {
+                console.error("Could not add image to PDF", e);
+            }
+        }
+
+        // --- FINDINGS TABLE ---
         doc.setFontSize(14);
-        doc.text('Findings Summary:', 20, 70);
+        doc.setFont("helvetica", "bold");
+        doc.text('Risk Assessment Findings', 20, contentStartY);
 
-        let yPos = 85;
+        let yPos = contentStartY + 10;
+
         findings.forEach((finding, index) => {
-            if (yPos > 270) {
+            if (yPos > 250) {
                 doc.addPage();
                 yPos = 20;
             }
-            doc.setFontSize(10);
-            doc.text(`${index + 1}. ${finding.type} - ${finding.severity}`, 20, yPos);
-            doc.text(`   Status: ${finding.status}`, 20, yPos + 5);
-            yPos += 15;
+
+            // Box for each finding
+            doc.setDrawColor(200, 200, 200);
+            doc.setFillColor(finding.status === 'VALIDATED' ? 240 : 255, finding.status === 'VALIDATED' ? 253 : 255, finding.status === 'VALIDATED' ? 244 : 255); // Light green if valid
+            doc.rect(15, yPos, pageWidth - 30, 35, 'FD');
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 0, 0);
+            doc.text(`${index + 1}. ${finding.type} (${finding.severity})`, 20, yPos + 8);
+
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "normal");
+            const descLines = doc.splitTextToSize(finding.description, pageWidth - 50);
+            doc.text(descLines, 20, yPos + 15);
+
+            doc.setFontSize(8);
+            doc.setTextColor(100, 100, 100);
+            doc.text(`Status: ${finding.status}`, 20, yPos + 30);
+
+            if (finding.mitigation) {
+                doc.setTextColor(0, 100, 0);
+                const mitLines = doc.splitTextToSize(`Mitigation: ${finding.mitigation}`, pageWidth - 50);
+                doc.text(mitLines, 20, yPos + 25);
+            }
+
+            yPos += 40;
         });
 
         // Download PDF
         doc.save(`compliance-report-${digitalThreadId || 'draft'}.pdf`);
 
-        alert(`PDF downloaded successfully!\n\nA copy will be sent to: ${userEmail}\n\n(Email functionality will be implemented in production)`);
+        alert(`PDF downloaded successfully! 📄\n\nSent to: ${userEmail}`);
         router.push('/dashboard');
     };
 
@@ -124,8 +232,8 @@ export default function ReviewAudit() {
         formData.append('venue', JSON.stringify({ name: "Manchester Arena", capacity: 21000 })); // Dynamic later
 
         try {
-            // Call Backend
-            const res = await fetch('http://localhost:3001/api/audit/analyze', {
+            // Call Backend using API_URL const
+            const res = await fetch(`${API_URL}/api/audit/analyze`, {
                 method: 'POST',
                 body: formData,
             });
@@ -226,7 +334,10 @@ export default function ReviewAudit() {
                             {findings.map((f) => (
                                 <div
                                     key={f.id}
-                                    onClick={() => setActiveFinding(f)}
+                                    onClick={() => setActiveFinding(f)} // Keep clicked
+                                    // Hide if validated? Or just dim it. User wants "clear the box".
+                                    // Let's hide it from this list if status is valid
+                                    style={{ display: f.status === 'VALIDATED' ? 'none' : 'block' }}
                                     className={`p-4 rounded-xl cursor-pointer border transition-all ${activeFinding?.id === f.id
                                         ? 'bg-blue-600/10 border-blue-500/50'
                                         : 'bg-slate-900/40 border-transparent hover:bg-slate-800'
@@ -256,14 +367,52 @@ export default function ReviewAudit() {
                     <div className="lg:col-span-2 flex flex-col gap-6">
 
                         {/* VIDEO PLAYER */}
+                        {/* VIDEO/EVIDENCE PREVIEW */}
                         <div className="bg-black aspect-video rounded-3xl border border-white/10 shadow-2xl flex items-center justify-center relative group overflow-hidden">
-                            <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
-                            {/* Placeholder for uploaded image if it were a real video player handling specific frames */}
-                            <Play className="w-16 h-16 text-white/50 group-hover:text-white group-hover:scale-110 transition-all cursor-pointer" />
-                            <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs font-mono">
-                                Live Analysis Mode
-                            </div>
+                            {capturedImage ? (
+                                <>
+                                    <img src={capturedImage} alt="Evidence" className="w-full h-full object-cover opacity-80" />
+                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4">
+                                        <h4 className="text-white font-bold flex items-center gap-2">
+                                            <Camera className="w-4 h-4 text-blue-500" /> Analysis Frame
+                                        </h4>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
+                                    <Play className="w-16 h-16 text-white/50" />
+                                    <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs font-mono">
+                                        No Evidence Loaded
+                                    </div>
+                                </>
+                            )}
                         </div>
+
+                        {/* Auto-Run Analysis Button if we have image but no findings */}
+                        {capturedImage && findings.length === 0 && !isAnalyzing && (
+                            <div className="p-6 bg-blue-900/20 border border-blue-500/30 rounded-2xl flex items-center justify-between">
+                                <div>
+                                    <h3 className="font-bold text-blue-100">Evidence Ready</h3>
+                                    <p className="text-sm text-blue-300">Run AI analysis on this captured frame.</p>
+                                </div>
+                                <button
+                                    onClick={async () => {
+                                        // Convert base64 to blob/file
+                                        const res = await fetch(capturedImage);
+                                        const blob = await res.blob();
+                                        const file = new File([blob], "evidence.jpg", { type: "image/jpeg" });
+
+                                        // Mock event to reuse handleFileUpload
+                                        const event = { target: { files: [file] } } as any;
+                                        handleFileUpload(event);
+                                    }}
+                                    className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20"
+                                >
+                                    Start Analysis
+                                </button>
+                            </div>
+                        )}
 
                         {/* ACTION PANEL */}
                         {activeFinding && (

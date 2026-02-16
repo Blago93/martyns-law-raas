@@ -120,17 +120,37 @@ app.get('/api/health/db', async (req, res) => {
     }
 });
 
+// --- DATABASE SCHEMA INITIALIZATION ---
+const initDB = async () => {
+    try {
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS findings (
+                id SERIAL PRIMARY KEY,
+                digital_thread_id VARCHAR(255),
+                hazard_type VARCHAR(255),
+                severity VARCHAR(50),
+                description TEXT,
+                mitigation TEXT,
+                reasonably_practicable BOOLEAN,
+                status VARCHAR(50) DEFAULT 'PENDING_REVIEW', -- PENDING_REVIEW, VALIDATED, OVERRIDDEN
+                justification TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+        console.log("✅ Database 'findings' table verified/created.");
+    } catch (err) {
+        console.error("❌ Database Schema Error:", err);
+    }
+};
+
+initDB();
+
 // Route: /api/audit/analyze
 // Triggers AI Risk Assessment on the uploaded video
 const { analyzeRisk } = require('./services/bedrock');
 
 app.post('/api/audit/analyze', upload.single('frame'), async (req, res) => {
     try {
-        // In a real app, this would process the video file from the DB or S3.
-        // For this prototype, we accept a single "frame" image upload for immediate analysis.
-        // OR we can extract a frame from the previously uploaded video chunks.
-
-        // Option A: Client sends a frame snapshot (Easier for MVP)
         if (!req.file) {
             return res.status(400).send('No frame image provided for analysis.');
         }
@@ -139,6 +159,8 @@ app.post('/api/audit/analyze', upload.single('frame'), async (req, res) => {
             name: JSON.parse(req.body.venue || '{}').name || "Unknown Venue",
             capacity: JSON.parse(req.body.venue || '{}').capacity || 1000
         };
+
+        const digitalThreadId = req.body.threadId || `THREAD-${Date.now()}`;
 
         console.log(`Analyzing frame for ${venueDetails.name}...`);
 
@@ -151,13 +173,59 @@ app.post('/api/audit/analyze', upload.single('frame'), async (req, res) => {
         // Clean up temp file
         fs.unlinkSync(req.file.path);
 
+        // SAVE TO DB
+        const insertQuery = `
+            INSERT INTO findings (digital_thread_id, hazard_type, severity, description, mitigation, reasonably_practicable, status)
+            VALUES ($1, $2, $3, $4, $5, $6, 'PENDING_REVIEW')
+            RETURNING *;
+        `;
+        const values = [
+            digitalThreadId,
+            riskAssessment.hazard_type,
+            riskAssessment.severity,
+            riskAssessment.description,
+            riskAssessment.mitigation,
+            riskAssessment.reasonably_practicable
+        ];
+
+        const dbResult = await db.query(insertQuery, values);
+        const savedFinding = dbResult.rows[0];
+
         res.json({
             status: 'success',
-            data: riskAssessment
+            data: savedFinding
         });
 
     } catch (error) {
         console.error('Analysis failed:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Route: Get Findings
+app.get('/api/audit/findings', async (req, res) => {
+    try {
+        const result = await db.query('SELECT * FROM findings ORDER BY created_at DESC');
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching findings:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Route: Update Finding Status (Accept/Override)
+app.put('/api/audit/findings/:id', async (req, res) => {
+    const { id } = req.params;
+    const { status, justification } = req.body;
+
+    try {
+        const result = await db.query(
+            'UPDATE findings SET status = $1, justification = $2 WHERE id = $3 RETURNING *',
+            [status, justification, id]
+        );
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error updating finding:', error);
         res.status(500).json({ error: error.message });
     }
 });

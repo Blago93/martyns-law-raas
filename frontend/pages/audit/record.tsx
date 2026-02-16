@@ -212,8 +212,8 @@ export default function RecordAudit() {
             <main className="pt-24 pb-20 px-4 max-w-6xl mx-auto grid md:grid-cols-2 gap-8 min-h-[calc(100vh-80px)]">
 
                 {/* VIDEO PREVIEW */}
-                <div className="flex flex-col">
-                    <div className="bg-black rounded-3xl overflow-hidden aspect-[9/16] md:aspect-video shadow-2xl border border-white/10 relative">
+                <div className="flex flex-col relative">
+                    <div className="bg-black rounded-3xl overflow-hidden aspect-[9/16] md:aspect-video shadow-2xl border border-white/10 relative group">
                         <video
                             ref={videoRef}
                             autoPlay
@@ -222,6 +222,21 @@ export default function RecordAudit() {
                             className="w-full h-full object-cover"
                         ></video>
                         <canvas ref={canvasRef} className="hidden" /> {/* Analysis Canvas */}
+
+                        {/* Landscape Hint */}
+                        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 md:opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-sm">
+                            <div className="bg-black/60 text-white px-4 py-2 rounded-full flex items-center gap-2 border border-white/20">
+                                <div className="animate-spin-slow w-4 h-4 border-2 border-white/50 border-t-white rounded-full"></div>
+                                <span className="text-sm font-bold">For best results, rotate phone to Landscape ↔️</span>
+                            </div>
+                        </div>
+
+                        {/* Mobile-only visible landscape hint (always on if portrait) */}
+                        <div className="md:hidden absolute bottom-20 left-0 right-0 flex justify-center pointer-events-none">
+                            <div className="bg-black/60 backdrop-blur-md text-white/80 px-4 py-1 rounded-full text-xs border border-white/10">
+                                ↔️ Landscape Mode Recommended
+                            </div>
+                        </div>
 
                         {/* Status Overlay */}
                         <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono border border-white/10 flex items-center gap-2">

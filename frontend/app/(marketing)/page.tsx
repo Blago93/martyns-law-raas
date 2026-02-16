@@ -98,16 +98,32 @@ export default function MarketingPage() {
                 </div>
             </section>
 
-            {/* --- LEAD MAGNET: TIER CHECKER --- */}
-            <section id="check-tier" className="py-24 relative overflow-hidden">
+            {/* --- START JOURNEY SECTION (Replaced Tier Checker focus) --- */}
+            <section id="start-journey" className="py-24 relative overflow-hidden bg-slate-900">
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-                    <h2 className="text-3xl font-bold mb-8">Are You Compliant?</h2>
-                    <p className="text-slate-400 mb-12">Enter your venue capacity to see exactly where you stand under the new legislation.</p>
-                    <TierChecker />
+                    <h2 className="text-4xl font-bold mb-6">Start Your Compliance Journey</h2>
+                    <p className="text-slate-400 mb-10 text-lg">
+                        Ready to secure your venue? Begin your self-assessment or check your regulation tier below.
+                    </p>
+
+                    {/* Primary CTA */}
+                    <div className="mb-16">
+                        <Link href="/dashboard" className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 py-5 rounded-2xl text-xl transition-all shadow-xl shadow-blue-600/20 hover:scale-105">
+                            <Shield className="w-6 h-6" /> Start Video Assessment
+                        </Link>
+                        <p className="mt-4 text-slate-500 text-sm">No credit card required for initial scan.</p>
+                    </div>
+
+                    {/* Tier Checker Helper */}
+                    <div className="bg-slate-950/50 border border-white/5 rounded-3xl p-8 backdrop-blur-sm">
+                        <h3 className="text-xl font-bold mb-4 text-slate-300">Not sure if the law applies to you?</h3>
+                        <p className="text-slate-500 mb-6 text-sm">Check your tier status in 30 seconds:</p>
+                        <TierChecker />
+                    </div>
                 </div>
 
                 {/* Background Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-blue-900/10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-blue-900/10"></div>
             </section>
 
             {/* --- TRUST SIGNALS --- */}
