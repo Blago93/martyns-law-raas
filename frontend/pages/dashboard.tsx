@@ -65,9 +65,9 @@ export default function Dashboard() {
                         </div>
                         <h2 className="text-xl font-bold mb-2">My Reports</h2>
                         <p className="text-slate-400 text-sm mb-6">view your past compliance PDF certificates.</p>
-                        <button className="text-sm font-bold text-emerald-500 hover:text-emerald-400 flex items-center gap-1">
+                        <Link href="/archive" className="text-sm font-bold text-emerald-500 hover:text-emerald-400 flex items-center gap-1">
                             View Archive <ArrowRight className="w-4 h-4" />
-                        </button>
+                        </Link>
                     </div>
 
                     {/* ACTION 3: SETTINGS */}
@@ -77,9 +77,9 @@ export default function Dashboard() {
                         </div>
                         <h2 className="text-xl font-bold mb-2">Venue Settings</h2>
                         <p className="text-slate-400 text-sm mb-6">Manage capacity limits and responsible persons.</p>
-                        <button className="text-sm font-bold text-slate-400 hover:text-white flex items-center gap-1">
+                        <Link href="/settings" className="text-sm font-bold text-slate-400 hover:text-white flex items-center gap-1">
                             Manage <ArrowRight className="w-4 h-4" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

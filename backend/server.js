@@ -230,6 +230,28 @@ app.put('/api/audit/findings/:id', async (req, res) => {
     }
 });
 
+// Route: Get Audit History (Grouped by Digital Thread)
+app.get('/api/audit/history', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                digital_thread_id,
+                MIN(created_at) as date,
+                COUNT(*) as total_findings,
+                COUNT(CASE WHEN status = 'PENDING_REVIEW' THEN 1 END) as pending_count,
+                COUNT(CASE WHEN severity = 'CRITICAL' THEN 1 END) as critical_count
+            FROM findings
+            GROUP BY digital_thread_id
+            ORDER BY date DESC
+        `;
+        const result = await db.query(query);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching history:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(port, () => {
     console.log(`RaaS Backend listening on port ${port}`);
 });
