@@ -27,6 +27,8 @@ export default function ReviewAudit() {
     const [digitalThreadId, setDigitalThreadId] = useState<string | null>(null);
     const [userEmail, setUserEmail] = useState('');
     const [capturedImage, setCapturedImage] = useState<string | null>(null);
+    const [storedTranscript, setStoredTranscript] = useState<string | null>(null);
+    const [evidenceCount, setEvidenceCount] = useState(0);
 
     // Get API URL from env or default to localhost for dev
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
@@ -66,6 +68,12 @@ export default function ReviewAudit() {
         if (storedHash) {
             setDigitalThreadId(`${storedHash.substring(0, 8).toUpperCase()}-${storedHash.substring(storedHash.length - 4).toUpperCase()}`);
         }
+
+        const trans = localStorage.getItem('raas_transcript');
+        setStoredTranscript(trans);
+
+        const count = Object.keys(localStorage).filter(k => k.startsWith('raas_evidence_')).length;
+        setEvidenceCount(count);
     }, []);
 
     const handleAccept = async (id: string) => {
@@ -453,25 +461,25 @@ export default function ReviewAudit() {
                         )}
 
                         {/* TRANSCRIPT DISPLAY */}
-                        {localStorage.getItem('raas_transcript') && (
+                        {storedTranscript && (
                             <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
                                 <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                                     <div className="w-2 h-2 bg-red-500 rounded-full"></div> Verbal Compliance Notes
                                 </h4>
                                 <p className="text-slate-700 text-sm font-medium italic border-l-4 border-primary/20 pl-6 py-2 bg-slate-50 rounded-r-xl">
-                                    "{localStorage.getItem('raas_transcript')}"
+                                    "{storedTranscript}"
                                 </p>
                             </div>
                         )}
 
                         {/* EVIDENCE DOCS DISPLAY */}
-                        {Object.keys(localStorage).some(k => k.startsWith('raas_evidence_')) && (
+                        {evidenceCount > 0 && (
                             <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
                                 <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                                     <FileText className="w-4 h-4 text-emerald-600" /> Procedural Evidence
                                 </h4>
                                 <p className="text-slate-600 text-sm font-medium">
-                                    {Object.keys(localStorage).filter(k => k.startsWith('raas_evidence_')).length} verification documents integrated for cross-analysis.
+                                    {evidenceCount} verification documents integrated for cross-analysis.
                                 </p>
                             </div>
                         )}
