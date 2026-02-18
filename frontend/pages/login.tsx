@@ -32,85 +32,90 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 relative overflow-hidden font-sans selection:bg-primary/20 selection:text-primary">
             <Head>
-                <title>Login | RaaS Platform</title>
+                <title>Auditor Login | RaaS Platform</title>
             </Head>
 
-            {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+            {/* Subtle Gradient Background */}
+            <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
 
-            <div className="w-full max-w-md relative z-10">
+            <div className="w-full max-w-lg relative z-10">
 
                 {/* Logo Area */}
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-900/20 rounded-2xl mb-4 border border-blue-500/20">
-                        <Shield className="w-8 h-8 text-blue-500" />
+                <div className="text-center mb-12">
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl mb-6 shadow-2xl shadow-primary/10 border border-slate-100 group transition-all hover:scale-105">
+                        <Shield className="w-10 h-10 text-primary fill-primary/5" />
                     </div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Welcome Back</h1>
-                    <p className="text-slate-400 mt-2">Sign in to your compliance dashboard</p>
+                    <h1 className="text-4xl font-extrabold text-primary tracking-tight mb-3">Martyn's Law RaaS</h1>
+                    <p className="text-slate-500 font-medium">Authorised Compliance Port for Facility Auditors</p>
                 </div>
 
                 {/* Card */}
-                <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl">
+                <div className="bg-white border border-slate-200 p-12 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] relative overflow-hidden">
+                    <div className="absolute top-0 inset-x-0 h-1.5 bg-primary"></div>
 
                     {error && (
-                        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3 text-red-400 text-sm animate-pulse">
-                            <AlertCircle className="w-5 h-5" />
+                        <div className="mb-8 p-5 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-4 text-red-700 text-sm font-bold animate-in slide-in-from-top-4">
+                            <AlertCircle className="w-5 h-5 flex-shrink-0" />
                             {error}
                         </div>
                     )}
 
-                    <form onSubmit={handleLogin} className="space-y-6">
+                    <form onSubmit={handleLogin} className="space-y-8">
                         <div>
-                            <label className="block text-sm font-bold text-slate-300 mb-2 ml-1">Username</label>
+                            <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 ml-1">Auditor Identification</label>
                             <input
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                className="w-full bg-slate-950 border border-slate-700/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all placeholder-slate-600"
-                                placeholder="Enter your username"
+                                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-primary font-bold placeholder-slate-300 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-lg shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
+                                placeholder="Enter username"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-bold text-slate-300 mb-2 ml-1">Password</label>
+                            <div className="flex justify-between items-center mb-3 px-1">
+                                <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Secure Passcode</label>
+                                <a href="#" className="text-[10px] font-extrabold text-primary uppercase tracking-widest hover:underline">Reset Logic</a>
+                            </div>
                             <div className="relative">
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-950 border border-slate-700/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all placeholder-slate-600"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-primary font-bold placeholder-slate-300 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-lg shadow-[inset_0_2_4px_rgba(0,0,0,0.02)]"
                                     placeholder="••••••••"
                                     required
                                 />
-                                <Lock className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                                <Lock className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between text-xs">
-                            <label className="flex items-center gap-2 text-slate-400 cursor-pointer hover:text-slate-300">
-                                <input type="checkbox" className="rounded border-slate-700 bg-slate-800 text-blue-500 focus:ring-offset-0" />
-                                Remember me
+                        <div className="flex items-center text-xs px-1">
+                            <label className="flex items-center gap-3 text-slate-500 font-bold cursor-pointer group">
+                                <input type="checkbox" className="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary/20 cursor-pointer" />
+                                <span className="group-hover:text-primary transition-colors">Maintain Active Session</span>
                             </label>
-                            <a href="#" className="text-blue-400 hover:text-blue-300 font-medium">Forgot Password?</a>
                         </div>
 
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group"
+                            className="w-full bg-primary hover:bg-primary/95 text-white font-extrabold py-5 rounded-2xl transition-all shadow-2xl shadow-primary/20 flex items-center justify-center gap-3 disabled:bg-slate-100 disabled:text-slate-400 disabled:shadow-none hover:scale-[1.01] text-xl"
                         >
-                            {isLoading ? 'Signing In...' : 'Sign In'}
-                            {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+                            {isLoading ? 'Verifying Credentials...' : 'Authenticate'}
+                            {!isLoading && <ArrowRight className="w-6 h-6" />}
                         </button>
                     </form>
                 </div>
 
-                <p className="text-center text-slate-500 text-sm mt-8">
-                    Don't have an account? <a href="/signup" className="text-blue-400 hover:text-blue-300 font-bold transition-colors">Start Free Trial</a>
-                </p>
+                <div className="mt-12 text-center">
+                    <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">
+                        New Organization? <a href="/signup" className="text-primary hover:underline ml-2">Request Onboarding</a>
+                    </p>
+                </div>
             </div>
         </div>
     );

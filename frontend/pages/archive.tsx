@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import MarketingHeader from '../components/marketing/Header';
-import { Shield, ArrowRight, Calendar, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
+import { Shield, ArrowRight, Calendar, AlertTriangle, CheckCircle, Clock, Lock, Loader2 } from 'lucide-react';
 
 interface AuditSummary {
     digital_thread_id: string;
@@ -54,7 +54,7 @@ export default function ArchivePage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-500 selection:text-white">
+        <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-sans">
             <Head>
                 <title>Audit Archive | RaaS</title>
             </Head>
@@ -62,93 +62,99 @@ export default function ArchivePage() {
             <MarketingHeader />
 
             <main className="pt-32 pb-20 px-4 max-w-6xl mx-auto">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-slate-200">
                     <div>
-                        <h1 className="text-3xl font-bold mb-4 flex items-center gap-3">
-                            <Clock className="text-blue-500" /> Audit Archive
+                        <h1 className="text-3xl font-extrabold mb-4 flex items-center gap-3 text-primary tracking-tight">
+                            <Clock className="text-primary fill-primary/10" /> Audit Archive
                         </h1>
-                        <p className="text-slate-400 max-w-2xl">
-                            View past risk assessments and track your compliance progress over time.
-                            Each entry represents a unique "Digital Thread" of evidence.
+                        <p className="text-slate-500 font-medium max-w-2xl">
+                            Historical record of compliance assessments. Each entry represents a unique
+                            <span className="text-primary font-bold"> Digital Thread</span> of immutable evidence.
                         </p>
                     </div>
 
                     {/* FILTER CONTROLS */}
-                    <div className="flex bg-slate-900 p-1 rounded-xl border border-white/5">
+                    <div className="flex bg-slate-100 p-1 rounded-2xl border border-slate-200 shadow-sm">
                         <button
                             onClick={() => setFilter('ALL')}
-                            className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${filter === 'ALL' ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                            className={`px-6 py-2 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all ${filter === 'ALL' ? 'bg-white text-primary shadow-sm ring-1 ring-slate-200' : 'text-slate-400 hover:text-slate-600'}`}
                         >
-                            All
+                            All Logs
                         </button>
                         <button
                             onClick={() => setFilter('CRITICAL')}
-                            className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${filter === 'CRITICAL' ? 'bg-red-500/20 text-red-400 border border-red-500/50' : 'text-slate-400 hover:text-white'}`}
+                            className={`px-6 py-2 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all flex items-center gap-2 ${filter === 'CRITICAL' ? 'bg-red-50 text-red-700 ring-1 ring-red-200 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
                         >
-                            <AlertTriangle className="w-3 h-3" /> Critical
+                            <AlertTriangle className="w-3 h-3" /> Critical Hazards
                         </button>
                         <button
                             onClick={() => setFilter('PENDING')}
-                            className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${filter === 'PENDING' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/50' : 'text-slate-400 hover:text-white'}`}
+                            className={`px-6 py-2 rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all flex items-center gap-2 ${filter === 'PENDING' ? 'bg-amber-50 text-amber-700 ring-1 ring-amber-200 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
                         >
-                            <Clock className="w-3 h-3" /> Pending
+                            <Clock className="w-3 h-3" /> In Review
                         </button>
                     </div>
                 </div>
 
                 {loading ? (
-                    <div className="text-center py-20 text-slate-500 animate-pulse">Loading archive...</div>
+                    <div className="flex flex-col items-center justify-center py-40">
+                        <Loader2 className="w-12 h-12 text-primary/20 animate-spin mb-4" />
+                        <div className="text-slate-400 font-bold uppercase tracking-widest text-xs">Retrieving Digital Repository...</div>
+                    </div>
                 ) : filteredAudits.length === 0 ? (
-                    <div className="text-center py-20 bg-slate-900/50 rounded-3xl border border-white/5">
-                        <Shield className="w-16 h-16 text-slate-700 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-slate-300">No Audits Found</h3>
-                        <p className="text-slate-500 mb-8">
-                            {filter === 'ALL' ? "You haven't completed any video assessments yet." : "No audits match your filter."}
+                    <div className="text-center py-24 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm">
+                        <Shield className="w-20 h-20 text-slate-100 mx-auto mb-6" />
+                        <h3 className="text-2xl font-extrabold text-primary tracking-tight">Digital Archive Empty</h3>
+                        <p className="text-slate-500 font-medium mb-10 max-w-sm mx-auto">
+                            {filter === 'ALL' ? "No historical compliance data exists for this facility yet." : "No records match your current organizational filter."}
                         </p>
                         {filter === 'ALL' && (
                             <button
                                 onClick={() => router.push('/audit/record')}
-                                className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold"
+                                className="bg-primary hover:bg-primary/95 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-primary/20"
                             >
-                                Start New Audit
+                                Start First Audit
                             </button>
                         )}
                     </div>
                 ) : (
-                    <div className="grid gap-4">
+                    <div className="grid gap-6">
                         {filteredAudits.map((audit) => (
-                            <div key={audit.digital_thread_id} className="bg-slate-900 border border-white/5 rounded-2xl p-6 hover:border-blue-500/30 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                            <div key={audit.digital_thread_id} className="bg-white border border-slate-200 rounded-[2rem] p-8 hover:border-primary/20 transition-all flex flex-col md:flex-row items-center justify-between gap-8 group shadow-sm hover:shadow-md">
 
-                                <div>
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <span className="font-mono text-xs bg-slate-800 text-blue-400 px-2 py-1 rounded">
-                                            {audit.digital_thread_id}
-                                        </span>
-                                        <span className="text-slate-500 text-xs flex items-center gap-1">
-                                            <Calendar className="w-3 h-3" /> {new Date(audit.date).toLocaleDateString()}
-                                        </span>
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-lg flex items-center gap-2">
+                                            <Lock className="w-3 h-3 text-emerald-600" />
+                                            <span className="font-mono text-[10px] font-bold text-primary uppercase tracking-tighter">
+                                                ID: {audit.digital_thread_id}
+                                            </span>
+                                        </div>
+                                        <div className="text-slate-400 text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-lg">
+                                            <Calendar className="w-3.5 h-3.5" /> {new Date(audit.date).toLocaleDateString()}
+                                        </div>
                                     </div>
 
-                                    <div className="flex items-center gap-6 text-sm">
-                                        <div className="flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-slate-500"></div>
-                                            <span className="text-slate-300">Total: <strong>{audit.total_findings}</strong></span>
+                                    <div className="flex flex-wrap items-center gap-8 text-sm font-bold uppercase tracking-tight text-slate-400">
+                                        <div className="flex items-center gap-2.5">
+                                            <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                                            <span>Total Findings: <span className="text-primary">{audit.total_findings}</span></span>
                                         </div>
                                         {parseInt(audit.critical_count) > 0 && (
-                                            <div className="flex items-center gap-2 text-red-400">
+                                            <div className="flex items-center gap-2.5 text-red-600 bg-red-50/50 px-3 py-1.5 rounded-full border border-red-100">
                                                 <AlertTriangle className="w-4 h-4" />
-                                                <strong>{audit.critical_count} Critical</strong>
+                                                <span>{audit.critical_count} Critical Risks</span>
                                             </div>
                                         )}
                                         {parseInt(audit.pending_count) === 0 ? (
-                                            <div className="flex items-center gap-2 text-emerald-400">
+                                            <div className="flex items-center gap-2.5 text-emerald-600 bg-emerald-50/50 px-3 py-1.5 rounded-full border border-emerald-100">
                                                 <CheckCircle className="w-4 h-4" />
-                                                <strong>Completed</strong>
+                                                <span>Audit Formalized</span>
                                             </div>
                                         ) : (
-                                            <div className="flex items-center gap-2 text-amber-400">
+                                            <div className="flex items-center gap-2.5 text-amber-600 bg-amber-50/50 px-3 py-1.5 rounded-full border border-amber-100">
                                                 <Clock className="w-4 h-4" />
-                                                <strong>{audit.pending_count} Pending Review</strong>
+                                                <span>{audit.pending_count} Items in Review</span>
                                             </div>
                                         )}
                                     </div>
@@ -156,9 +162,9 @@ export default function ArchivePage() {
 
                                 <button
                                     onClick={() => continueAudit(audit.digital_thread_id)}
-                                    className="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 border border-white/5 transition-colors whitespace-nowrap"
+                                    className="bg-primary hover:bg-primary/95 text-white px-8 py-4 rounded-2xl font-bold text-sm flex items-center gap-3 transition-all shadow-xl shadow-primary/10 group-hover:scale-[1.02]"
                                 >
-                                    View Details <ArrowRight className="w-4 h-4" />
+                                    Access Archive <ArrowRight className="w-5 h-5" />
                                 </button>
                             </div>
                         ))}

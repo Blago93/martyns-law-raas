@@ -136,8 +136,25 @@ const initDB = async () => {
                 justification TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
+
+            CREATE TABLE IF NOT EXISTS venue_settings (
+                id INTEGER PRIMARY KEY,
+                venue_name VARCHAR(255),
+                max_capacity INTEGER,
+                address TEXT,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS responsible_persons (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255),
+                role VARCHAR(255),
+                email VARCHAR(255),
+                phone VARCHAR(50),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
         `);
-        console.log("✅ Database 'findings' table verified/created.");
+        console.log("✅ Database tables verified/created.");
     } catch (err) {
         console.error("❌ Database Schema Error:", err);
     }
@@ -149,47 +166,83 @@ initDB();
 // Triggers AI Risk Assessment on the uploaded video
 const { analyzeRisk } = require('./services/bedrock');
 
-app.post('/api/audit/analyze', upload.single('frame'), async (req, res) => {
+const { getSatelliteMap } = require('./services/maps');
+
+// 5. Audit Analysis Route (Hybrid)
+app.post('/api/audit/analyze', upload.fields([{ name: 'frame', maxCount: 1 }, { name: 'evidence_docs', maxCount: 5 }]), async (req, res) => {
     try {
-        if (!req.file) {
-            return res.status(400).send('No frame image provided for analysis.');
+        if (!req.files || !req.files['frame'] || req.files['frame'].length === 0) {
+            return res.status(400).json({ error: 'No video frame uploaded' });
         }
 
-        const venueDetails = {
-            name: JSON.parse(req.body.venue || '{}').name || "Unknown Venue",
-            capacity: JSON.parse(req.body.venue || '{}').capacity || 1000
+        const frameFile = req.files['frame'][0];
+        const evidenceFiles = req.files['evidence_docs'] || [];
+
+        // Parse Venue Details
+        const venueDetails = req.body.venue ? JSON.parse(req.body.venue) : {
+            name: "Unknown Venue",
+            capacity: 0,
+            address: "Unknown Address"
         };
 
         const digitalThreadId = req.body.threadId || `THREAD-${Date.now()}`;
+        const proceduralContext = req.body.context ? JSON.parse(req.body.context) : null;
+        const verbalNotes = req.body.verbal_notes || null;
+
+        // FETCH GEO CONTEXT (MOCK)
+        let mapBuffer = null;
+        if (venueDetails.address) {
+            mapBuffer = await getSatelliteMap(venueDetails.address);
+        }
 
         console.log(`Analyzing frame for ${venueDetails.name}...`);
+        if (proceduralContext) console.log("Context Injected:", proceduralContext);
+        if (verbalNotes) console.log("Verbal Notes:", verbalNotes);
+        if (evidenceFiles.length > 0) console.log(`Evidence Docs: ${evidenceFiles.length} files attached.`);
+        if (mapBuffer) console.log("Geo-Spatial Context: Map Loaded.");
 
-        // Read file buffer
-        const imageBuffer = fs.readFileSync(req.file.path);
+        // Read file buffers
+        const imageBuffer = fs.readFileSync(frameFile.path);
 
-        // Call AI
-        const riskAssessment = await analyzeRisk(imageBuffer, venueDetails);
+        // Read evidence buffers
+        const evidenceBuffers = evidenceFiles.map(f => fs.readFileSync(f.path));
 
-        // Clean up temp file
-        fs.unlinkSync(req.file.path);
+        // Call AI with Hybrid Context + Geo
+        const riskAssessment = await analyzeRisk(imageBuffer, venueDetails, proceduralContext, verbalNotes, evidenceBuffers, mapBuffer);
 
-        // SAVE TO DB
-        const insertQuery = `
-            INSERT INTO findings (digital_thread_id, hazard_type, severity, description, mitigation, reasonably_practicable, status)
-            VALUES ($1, $2, $3, $4, $5, $6, 'PENDING_REVIEW')
-            RETURNING *;
-        `;
-        const values = [
-            digitalThreadId,
-            riskAssessment.hazard_type,
-            riskAssessment.severity,
-            riskAssessment.description,
-            riskAssessment.mitigation,
-            riskAssessment.reasonably_practicable
-        ];
+        // Clean up temp files
+        fs.unlinkSync(frameFile.path);
+        evidenceFiles.forEach(f => fs.unlinkSync(f.path));
 
-        const dbResult = await db.query(insertQuery, values);
-        const savedFinding = dbResult.rows[0];
+        // SAVE TO DB (Optional for Verification)
+        let savedFinding = {
+            ...riskAssessment,
+            id: 'temp-' + Date.now(),
+            status: 'PENDING_REVIEW',
+            model_used: riskAssessment._model_used // Preserve model info
+        };
+
+        try {
+            const insertQuery = `
+                INSERT INTO findings (digital_thread_id, hazard_type, severity, description, mitigation, reasonably_practicable, status)
+                VALUES ($1, $2, $3, $4, $5, $6, 'PENDING_REVIEW')
+                RETURNING *;
+            `;
+            const values = [
+                digitalThreadId,
+                riskAssessment.hazard_type,
+                riskAssessment.severity,
+                riskAssessment.description,
+                riskAssessment.mitigation,
+                riskAssessment.reasonably_practicable
+            ];
+
+            const dbResult = await db.query(insertQuery, values);
+            // Merge DB ID with AI model metadata
+            savedFinding = { ...dbResult.rows[0], model_used: riskAssessment._model_used };
+        } catch (dbError) {
+            console.warn("⚠️ Database Insert Failed (Running in Verification/Offline Mode):", dbError.message);
+        }
 
         res.json({
             status: 'success',
@@ -198,7 +251,16 @@ app.post('/api/audit/analyze', upload.single('frame'), async (req, res) => {
 
     } catch (error) {
         console.error('Analysis failed:', error);
-        res.status(500).json({ error: error.message });
+
+        // Return a structured error with a hint for the user
+        const isQuotaError = error.message.includes('rate-limited') || error.message.includes('quota');
+
+        res.status(500).json({
+            error: error.message,
+            hint: isQuotaError
+                ? 'AI daily quotas are currently exhausted. Please try again after midnight UTC or contact support for a quota increase.'
+                : 'An unexpected error occurred during AI analysis.'
+        });
     }
 });
 
@@ -248,6 +310,72 @@ app.get('/api/audit/history', async (req, res) => {
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching history:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// --- SETTINGS API ---
+
+// Route: Get Venue Settings & Responsible Persons
+app.get('/api/settings', async (req, res) => {
+    try {
+        // 1. Get Venue Config (Singleton - ID 1)
+        const venueRes = await db.query('SELECT * FROM venue_settings WHERE id = 1');
+        let venue = venueRes.rows[0];
+
+        // Default if not exists
+        if (!venue) {
+            venue = { venue_name: 'My Venue', max_capacity: 0, address: '' };
+        }
+
+        // 2. Get Responsible Persons
+        const personsRes = await db.query('SELECT * FROM responsible_persons ORDER BY created_at ASC');
+
+        res.json({
+            venue,
+            responsiblePersons: personsRes.rows
+        });
+    } catch (error) {
+        console.error('Error getting settings:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Route: Save Venue Settings
+app.post('/api/settings', async (req, res) => {
+    const { venue, responsiblePersons } = req.body;
+
+    try {
+        await db.query('BEGIN');
+
+        // 1. Upsert Venue Settings (Force ID 1)
+        const venueQuery = `
+            INSERT INTO venue_settings (id, venue_name, max_capacity, address, updated_at)
+            VALUES (1, $1, $2, $3, NOW())
+            ON CONFLICT (id) DO UPDATE 
+            SET venue_name = EXCLUDED.venue_name, 
+                max_capacity = EXCLUDED.max_capacity,
+                address = EXCLUDED.address,
+                updated_at = NOW()
+            RETURNING *;
+        `;
+        await db.query(venueQuery, [venue.venue_name, venue.max_capacity, venue.address]);
+
+        // 2. Sync Responsible Persons (Delete all & Re-insert strategy for simplicity)
+        // In a real app with relationships, we would be more careful, but this ensures the list matches UI exactly.
+        await db.query('DELETE FROM responsible_persons');
+
+        if (responsiblePersons && responsiblePersons.length > 0) {
+            const personValues = responsiblePersons.map(p => `('${p.name}', '${p.role}', '${p.email}', '${p.phone || ''}')`).join(',');
+            await db.query(`INSERT INTO responsible_persons (name, role, email, phone) VALUES ${personValues}`);
+        }
+
+        await db.query('COMMIT');
+        res.json({ status: 'success', message: 'Settings saved successfully' });
+
+    } catch (error) {
+        await db.query('ROLLBACK');
+        console.error('Error saving settings:', error);
         res.status(500).json({ error: error.message });
     }
 });

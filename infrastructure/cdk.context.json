@@ -2,6 +2,7 @@
   "availability-zones:account=728768429638:region=eu-west-2": [
     "eu-west-2a",
     "eu-west-2b",
-    "eu-west-2c"
+    "eu-west-2c",
+    "eu-west-2-wl2-man-wlz-1"
   ]
 }

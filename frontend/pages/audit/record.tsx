@@ -54,9 +54,33 @@ export default function RecordAudit() {
         return variance / (width * height);
     };
 
+    // Transcript State
+    const [transcript, setTranscript] = useState('');
+    const recognitionRef = useRef<any>(null);
+
     // Initial Stream Setup
     const setupStream = async () => {
         try {
+            // Setup Speech Recognition
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+                recognitionRef.current = new SpeechRecognition();
+                recognitionRef.current.continuous = true;
+                recognitionRef.current.interimResults = true;
+
+                recognitionRef.current.onresult = (event: any) => {
+                    let finalTranscript = '';
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            finalTranscript += event.results[i][0].transcript + '. ';
+                        }
+                    }
+                    if (finalTranscript) {
+                        setTranscript(prev => prev + finalTranscript);
+                    }
+                };
+            }
+
             const stream = await navigator.mediaDevices.getUserMedia({
                 // HIGH RES CONSTRAINTS
                 video: {
@@ -89,6 +113,11 @@ export default function RecordAudit() {
 
                 setHash(hashHex);
                 localStorage.setItem('DigitalThreadStart', hashHex);
+
+                // SAVE TRANSCRIPT
+                console.log("Saving Transcript:", transcript);
+                localStorage.setItem('raas_transcript', transcript);
+
                 // Redirect to Review Portal
                 window.location.href = '/audit/review';
             };
@@ -164,8 +193,15 @@ export default function RecordAudit() {
     const startRecording = () => {
         if (!mediaRecorder) return;
         setRecordedChunks([]); // Clear previous
+        setTranscript(''); // Clear transcript
         setHash(null);
         mediaRecorder.start(1000); // 1s slice for potential streaming
+
+        // Start Speech
+        if (recognitionRef.current) {
+            try { recognitionRef.current.start(); } catch (e) { console.log("Speech already started"); }
+        }
+
         setStatus('Recording...');
     };
 
@@ -173,6 +209,10 @@ export default function RecordAudit() {
         if (!mediaRecorder) return;
         if (mediaRecorder.state === 'recording') {
             mediaRecorder.pause();
+
+            // Pause Speech
+            if (recognitionRef.current) recognitionRef.current.stop();
+
             setIsPaused(true);
             setStatus('Paused');
         }
@@ -182,6 +222,12 @@ export default function RecordAudit() {
         if (!mediaRecorder) return;
         if (mediaRecorder.state === 'paused') {
             mediaRecorder.resume();
+
+            // Resume Speech
+            if (recognitionRef.current) {
+                try { recognitionRef.current.start(); } catch (e) { console.log("Speech restart failed", e); }
+            }
+
             setIsPaused(false);
             setStatus('Recording...');
         }
@@ -190,104 +236,101 @@ export default function RecordAudit() {
     const stopRecording = () => {
         if (!mediaRecorder) return;
         mediaRecorder.stop();
+        if (recognitionRef.current) recognitionRef.current.stop();
         // State update handled in onstop
     };
 
     const restartRecording = () => {
         // Discard data and reset
         setRecordedChunks([]);
+        setTranscript('');
         setHash(null);
         setIsPaused(false);
         // Ensure recorder is reset or state is clear
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
             mediaRecorder.stop();
         }
+        if (recognitionRef.current) recognitionRef.current.stop();
         setStatus('Ready');
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-500 selection:text-white">
+        <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-sans">
             <MarketingHeader />
 
             <main className="pt-24 pb-20 px-4 max-w-6xl mx-auto grid md:grid-cols-2 gap-8 min-h-[calc(100vh-80px)]">
 
                 {/* VIDEO PREVIEW */}
-                <div className="flex flex-col relative">
-                    <div className="bg-black rounded-3xl overflow-hidden aspect-[9/16] md:aspect-video shadow-2xl border border-white/10 relative group">
+                <div className="flex flex-col relative order-2 md:order-1">
+                    <div className="bg-slate-900 rounded-[2.5rem] overflow-hidden aspect-[9/16] md:aspect-video shadow-2xl border border-slate-200 relative group">
                         <video
                             ref={videoRef}
                             autoPlay
                             muted
                             playsInline
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover opacity-90"
                         ></video>
                         <canvas ref={canvasRef} className="hidden" /> {/* Analysis Canvas */}
 
                         {/* Landscape Hint */}
-                        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 md:opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-sm">
-                            <div className="bg-black/60 text-white px-4 py-2 rounded-full flex items-center gap-2 border border-white/20">
-                                <div className="animate-spin-slow w-4 h-4 border-2 border-white/50 border-t-white rounded-full"></div>
-                                <span className="text-sm font-bold">For best results, rotate phone to Landscape ↔️</span>
-                            </div>
-                        </div>
-
-                        {/* Mobile-only visible landscape hint (always on if portrait) */}
-                        <div className="md:hidden absolute bottom-20 left-0 right-0 flex justify-center pointer-events-none">
-                            <div className="bg-black/60 backdrop-blur-md text-white/80 px-4 py-1 rounded-full text-xs border border-white/10">
-                                ↔️ Landscape Mode Recommended
+                        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 backdrop-blur-sm">
+                            <div className="bg-white/90 backdrop-blur text-primary px-6 py-3 rounded-full flex items-center gap-3 border border-white/20 shadow-xl">
+                                <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                                <span className="text-xs font-extrabold uppercase tracking-widest">Landscape Recommended for Fidelity</span>
                             </div>
                         </div>
 
                         {/* Status Overlay */}
-                        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-mono border border-white/10 flex items-center gap-2">
-                            <div className={`w-2 h-2 rounded-full ${status === 'Recording...' ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></div>
+                        <div className="absolute top-6 left-6 bg-background/80 backdrop-blur-md px-4 py-2 rounded-2xl text-[10px] font-extrabold uppercase tracking-widest border border-slate-200/50 flex items-center gap-3 text-primary shadow-lg">
+                            <div className={`w-2.5 h-2.5 rounded-full ${status === 'Recording...' ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></div>
                             {status}
                         </div>
                     </div>
 
                     {/* CONTROLS */}
-                    <div className="mt-6 flex justify-center gap-4">
+                    <div className="mt-8 flex justify-center items-center gap-8">
                         {status === 'Ready' || status.includes('Error') ? (
                             <button
                                 onClick={startRecording}
-                                className="bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 transition-all shadow-lg shadow-red-600/20"
+                                className="bg-red-600 hover:bg-red-700 text-white font-extrabold py-5 px-10 rounded-full flex items-center gap-4 transition-all shadow-2xl shadow-red-600/20 hover:scale-105 active:scale-95"
                             >
-                                <div className="w-4 h-4 bg-white rounded-full"></div> Start Recording
+                                <div className="w-5 h-5 bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.8)]"></div>
+                                <span className="uppercase tracking-widest text-sm">Initiate Evidence Capture</span>
                             </button>
                         ) : (
                             <>
                                 <button
                                     onClick={stopRecording}
-                                    className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-4 rounded-full transition-all shadow-lg shadow-emerald-600/20"
-                                    title="Finish & Save"
+                                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-6 rounded-full transition-all shadow-xl shadow-emerald-600/20 hover:scale-110 active:scale-90"
+                                    title="Seal & Submit"
                                 >
-                                    <Square className="w-6 h-6 fill-current" />
+                                    <Square className="w-8 h-8 fill-current" />
                                 </button>
 
                                 {isPaused ? (
                                     <button
                                         onClick={resumeRecording}
-                                        className="bg-amber-500 hover:bg-amber-400 text-black font-bold p-4 rounded-full transition-all"
+                                        className="bg-primary hover:bg-primary/95 text-white font-bold p-6 rounded-full transition-all shadow-xl shadow-primary/20 hover:scale-110 active:scale-90"
                                         title="Resume"
                                     >
-                                        <Play className="w-6 h-6 fill-current" />
+                                        <Play className="w-8 h-8 fill-current" />
                                     </button>
                                 ) : (
                                     <button
                                         onClick={pauseRecording}
-                                        className="bg-amber-500 hover:bg-amber-400 text-black font-bold p-4 rounded-full transition-all"
+                                        className="bg-amber-500 hover:bg-amber-600 text-white font-bold p-6 rounded-full transition-all shadow-xl shadow-amber-500/20 hover:scale-110 active:scale-90"
                                         title="Pause"
                                     >
-                                        <Pause className="w-6 h-6 fill-current" />
+                                        <Pause className="w-8 h-8 fill-current" />
                                     </button>
                                 )}
 
                                 <button
                                     onClick={restartRecording}
-                                    className="bg-slate-700 hover:bg-slate-600 text-white font-bold p-4 rounded-full transition-all"
-                                    title="Disclaimer"
+                                    className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold p-6 rounded-full transition-all border border-slate-200 hover:scale-110 active:scale-90"
+                                    title="Discard & Restart"
                                 >
-                                    <RefreshCw className="w-6 h-6" />
+                                    <RefreshCw className="w-8 h-8" />
                                 </button>
                             </>
                         )}
@@ -295,37 +338,38 @@ export default function RecordAudit() {
                 </div>
 
                 {/* GUIDANCE PANEL */}
-                <div className="bg-slate-900/50 p-8 rounded-3xl border border-white/5 flex flex-col justify-center">
-                    <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
-                        <Camera className="text-blue-500" /> Video Audit
+                <div className="bg-white p-10 rounded-[2.5rem] border border-slate-200 flex flex-col justify-center shadow-sm order-1 md:order-2 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+
+                    <h1 className="text-3xl font-extrabold mb-8 flex items-center gap-4 text-primary tracking-tight">
+                        <Camera className="text-primary fill-primary/10 w-8 h-8" /> Digital Audit
                     </h1>
 
-                    <div className="space-y-6 text-slate-300">
-                        <div className="flex gap-4">
-                            <div className="mt-1"><AlertCircle className="text-blue-500" /></div>
+                    <div className="space-y-8 text-slate-600">
+                        <div className="flex gap-5">
+                            <div className="mt-1 bg-primary/10 p-2 rounded-xl"><AlertCircle className="text-primary w-5 h-5" /></div>
                             <div>
-                                <h3 className="font-bold text-white">How to Film</h3>
-                                <p className="text-sm mt-1">Walk slowly around your venue. Film at a steady pace. Keep the camera at eye level.</p>
+                                <h3 className="font-extrabold text-primary uppercase tracking-widest text-xs mb-2">Protocol: Capture Motion</h3>
+                                <p className="text-sm font-medium leading-relaxed">Walk deliberately through the security perimeter. The AI tracks <span className="text-primary font-bold">digital continuity</span> to ensure evidence integrity.</p>
                             </div>
                         </div>
 
-                        <div className="flex gap-4">
-                            <div className="mt-1"><CheckCircle className="text-emerald-500" /></div>
+                        <div className="flex gap-5">
+                            <div className="mt-1 bg-emerald-50 p-2 rounded-xl"><CheckCircle className="text-emerald-600 w-5 h-5" /></div>
                             <div>
-                                <h3 className="font-bold text-white">Key Areas to Capture</h3>
-                                <ul className="text-sm mt-1 space-y-1 list-disc list-inside text-slate-400">
-                                    <li>All public Entrances & Exits</li>
-                                    <li>Crowd gathering points (Bars, Stages)</li>
-                                    <li>Fire Exits (Show they are clear)</li>
-                                    <li>Parking or delivery areas</li>
+                                <h3 className="font-extrabold text-emerald-600 uppercase tracking-widest text-xs mb-2">Required Coverage</h3>
+                                <ul className="text-sm font-medium space-y-2 text-slate-500">
+                                    <li className="flex items-center gap-2 underline decoration-emerald-200 decoration-2 underline-offset-4">Primary & Secondary Egress</li>
+                                    <li className="flex items-center gap-2 underline decoration-emerald-200 decoration-2 underline-offset-4">High-Occupancy Concentration Zones</li>
+                                    <li className="flex items-center gap-2 underline decoration-emerald-200 decoration-2 underline-offset-4">Physical Security Barriers (Bollards/Gates)</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div className="mt-8 p-4 bg-blue-900/20 border border-blue-500/20 rounded-xl">
-                        <p className="text-xs text-blue-300">
-                            <strong>Note:</strong> Your video is processed locally to generate a cryptographic hash (Digital Thread). It is then securely uploaded for AI analysis in the next step.
+                    <div className="mt-10 p-6 bg-slate-50 border border-slate-200 rounded-3xl relative">
+                        <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                            <span className="font-bold text-primary">Cryptographic Assurance:</span> Your capture generates an immutable <span className="font-mono text-primary/70">SHA-256</span> thread locally before secure cloud distribution.
                         </p>
                     </div>
 

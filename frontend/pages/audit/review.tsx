@@ -15,6 +15,7 @@ interface Finding {
     justification?: string;
     mitigation?: string; // Added from AI
     reasonably_practicable?: boolean; // Added from AI
+    model_used?: string; // Added from AI
 }
 
 export default function ReviewAudit() {
@@ -229,7 +230,34 @@ export default function ReviewAudit() {
         // Prepare Form Data
         const formData = new FormData();
         formData.append('frame', file);
-        formData.append('venue', JSON.stringify({ name: "Manchester Arena", capacity: 21000 })); // Dynamic later
+
+        // Dynamic Venue Details from LocalStorage if available, else Mock
+        const venueName = localStorage.getItem('raas_venue') || "Manchester Arena";
+        formData.append('venue', JSON.stringify({ name: venueName, capacity: 21000 }));
+
+        // HYBRID AUDIT: Inject Procedural Context
+        const precheck = localStorage.getItem('raas_precheck');
+        if (precheck) {
+            formData.append('context', precheck);
+        }
+
+        // HYBRID AUDIT: Inject Audio Transcript
+        const transcript = localStorage.getItem('raas_transcript');
+        if (transcript) {
+            formData.append('verbal_notes', transcript);
+        }
+
+        // HYBRID AUDIT: Inject Document Evidence
+        // Loop through all keys in localStorage to find "raas_evidence_"
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('raas_evidence_')) {
+                const evidenceBase64 = localStorage.getItem(key);
+                if (evidenceBase64) {
+                    formData.append('evidence_docs', evidenceBase64); // Send as array of strings
+                }
+            }
+        }
 
         try {
             // Call Backend using API_URL const
@@ -251,17 +279,19 @@ export default function ReviewAudit() {
                 severity: aiResult.severity as any || "MEDIUM",
                 timestamp: new Date().toLocaleTimeString(),
                 status: 'PENDING_REVIEW',
-                mitigation: aiResult.mitigation,
-                reasonably_practicable: aiResult.reasonably_practicable
+                mitigation: aiResult.mitigation || undefined,
+                reasonably_practicable: aiResult.reasonably_practicable !== undefined ? !!aiResult.reasonably_practicable : undefined,
+                model_used: aiResult.model_used || undefined
             };
 
             setFindings(prev => [newFinding, ...prev]);
             setActiveFinding(newFinding);
             alert("✅ AI Analysis Complete!\n\nNew finding added to the top of the list.");
 
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            alert("❌ AI Analysis Failed. Check backend console.");
+            const errorData = await error.response?.json();
+            alert(`❌ AI Analysis Failed\n\n${errorData?.hint || error.message}`);
         } finally {
             setIsAnalyzing(false);
             if (fileInputRef.current) fileInputRef.current.value = ''; // Reset input
@@ -282,7 +312,8 @@ export default function ReviewAudit() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-500 selection:text-white">
+        <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-sans">
+
             <Head>
                 <title>Audit Review | RaaS</title>
             </Head>
@@ -292,12 +323,12 @@ export default function ReviewAudit() {
             <main className="pt-32 pb-20 px-4 max-w-7xl mx-auto">
 
                 {/* HEADER */}
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                <div className="flex flex-wrap items-center justify-between gap-6 mb-10 pb-8 border-b border-slate-200">
                     <div>
-                        <h1 className="text-3xl font-bold flex items-center gap-2">
-                            <Shield className="text-blue-500" /> Compliance Review
+                        <h1 className="text-3xl font-extrabold flex items-center gap-3 text-primary tracking-tight">
+                            <Shield className="text-primary fill-primary/10" /> Compliance Review
                         </h1>
-                        <p className="text-slate-400 text-sm mt-1">Validate AI findings before submission.</p>
+                        <p className="text-slate-500 font-medium mt-1">Validate AI-detected risks before formalizing the compliance report.</p>
                     </div>
                     <div className="flex gap-4">
                         <input
@@ -310,15 +341,15 @@ export default function ReviewAudit() {
                         <button
                             onClick={triggerUpload}
                             disabled={isAnalyzing}
-                            className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-all shadow-lg shadow-blue-600/20"
+                            className="bg-primary hover:bg-primary/95 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-primary/20"
                         >
                             {isAnalyzing ? <Loader2 className="animate-spin w-4 h-4" /> : <Camera className="w-4 h-4" />}
                             {isAnalyzing ? "Analyzing Frame..." : "Analyze Live Evidence"}
                         </button>
-                        <div className="bg-slate-900 border border-white/10 px-4 py-2 rounded-lg flex items-center gap-2 font-mono text-xs hidden md:flex">
-                            <Lock className="w-3 h-3 text-emerald-500" />
-                            <span className="text-slate-500">Thread ID:</span>
-                            <span className="text-emerald-400 font-bold">{digitalThreadId || 'LOADING...'}</span>
+                        <div className="bg-white border border-slate-200 px-4 py-2.5 rounded-xl shadow-sm flex items-center gap-3 font-mono text-xs hidden md:flex">
+                            <Lock className="w-3.5 h-3.5 text-emerald-600" />
+                            <span className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">Digital Thread</span>
+                            <span className="text-primary font-bold">{digitalThreadId || 'PROVISIONING...'}</span>
                         </div>
                     </div>
                 </div>
@@ -326,64 +357,68 @@ export default function ReviewAudit() {
                 <div className="grid lg:grid-cols-3 gap-8">
 
                     {/* LEFT: LIST */}
-                    <div className="lg:col-span-1 bg-slate-900/50 border border-white/5 rounded-3xl overflow-hidden flex flex-col h-[600px]">
-                        <div className="p-4 border-b border-white/5 bg-slate-900/80">
-                            <h3 className="font-bold text-sm text-slate-400 uppercase tracking-wider">Detected Risks ({findings.length})</h3>
+                    <div className="lg:col-span-1 bg-white border border-slate-200 rounded-3xl overflow-hidden flex flex-col h-[600px] shadow-sm">
+                        <div className="p-5 border-b border-slate-100 bg-slate-50/50">
+                            <h3 className="font-bold text-xs text-slate-400 uppercase tracking-widest">Detected Risks ({findings.length})</h3>
                         </div>
-                        <div className="overflow-y-auto flex-1 p-2 space-y-2">
+                        <div className="overflow-y-auto flex-1 p-3 space-y-3">
                             {findings.map((f) => (
                                 <div
                                     key={f.id}
-                                    onClick={() => setActiveFinding(f)} // Keep clicked
-                                    // Hide if validated? Or just dim it. User wants "clear the box".
-                                    // Let's hide it from this list if status is valid
+                                    onClick={() => setActiveFinding(f)}
                                     style={{ display: f.status === 'VALIDATED' ? 'none' : 'block' }}
-                                    className={`p-4 rounded-xl cursor-pointer border transition-all ${activeFinding?.id === f.id
-                                        ? 'bg-blue-600/10 border-blue-500/50'
-                                        : 'bg-slate-900/40 border-transparent hover:bg-slate-800'
+                                    className={`p-5 rounded-2xl cursor-pointer border-2 transition-all ${activeFinding?.id === f.id
+                                        ? 'bg-primary/5 border-primary shadow-sm'
+                                        : 'bg-white border-transparent hover:bg-slate-50'
                                         }`}
                                 >
-                                    <div className="flex justify-between items-start mb-2">
-                                        <div className={`text-[10px] font-bold px-2 py-0.5 rounded border ${severityColor(f.severity)}`}>
+                                    <div className="flex justify-between items-start mb-3">
+                                        <div className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full border uppercase tracking-widest ${severityColor(f.severity)}`}>
                                             {f.severity}
                                         </div>
-                                        <div className="text-xs text-slate-500 font-mono">{f.timestamp}</div>
+                                        <div className="text-[10px] text-slate-400 font-mono">{f.timestamp}</div>
                                     </div>
-                                    <h4 className={`font-bold text-sm mb-1 ${activeFinding?.id === f.id ? 'text-white' : 'text-slate-300'}`}>
+                                    <h4 className={`font-bold text-base mb-2 leading-tight ${activeFinding?.id === f.id ? 'text-primary' : 'text-slate-700'}`}>
                                         {f.type}
                                     </h4>
-                                    <div className="flex items-center gap-2 text-xs">
+                                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-tight text-slate-400">
                                         Status:
-                                        {f.status === 'PENDING_REVIEW' && <span className="text-slate-400 flex items-center gap-1"><div className="w-2 h-2 bg-slate-500 rounded-full"></div> Pending</span>}
-                                        {f.status === 'VALIDATED' && <span className="text-emerald-400 flex items-center gap-1"><CheckCircle className="w-3 h-3" /> Accepted</span>}
-                                        {f.status === 'OVERRIDDEN' && <span className="text-amber-400 flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> Overridden</span>}
+                                        {f.status === 'PENDING_REVIEW' && <span className="text-slate-500 flex items-center gap-1.5"><div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div> Pending Review</span>}
+                                        {f.status === 'VALIDATED' && <span className="text-emerald-600 flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5" /> Accepted</span>}
+                                        {f.status === 'OVERRIDDEN' && <span className="text-amber-600 flex items-center gap-1.5"><AlertTriangle className="w-3.5 h-3.5" /> Overridden</span>}
                                     </div>
                                 </div>
                             ))}
+                            {findings.length === 0 && (
+                                <div className="text-center py-10 opacity-50">
+                                    <Shield className="w-12 h-12 mx-auto mb-2 text-slate-200" />
+                                    <p className="text-sm font-medium">No risks detected</p>
+                                </div>
+                            )}
                         </div>
                     </div>
 
                     {/* RIGHT: DETAIL */}
                     <div className="lg:col-span-2 flex flex-col gap-6">
 
-                        {/* VIDEO PLAYER */}
                         {/* VIDEO/EVIDENCE PREVIEW */}
-                        <div className="bg-black aspect-video rounded-3xl border border-white/10 shadow-2xl flex items-center justify-center relative group overflow-hidden">
+                        <div className="bg-slate-900 aspect-video rounded-3xl border border-slate-200 shadow-2xl flex items-center justify-center relative group overflow-hidden">
                             {capturedImage ? (
                                 <>
-                                    <img src={capturedImage} alt="Evidence" className="w-full h-full object-cover opacity-80" />
-                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4">
-                                        <h4 className="text-white font-bold flex items-center gap-2">
-                                            <Camera className="w-4 h-4 text-blue-500" /> Analysis Frame
+                                    <img src={capturedImage} alt="Evidence" className="w-full h-full object-cover opacity-90" />
+                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 to-transparent p-6">
+                                        <h4 className="text-white font-bold flex items-center gap-3">
+                                            <Camera className="w-5 h-5 text-white/70" />
+                                            <span className="uppercase tracking-widest text-[10px]">AI Analysis Source Frame</span>
                                         </h4>
                                     </div>
                                 </>
                             ) : (
                                 <>
-                                    <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
-                                    <Play className="w-16 h-16 text-white/50" />
-                                    <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs font-mono">
-                                        No Evidence Loaded
+                                    <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+                                    <Play className="w-20 h-20 text-white/30" />
+                                    <div className="absolute bottom-6 left-6 bg-primary/80 backdrop-blur px-4 py-1.5 rounded-full text-[10px] uppercase font-bold tracking-widest text-white border border-white/20">
+                                        No Evidence Context
                                     </div>
                                 </>
                             )}
@@ -391,88 +426,128 @@ export default function ReviewAudit() {
 
                         {/* Auto-Run Analysis Button if we have image but no findings */}
                         {capturedImage && findings.length === 0 && !isAnalyzing && (
-                            <div className="p-6 bg-blue-900/20 border border-blue-500/30 rounded-2xl flex items-center justify-between">
+                            <div className="p-8 bg-primary/5 border border-primary/20 rounded-3xl flex items-center justify-between shadow-sm animate-in fade-in slide-in-from-bottom-4">
                                 <div>
-                                    <h3 className="font-bold text-blue-100">Evidence Ready</h3>
-                                    <p className="text-sm text-blue-300">Run AI analysis on this captured frame.</p>
+                                    <h3 className="font-bold text-primary text-lg">Cross-Analysis Ready</h3>
+                                    <p className="text-sm text-slate-500 font-medium">Generate risk assessment from the latest capture frame.</p>
                                 </div>
                                 <button
                                     onClick={async () => {
-                                        // Convert base64 to blob/file
-                                        const res = await fetch(capturedImage);
-                                        const blob = await res.blob();
-                                        const file = new File([blob], "evidence.jpg", { type: "image/jpeg" });
+                                        if (!capturedImage) return;
+                                        try {
+                                            const res = await fetch(capturedImage);
+                                            const blob = await res.blob();
+                                            const file = new File([blob], "evidence.jpg", { type: "image/jpeg" });
 
-                                        // Mock event to reuse handleFileUpload
-                                        const event = { target: { files: [file] } } as any;
-                                        handleFileUpload(event);
+                                            const event = { target: { files: [file] } } as any;
+                                            handleFileUpload(event);
+                                        } catch (e) {
+                                            console.error("Failed to process captured image", e);
+                                        }
                                     }}
-                                    className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20"
+                                    className="bg-primary hover:bg-primary/95 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-primary/20 hover:scale-[1.02]"
                                 >
-                                    Start Analysis
+                                    Initialize AI Analysis
                                 </button>
+                            </div>
+                        )}
+
+                        {/* TRANSCRIPT DISPLAY */}
+                        {localStorage.getItem('raas_transcript') && (
+                            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+                                <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-red-500 rounded-full"></div> Verbal Compliance Notes
+                                </h4>
+                                <p className="text-slate-700 text-sm font-medium italic border-l-4 border-primary/20 pl-6 py-2 bg-slate-50 rounded-r-xl">
+                                    "{localStorage.getItem('raas_transcript')}"
+                                </p>
+                            </div>
+                        )}
+
+                        {/* EVIDENCE DOCS DISPLAY */}
+                        {Object.keys(localStorage).some(k => k.startsWith('raas_evidence_')) && (
+                            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+                                <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <FileText className="w-4 h-4 text-emerald-600" /> Procedural Evidence
+                                </h4>
+                                <p className="text-slate-600 text-sm font-medium">
+                                    {Object.keys(localStorage).filter(k => k.startsWith('raas_evidence_')).length} verification documents integrated for cross-analysis.
+                                </p>
                             </div>
                         )}
 
                         {/* ACTION PANEL */}
                         {activeFinding && (
-                            <div className="bg-slate-900 border border-white/5 rounded-3xl p-6 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+                            <div className="bg-white border border-slate-200 rounded-3xl p-10 relative overflow-hidden shadow-sm">
+                                <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -mr-40 -mt-40 pointer-events-none"></div>
 
-                                <div className="flex justify-between items-start mb-6 relative z-10">
+                                <div className="flex justify-between items-start mb-8 relative z-10">
                                     <div>
-                                        <h2 className="text-2xl font-bold mb-2 text-white">{activeFinding.type} Hazard</h2>
-                                        <p className="text-slate-400 text-lg mb-4">{activeFinding.description}</p>
+                                        <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Hazard Assessment</div>
+                                        <h2 className="text-3xl font-extrabold mb-3 text-primary tracking-tight">{activeFinding?.type} Risk</h2>
+                                        <p className="text-slate-600 text-lg mb-8 font-medium leading-relaxed">{activeFinding?.description}</p>
 
                                         {/* AI MITIGATION SECTION */}
-                                        {activeFinding.mitigation && (
-                                            <div className="bg-blue-900/20 border border-blue-500/20 p-4 rounded-xl mb-4">
-                                                <h4 className="text-blue-400 font-bold mb-1 flex items-center gap-2">
-                                                    <Shield className="w-4 h-4" /> AI Suggested Mitigation
+                                        {activeFinding?.mitigation && (
+                                            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl mb-6 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
+                                                <h4 className="text-primary font-bold mb-3 flex items-center gap-2 text-sm">
+                                                    <Shield className="w-4 h-4 text-primary fill-primary/10" /> AI Suggested Mitigation Strategy
                                                 </h4>
-                                                <p className="text-slate-300 text-sm">{activeFinding.mitigation}</p>
+                                                <p className="text-slate-600 text-sm font-medium leading-relaxed mb-4">{activeFinding.mitigation}</p>
                                                 {activeFinding.reasonably_practicable !== undefined && (
-                                                    <div className={`text-xs mt-2 font-mono ${activeFinding.reasonably_practicable ? 'text-emerald-400' : 'text-red-400'}`}>
-                                                        Reasonably Practicable: {activeFinding.reasonably_practicable ? "YES (Cost < Risk)" : "NO (Disproportionate)"}
+                                                    <div className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full inline-block border ${activeFinding.reasonably_practicable ? 'bg-emerald-50 border-emerald-200 text-emerald-700' : 'bg-red-50 border-red-200 text-red-700'}`}>
+                                                        ALARP Assessment: {activeFinding.reasonably_practicable ? "REASONABLY PRACTICABLE" : "DISPROPORTIONATE COST"}
                                                     </div>
                                                 )}
+                                            </div>
+                                        )}
+
+                                        {/* MODEL METADATA */}
+                                        {activeFinding?.model_used && (
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div className="text-[10px] uppercase tracking-widest text-slate-400 font-extrabold">Analysis Engine:</div>
+                                                <div className="bg-white border border-slate-200 px-3 py-1 rounded-full text-[10px] text-primary font-bold shadow-sm">
+                                                    {activeFinding.model_used}
+                                                </div>
                                             </div>
                                         )}
                                     </div>
                                 </div>
 
                                 {activeFinding.status === 'VALIDATED' && (
-                                    <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center gap-3 text-emerald-400">
-                                        <CheckCircle className="w-6 h-6" />
+                                    <div className="p-5 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-4 text-emerald-800 shadow-sm animate-in zoom-in-95">
+                                        <div className="bg-white p-2 rounded-full shadow-sm">
+                                            <CheckCircle className="w-6 h-6 text-emerald-500" />
+                                        </div>
                                         <div>
-                                            <div className="font-bold">Risk Validated</div>
-                                            <div className="text-xs opacity-80">Included in final report.</div>
+                                            <div className="font-extrabold text-sm uppercase tracking-wide">Finding Validated</div>
+                                            <div className="text-xs font-medium opacity-80">Included in formal compliance digital thread.</div>
                                         </div>
                                     </div>
                                 )}
 
-                                {activeFinding.status === 'OVERRIDDEN' && (
-                                    <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-400">
-                                        <div className="flex items-center gap-2 font-bold mb-1">
-                                            <AlertTriangle className="w-5 h-5" /> Risk Overridden
+                                {activeFinding?.status === 'OVERRIDDEN' && (
+                                    <div className="p-5 bg-amber-50 border border-amber-200 rounded-2xl text-amber-900 shadow-sm animate-in zoom-in-95">
+                                        <div className="flex items-center gap-3 font-extrabold text-sm uppercase tracking-wide mb-2">
+                                            <AlertTriangle className="w-5 h-5 text-amber-500" /> Variance Record Created
                                         </div>
-                                        <div className="text-sm italic opacity-80">"{activeFinding.justification}"</div>
+                                        <div className="text-sm font-medium italic opacity-80 border-l-2 border-amber-300 pl-4">"{activeFinding.justification}"</div>
                                     </div>
                                 )}
 
                                 {activeFinding.status === 'PENDING_REVIEW' && (
                                     <div className="flex gap-4 mt-8">
                                         <button
-                                            onClick={() => handleAccept(activeFinding.id)}
-                                            className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/20"
+                                            onClick={() => handleAccept(activeFinding!.id)}
+                                            className="flex-1 bg-primary hover:bg-primary/95 text-white font-bold py-5 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xl shadow-primary/20 hover:scale-[1.02]"
                                         >
                                             <CheckCircle className="w-5 h-5" /> Accept Finding
                                         </button>
                                         <button
                                             onClick={handleOverrideClick}
-                                            className="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all border border-white/5 hover:border-white/20"
+                                            className="flex-1 bg-white hover:bg-slate-50 text-slate-600 font-bold py-5 rounded-2xl flex items-center justify-center gap-2 transition-all border border-slate-200 shadow-sm"
                                         >
-                                            <XCircle className="w-5 h-5 text-red-400" /> Reject / Override
+                                            <XCircle className="w-5 h-5 text-red-500" /> Formal Reject
                                         </button>
                                     </div>
                                 )}
@@ -480,32 +555,34 @@ export default function ReviewAudit() {
                         )}
 
                         {/* SUBMIT SECTION */}
-                        <div className="mt-4 space-y-4">
-                            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6">
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    Your Email Address
+                        <div className="mt-4 space-y-6">
+                            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+                                <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">
+                                    Report Distribution Email
                                 </label>
-                                <input
-                                    type="email"
-                                    value={userEmail}
-                                    onChange={(e) => setUserEmail(e.target.value)}
-                                    placeholder="your.email@example.com"
-                                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                                />
-                                <p className="text-xs text-slate-400 mt-2">
-                                    You'll receive a copy of the compliance report at this address.
+                                <div className="relative">
+                                    <input
+                                        type="email"
+                                        value={userEmail}
+                                        onChange={(e) => setUserEmail(e.target.value)}
+                                        placeholder="auditor@organization.gov.uk"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-primary font-bold placeholder-slate-300 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-lg shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
+                                    />
+                                </div>
+                                <p className="text-xs text-slate-400 mt-4 font-medium flex items-center gap-2">
+                                    <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> Authorized compliance report will be delivered securely.
                                 </p>
                             </div>
 
                             <button
                                 disabled={!allReviewed}
                                 onClick={handleSubmitToSIA}
-                                className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 text-lg"
+                                className="w-full bg-primary hover:bg-primary/95 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-extrabold py-6 rounded-3xl transition-all shadow-2xl shadow-primary/20 flex items-center justify-center gap-3 text-xl hover:scale-[1.01]"
                             >
                                 {allReviewed ? (
-                                    <> <FileText className="w-5 h-5" /> Download PDF Report </>
+                                    <> <FileText className="w-6 h-6" /> Formalize & Download Report </>
                                 ) : (
-                                    <> Review {findings.filter(f => f.status === 'PENDING_REVIEW').length} more items to submit </>
+                                    <> Review Remaining {findings.filter(f => f.status === 'PENDING_REVIEW').length} Items </>
                                 )}
                             </button>
                         </div>
@@ -515,33 +592,35 @@ export default function ReviewAudit() {
 
                 {/* OVERRIDE MODAL */}
                 {showOverrideModal && (
-                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                        <div className="bg-slate-900 border border-white/10 rounded-3xl p-8 w-full max-w-lg shadow-2xl relative">
-                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
-                                <AlertTriangle className="text-amber-500" /> Justify Override
+                    <div className="fixed inset-0 bg-primary/20 backdrop-blur-md z-50 flex items-center justify-center p-6 animate-in fade-in duration-300">
+                        <div className="bg-white border border-slate-200 rounded-[2.5rem] p-12 w-full max-w-xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] relative overflow-hidden animate-in zoom-in-95 duration-300">
+                            <div className="absolute top-0 inset-x-0 h-2 bg-amber-500"></div>
+
+                            <h3 className="text-2xl font-extrabold mb-4 flex items-center gap-3 text-primary tracking-tight">
+                                <AlertTriangle className="text-amber-500 w-8 h-8" /> Auditor Variance Note
                             </h3>
-                            <p className="text-slate-400 text-sm mb-6">
-                                You are overriding an AI-detected Critical Hazard. Under Section 27 (Martyn's Law), you must provide a justification for why this risk is "As Low As Reasonably Practicable" (ALARP).
+                            <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8">
+                                You are overriding an AI-detected compliance hazard. Under <span className="text-primary font-bold">Section 27 of the Terrorism (Protection of Premises) Act</span>, you must provide a formal justification for why this risk is managed <span className="italic font-bold">As Low As Reasonably Practicable (ALARP)</span>.
                             </p>
                             <textarea
                                 value={overrideText}
                                 onChange={(e) => setOverrideText(e.target.value)}
-                                placeholder="E.g., 'Fire Marshall approved alternative route'..."
-                                className="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-blue-500 h-32 mb-6"
+                                placeholder="Formal justification for compliance deviation..."
+                                className="w-full bg-slate-50 border border-slate-200 rounded-3xl p-6 text-primary font-medium focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 h-40 mb-8 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                                 autoFocus
                             />
                             <div className="flex gap-4">
                                 <button
                                     onClick={() => setShowOverrideModal(false)}
-                                    className="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition-colors"
+                                    className="flex-1 bg-white hover:bg-slate-50 text-slate-500 font-bold py-4 rounded-2xl transition-all border border-slate-200"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     onClick={submitOverride}
-                                    className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-colors shadow-lg shadow-red-600/20"
+                                    className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-extrabold py-4 rounded-2xl transition-all shadow-xl shadow-amber-600/20 hover:scale-[1.02]"
                                 >
-                                    Confirm Override
+                                    Submit Variance
                                 </button>
                             </div>
                         </div>

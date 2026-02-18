@@ -1,5 +1,5 @@
 {
-    "app": "npx ts-node --prefer-ts-exts bin/raas.ts",
+    "app": "node bin/raas.js",
     "watch": {
         "include": [
             "**"
