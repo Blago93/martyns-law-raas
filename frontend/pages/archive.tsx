@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import MarketingHeader from '../components/marketing/Header';
 import { Shield, ArrowRight, Calendar, AlertTriangle, CheckCircle, Clock, Lock, Loader2 } from 'lucide-react';
 
 interface AuditSummary {
@@ -59,7 +58,7 @@ export default function ArchivePage() {
                 <title>Audit Archive | RaaS</title>
             </Head>
 
-            <MarketingHeader />
+            {/* Header handled by Layout */}
 
             <main className="pt-32 pb-20 px-4 max-w-6xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-slate-200">

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import MarketingHeader from '../components/marketing/Header';
+import MarketingHeader from '../components/marketing/Header'; // Legacy, will replace with Sidebar
 import { User, Building, Save, Bell, Shield, Plus, Trash2, Loader2, MapPin, Briefcase, CheckCircle } from 'lucide-react';
+import { useRouter } from 'next/router';
+import { isAuthenticated, getToken } from '../utils/auth';
 
 interface ResponsiblePerson {
     name: string;
@@ -104,7 +106,7 @@ export default function Settings() {
                 <title>Settings | RaaS Platform</title>
             </Head>
 
-            <MarketingHeader />
+            {/* Header handled by Layout */}
 
             <main className="pt-32 pb-20 px-4 max-w-5xl mx-auto">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 pb-8 border-b border-slate-200">

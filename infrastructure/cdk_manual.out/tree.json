@@ -1,0 +1,1187 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "MartynsLawRaasStack": {
+        "id": "MartynsLawRaasStack",
+        "path": "MartynsLawRaasStack",
+        "children": {
+          "RaasVpc": {
+            "id": "RaasVpc",
+            "path": "MartynsLawRaasStack/RaasVpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MartynsLawRaasStack/RaasVpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "MartynsLawRaasStack/RaasVpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.139.0"
+                }
+              },
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": "eu-west-2a",
+                        "cidrBlock": "10.0.0.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "RaasVpcPublicSubnet1RouteTable57DB4997"
+                        },
+                        "subnetId": {
+                          "Ref": "RaasVpcPublicSubnet1SubnetA18ED6AB"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "RaasVpcIGWDB28A1F7"
+                        },
+                        "routeTableId": {
+                          "Ref": "RaasVpcPublicSubnet1RouteTable57DB4997"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "RaasVpcPublicSubnet1EIPD5ADFB92",
+                            "AllocationId"
+                          ]
+                        },
+                        "subnetId": {
+                          "Ref": "RaasVpcPublicSubnet1SubnetA18ED6AB"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.139.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": "eu-west-2b",
+                        "cidrBlock": "10.0.1.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PublicSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PublicSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "RaasVpcPublicSubnet2RouteTableA98E98E9"
+                        },
+                        "subnetId": {
+                          "Ref": "RaasVpcPublicSubnet2Subnet6568C2B5"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MartynsLawRaasStack/RaasVpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "RaasVpcIGWDB28A1F7"
+                        },
+                        "routeTableId": {
+                          "Ref": "RaasVpcPublicSubnet2RouteTableA98E98E9"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.139.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": "eu-west-2a",
+                        "cidrBlock": "10.0.2.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "RaasVpcPrivateSubnet1RouteTable59C51CAD"
+                        },
+                        "subnetId": {
+                          "Ref": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "RaasVpcPublicSubnet1NATGateway585E085B"
+                        },
+                        "routeTableId": {
+                          "Ref": "RaasVpcPrivateSubnet1RouteTable59C51CAD"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.139.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": "eu-west-2b",
+                        "cidrBlock": "10.0.3.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "RaasVpc3D794FF8"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "RaasVpcPrivateSubnet2RouteTableCEB72A58"
+                        },
+                        "subnetId": {
+                          "Ref": "RaasVpcPrivateSubnet2Subnet73518A6A"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "RaasVpcPublicSubnet1NATGateway585E085B"
+                        },
+                        "routeTableId": {
+                          "Ref": "RaasVpcPrivateSubnet2RouteTableCEB72A58"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.139.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "MartynsLawRaasStack/RaasVpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "MartynsLawRaasStack/RaasVpc"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.139.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "MartynsLawRaasStack/RaasVpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "internetGatewayId": {
+                      "Ref": "RaasVpcIGWDB28A1F7"
+                    },
+                    "vpcId": {
+                      "Ref": "RaasVpc3D794FF8"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.139.0"
+            }
+          },
+          "AppRunnerSG": {
+            "id": "AppRunnerSG",
+            "path": "MartynsLawRaasStack/AppRunnerSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MartynsLawRaasStack/AppRunnerSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Security group for App Runner service",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "RaasVpc3D794FF8"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.139.0"
+            }
+          },
+          "DatabaseSG": {
+            "id": "DatabaseSG",
+            "path": "MartynsLawRaasStack/DatabaseSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MartynsLawRaasStack/DatabaseSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Security group for RDS Database",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "RaasVpc3D794FF8"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.139.0"
+                }
+              },
+              "from MartynsLawRaasStackAppRunnerSG39B290CE:5432": {
+                "id": "from MartynsLawRaasStackAppRunnerSG39B290CE:5432",
+                "path": "MartynsLawRaasStack/DatabaseSG/from MartynsLawRaasStackAppRunnerSG39B290CE:5432",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Allow Postgres from App Runner",
+                    "fromPort": 5432,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "DatabaseSG2A23C222",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "tcp",
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "AppRunnerSGAFD09FB7",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 5432
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.139.0"
+            }
+          },
+          "RaasDatabase": {
+            "id": "RaasDatabase",
+            "path": "MartynsLawRaasStack/RaasDatabase",
+            "children": {
+              "SubnetGroup": {
+                "id": "SubnetGroup",
+                "path": "MartynsLawRaasStack/RaasDatabase/SubnetGroup",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "MartynsLawRaasStack/RaasDatabase/SubnetGroup/Default",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::RDS::DBSubnetGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "dbSubnetGroupDescription": "Subnet group for RaasDatabase database",
+                        "subnetIds": [
+                          {
+                            "Ref": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+                          },
+                          {
+                            "Ref": "RaasVpcPrivateSubnet2Subnet73518A6A"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_rds.CfnDBSubnetGroup",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.SubnetGroup",
+                  "version": "2.139.0"
+                }
+              },
+              "Secret": {
+                "id": "Secret",
+                "path": "MartynsLawRaasStack/RaasDatabase/Secret",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MartynsLawRaasStack/RaasDatabase/Secret/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SecretsManager::Secret",
+                      "aws:cdk:cloudformation:props": {
+                        "description": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "Generated by the CDK for stack: ",
+                              {
+                                "Ref": "AWS::StackName"
+                              }
+                            ]
+                          ]
+                        },
+                        "generateSecretString": {
+                          "passwordLength": 30,
+                          "secretStringTemplate": "{\"username\":\"postgres\"}",
+                          "generateStringKey": "password",
+                          "excludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecret",
+                      "version": "2.139.0"
+                    }
+                  },
+                  "Attachment": {
+                    "id": "Attachment",
+                    "path": "MartynsLawRaasStack/RaasDatabase/Secret/Attachment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MartynsLawRaasStack/RaasDatabase/Secret/Attachment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::SecretsManager::SecretTargetAttachment",
+                          "aws:cdk:cloudformation:props": {
+                            "secretId": {
+                              "Ref": "MartynsLawRaasStackRaasDatabaseSecret67C95F803fdaad7efa858a3daf9490cf0a702aeb"
+                            },
+                            "targetId": {
+                              "Ref": "RaasDatabaseFCC1C206"
+                            },
+                            "targetType": "AWS::RDS::DBInstance"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecretTargetAttachment",
+                          "version": "2.139.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_secretsmanager.SecretTargetAttachment",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.DatabaseSecret",
+                  "version": "2.139.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "MartynsLawRaasStack/RaasDatabase/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::RDS::DBInstance",
+                  "aws:cdk:cloudformation:props": {
+                    "allocatedStorage": "20",
+                    "copyTagsToSnapshot": true,
+                    "dbInstanceClass": "db.t3.micro",
+                    "dbName": "martyns_law_db",
+                    "dbSubnetGroupName": {
+                      "Ref": "RaasDatabaseSubnetGroupD6757BF9"
+                    },
+                    "deletionProtection": false,
+                    "engine": "postgres",
+                    "engineVersion": "16",
+                    "masterUsername": "postgres",
+                    "masterUserPassword": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "MartynsLawRaasStackRaasDatabaseSecret67C95F803fdaad7efa858a3daf9490cf0a702aeb"
+                          },
+                          ":SecretString:password::}}"
+                        ]
+                      ]
+                    },
+                    "publiclyAccessible": false,
+                    "storageType": "gp2",
+                    "vpcSecurityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "DatabaseSG2A23C222",
+                          "GroupId"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.CfnDBInstance",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_rds.DatabaseInstance",
+              "version": "2.139.0"
+            }
+          },
+          "RaasAppRunnerTaskRole": {
+            "id": "RaasAppRunnerTaskRole",
+            "path": "MartynsLawRaasStack/RaasAppRunnerTaskRole",
+            "children": {
+              "ImportRaasAppRunnerTaskRole": {
+                "id": "ImportRaasAppRunnerTaskRole",
+                "path": "MartynsLawRaasStack/RaasAppRunnerTaskRole/ImportRaasAppRunnerTaskRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.139.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "MartynsLawRaasStack/RaasAppRunnerTaskRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "tasks.apprunner.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.139.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "MartynsLawRaasStack/RaasAppRunnerTaskRole/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MartynsLawRaasStack/RaasAppRunnerTaskRole/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "bedrock:InvokeModel",
+                                "bedrock:ApplyGuardrail"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": [
+                                "secretsmanager:GetSecretValue",
+                                "secretsmanager:DescribeSecret"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Ref": "RaasDatabaseSecretAttachment073B4A49"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "RaasAppRunnerTaskRoleDefaultPolicyEA96CD2C",
+                        "roles": [
+                          {
+                            "Ref": "RaasAppRunnerTaskRoleBD91C743"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.139.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.139.0"
+            }
+          },
+          "AppRunnerECRAccess": {
+            "id": "AppRunnerECRAccess",
+            "path": "MartynsLawRaasStack/AppRunnerECRAccess",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.139.0"
+            }
+          },
+          "RaasAppRunnerECRRole": {
+            "id": "RaasAppRunnerECRRole",
+            "path": "MartynsLawRaasStack/RaasAppRunnerECRRole",
+            "children": {
+              "ImportRaasAppRunnerECRRole": {
+                "id": "ImportRaasAppRunnerECRRole",
+                "path": "MartynsLawRaasStack/RaasAppRunnerECRRole/ImportRaasAppRunnerECRRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.139.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "MartynsLawRaasStack/RaasAppRunnerECRRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "build.apprunner.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.139.0"
+            }
+          },
+          "BackendImage": {
+            "id": "BackendImage",
+            "path": "MartynsLawRaasStack/BackendImage",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "MartynsLawRaasStack/BackendImage/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.139.0"
+                }
+              },
+              "Repository": {
+                "id": "Repository",
+                "path": "MartynsLawRaasStack/BackendImage/Repository",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                  "version": "2.139.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+              "version": "2.139.0"
+            }
+          },
+          "VpcConnector": {
+            "id": "VpcConnector",
+            "path": "MartynsLawRaasStack/VpcConnector",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::AppRunner::VpcConnector",
+              "aws:cdk:cloudformation:props": {
+                "securityGroups": [
+                  {
+                    "Fn::GetAtt": [
+                      "AppRunnerSGAFD09FB7",
+                      "GroupId"
+                    ]
+                  }
+                ],
+                "subnets": [
+                  {
+                    "Ref": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+                  },
+                  {
+                    "Ref": "RaasVpcPrivateSubnet2Subnet73518A6A"
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apprunner.CfnVpcConnector",
+              "version": "2.139.0"
+            }
+          },
+          "RaasBackendService": {
+            "id": "RaasBackendService",
+            "path": "MartynsLawRaasStack/RaasBackendService",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::AppRunner::Service",
+              "aws:cdk:cloudformation:props": {
+                "instanceConfiguration": {
+                  "instanceRoleArn": {
+                    "Fn::GetAtt": [
+                      "RaasAppRunnerTaskRoleBD91C743",
+                      "Arn"
+                    ]
+                  },
+                  "cpu": "1 vCPU",
+                  "memory": "2 GB"
+                },
+                "networkConfiguration": {
+                  "egressConfiguration": {
+                    "egressType": "VPC",
+                    "vpcConnectorArn": {
+                      "Fn::GetAtt": [
+                        "VpcConnector",
+                        "VpcConnectorArn"
+                      ]
+                    }
+                  }
+                },
+                "sourceConfiguration": {
+                  "authenticationConfiguration": {
+                    "accessRoleArn": {
+                      "Fn::GetAtt": [
+                        "RaasAppRunnerECRRoleD53BEE1E",
+                        "Arn"
+                      ]
+                    }
+                  },
+                  "imageRepository": {
+                    "imageIdentifier": {
+                      "Fn::Sub": "728768429638.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-728768429638-eu-west-2:20f2c606a8c0eb0b34d83f6231ef9320707a64221086c711caff640d1ee7ed40"
+                    },
+                    "imageRepositoryType": "ECR",
+                    "imageConfiguration": {
+                      "port": "3001",
+                      "runtimeEnvironmentVariables": [
+                        {
+                          "name": "NODE_ENV",
+                          "value": "production"
+                        },
+                        {
+                          "name": "DB_HOST",
+                          "value": {
+                            "Fn::GetAtt": [
+                              "RaasDatabaseFCC1C206",
+                              "Endpoint.Address"
+                            ]
+                          }
+                        },
+                        {
+                          "name": "DB_PORT",
+                          "value": {
+                            "Fn::GetAtt": [
+                              "RaasDatabaseFCC1C206",
+                              "Endpoint.Port"
+                            ]
+                          }
+                        },
+                        {
+                          "name": "DB_NAME",
+                          "value": "martyns_law_db"
+                        }
+                      ],
+                      "runtimeEnvironmentSecrets": [
+                        {
+                          "name": "DB_SECRET",
+                          "value": {
+                            "Ref": "RaasDatabaseSecretAttachment073B4A49"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "autoDeploymentsEnabled": true
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_apprunner.CfnService",
+              "version": "2.139.0"
+            }
+          },
+          "AppRunnerUrl": {
+            "id": "AppRunnerUrl",
+            "path": "MartynsLawRaasStack/AppRunnerUrl",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.139.0"
+            }
+          },
+          "DatabaseEndpoint": {
+            "id": "DatabaseEndpoint",
+            "path": "MartynsLawRaasStack/DatabaseEndpoint",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.139.0"
+            }
+          },
+          "DatabaseSecretArn": {
+            "id": "DatabaseSecretArn",
+            "path": "MartynsLawRaasStack/DatabaseSecretArn",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.139.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "MartynsLawRaasStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.139.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "MartynsLawRaasStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.139.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.139.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.4.5"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.139.0"
+    }
+  }
+}

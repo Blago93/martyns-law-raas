@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { Shield, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Shield, Lock, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
+import { login } from '../utils/auth';
 import '../app/globals.css'; // Ensure Tailwind works
 
 export default function Login() {
@@ -11,24 +12,34 @@ export default function Login() {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
 
-        // Simulate API delay
-        setTimeout(() => {
-            // Mock Verification Logic matching User Request
-            // Note: In production this would be a real API call
-            if (username.toLowerCase() === 'admin' && password === 'Blago1234') {
-                localStorage.setItem('raas_token', 'mock_valid_token');
-                localStorage.setItem('raas_user', username);
-                router.push('/dashboard');
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
+        try {
+            const res = await fetch(`${API_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: username, password }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                // Use Auth Utility to store session and redirect
+                login(data.token, data.user);
             } else {
-                setError('Invalid credentials. Please try again.');
+                setError(data.error || 'Invalid credentials');
                 setIsLoading(false);
             }
-        }, 1000);
+        } catch (err) {
+            console.error(err);
+            setError('System error. Please verify backend connection.');
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -62,15 +73,22 @@ export default function Login() {
                         </div>
                     )}
 
+                    {router.query.registered && (
+                        <div className="mb-8 p-5 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-4 text-emerald-700 text-sm font-bold animate-in slide-in-from-top-4">
+                            <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                            Account created successfully. Please log in.
+                        </div>
+                    )}
+
                     <form onSubmit={handleLogin} className="space-y-8">
                         <div>
                             <label className="block text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 ml-1">Auditor Identification</label>
                             <input
-                                type="text"
+                                type="email"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-primary font-bold placeholder-slate-300 focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-lg shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
-                                placeholder="Enter username"
+                                placeholder="name@organization.com"
                                 required
                             />
                         </div>

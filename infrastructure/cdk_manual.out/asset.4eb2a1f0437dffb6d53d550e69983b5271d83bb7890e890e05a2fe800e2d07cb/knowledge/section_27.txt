@@ -1,0 +1,1959 @@
+[LEGISLATION CONTEXT: Terrorism (Protection of Premises) Draft Bill - Section 27]
+
+"Reasonably Practicable" Test:
+The responsible person must take such measures as are reasonably practicable to reduce the risk of a terrorist attack occurring at the premises or in the immediate vicinity, and to reduce the risk of physical harm to individuals if an attack occurs.
+
+Factors to consider when determining what is "reasonably practicable":
+1. The nature of the premises and the activities that take place there.
+2. The maximum number of individuals who may be present at the premises.
+3. The extent to which the responsible person has control over the premises.
+4. The costs of any measures relative to the reduction in risk (Proportionality).
+5. The specific guidance issued by the Secretary of State (e.g., NaCTSO Guidance).
+Terrorism
+(Protection of Premises)
+Draft Bill
+May 2023
+CP 840
+Terrorism
+(Protection of Premises)
+Draft Bill
+Presented to Parliament
+by the Secretary of State for the Home Department
+by Command of His Majesty
+May 2023
+CP 840
+© Crown copyright 2023
+This publication is licensed under the terms of the Open Government Licence v3.0
+except where otherwise stated. To view this licence,
+visit nationalarchives.gov.uk/doc/open-government-licence/version/3.
+Where we have identified any third party copyright information you will need to
+obtain permission from the copyright holders concerned.
+This publication is available at www.gov.uk/official-documents.
+Any enquiries regarding this publication should be sent to us
+at public.enquiries@homeoffice.gov.uk.
+ISBN 978-1-5286-4082-4
+E02903755 05/23
+Printed on paper containing 40% recycled fibre content minimum
+Printed in the UK by HH Associates Ltd. on behalf of the Controller of His Majesty’s
+Stationery Office
+Terrorism (Protection of Premises) Bill
+[DRAFT BILL]
+CONTENTS
+The regulator
+1 The regulator
+Qualifying public premises and events etc
+2 Qualifying public premises
+3 Standard duty premises and enhanced duty premises
+4 Qualifying public events
+5 Persons responsible for qualifying public premises or events
+6 Capacity of premises
+7 Parts of premises to be disregarded
+8 Powers to amend or modify application of Act
+Registration of premises and notification of events
+9 Registration of qualifying public premises
+10 Notification of qualifying public events
+Evaluation and assessment of terrorism risk
+11 Standard terrorism evaluation
+12 Enhanced terrorism risk assessment
+Provision of terrorism protection training
+13 Duty to provide terrorism protection training
+14 Content of terrorism protection training
+Enhanced duty to take security measures
+15 Security measures
+Coordinating and recording compliance with enhanced duties
+16 Designated senior officers
+17 Security plans
+Cooperation and dispute resolution
+18 Cooperation of other persons with control of premises
+19 Cooperation with persons responsible for fire safety
+20 Determinations by the tribunal
+Investigatory powers
+21 Investigatory powers
+Enforcement
+22 Contravention notices
+23 Restriction notices
+24 Duration of restriction notices
+25 Appeals in relation to contravention notices and restriction notices
+Monetary penalties
+26 Penalty notices
+27 Daily penalties
+28 Determining the amount of a penalty
+29 Maximum amounts of fixed penalty
+30 Penalty notices: procedure
+31 Appeals against penalties
+32 Recovery of penalties
+33 Double jeopardy
+Offences
+34 Offences
+35 Offences by directors, partners etc
+Guidance
+36 Guidance about requirements
+37 Guidance about the exercise of the regulator’s functions
+Licensing of premises at heightened terrorism risk
+38 Licensing of premises at heightened terrorism risk
+General
+39 Data protection
+40 Means of giving notices
+41 Further provision about notices
+42 Civil liability
+43 Interpretation
+44 Regulations
+45 Extent
+46 Commencement and transitional provision
+47 Short title
+ii Terrorism (Protection of Premises) Bill
+Schedule 1 — Specified uses of premises
+Schedule 2 — Investigatory powers
+Schedule 3 — Licensing of premises at heightened terrorism risk
+Terrorism (Protection of Premises) Bill iii
+[DRAFT BILL]
+A
+BILL
+TO
+Make provision about the assessment and mitigation of risks of terrorist activity
+at, or in the immediate vicinity of, certain publicly accessible premises or
+events; to amend the Licensing Act 2003 in relation to premises at heightened
+risk of being a target of terrorist activity; and for connected purposes.
+B E IT ENACTED by the King’s most Excellent Majesty, by and with the advice and
+consent of the Lords Spiritual and Temporal, and Commons, in this present
+Parliament assembled, and by the regulator of the same, as follows:—
+The regulator
+1 The regulator
+(1) In this Act, “the regulator” means—
+(a) a public authority prescribed as the regulator in regulations made by
+the Secretary of State, or
+(b) if no public authority is prescribed, the Secretary of State.
+(2) Regulations under subsection (1)(a) may make provision about how costs
+incurred by the prescribed public authority in acting as the regulator are to
+be met.
+(3) In this section “public authority” means any person certain of whose functions
+are functions of a public nature.
+Qualifying public premises and events etc
+2 Qualifying public premises
+(1) In this Act, “qualifying public premises” means premises in respect of which
+the following conditions are met—
+(a) the premises are primarily used for a use or uses specified in Schedule
+1;
+(b) the public, or a section of the public, has access to the premises or a
+part of the premises;
+(c) the premises have a public capacity of 100 or more individuals (see
+section 6).
+Terrorism (Protection of Premises) Bill 1
+(2) For the purposes of subsection (1)(b)—
+(a) where the premises primarily comprise land in the open air, access to
+the premises by a member of the public must be by express permission
+only (whether or not on payment);
+(b) in any other case, access to the premises by a member of the public
+may be by express or implied permission (whether or not on payment).
+(3) Qualifying public premises may be contained within other premises, including
+other qualifying public premises (for example, in a shopping centre).
+(4) Where one or more qualifying public premises are contained within other
+qualifying public premises, this Act applies in relation to each of the premises.
+3 Standard duty premises and enhanced duty premises
+(1) In this Act—
+(a) “enhanced duty premises” are qualifying public premises with a public
+capacity of 800 or more individuals (see section 6);
+(b) “standard duty premises” are qualifying public premises which are
+not enhanced duty premises.
+(2) This section is subject to any provision of Schedule 1 which provides for
+qualifying public premises to be treated as standard duty premises or
+enhanced duty premises in certain cases.
+4 Qualifying public events
+(1) In this Act, “qualifying public event” means an event in respect of which the
+following conditions are met—
+(a) the event is to be held at premises which are not qualifying public
+premises;
+(b) the public or a section of the public will have access to the premises,
+or a part of the premises, for the purpose of attending the event;
+(c) the premises have a public capacity of 800 or more individuals (see
+section 6).
+(2) For the purposes of subsection (1)(b), access to the premises by a member of
+the public for the purpose of attending the event must be by express
+permission only (whether or not on payment).
+5 Persons responsible for qualifying public premises or events
+(1) For the purposes of this Act—
+(a) the person responsible for qualifying public premises is the person
+who has control of the premises in connection with their relevant
+Schedule 1 use;
+(b) the person responsible for a qualifying public event is the person who
+has control of the premises at which the event is to be held in
+connection with their use for the event.
+2 Terrorism (Protection of Premises) Bill
+(2) If more than one person is responsible for qualifying public premises or a
+qualifying public event—
+(a) references in this Act to the person responsible for the premises or
+the event (as the case may be) are to each such person, and
+(b) two or more such persons may act jointly in pursuance of a
+requirement imposed on them by or under this Act.
+(3) This section is subject to any provision of Schedule 1 which specifies the
+person responsible for qualifying public premises in certain cases.
+(4) In this Act, “relevant Schedule 1 use”, in relation to qualifying public premises,
+means—
+(a) in a case where the premises are used for only one use specified in
+Schedule 1, that use;
+(b) in a case where the premises are used for more than one use specified
+in that Schedule, whichever is the predominant of those uses;
+(c) in a case within paragraph (b) where none of the uses specified in
+Schedule 1 is the predominant of those uses, the use determined by
+regulations made by the Secretary of State.
+6 Capacity of premises
+(1) For the purposes of this Act, the “public capacity” of premises is to be
+determined in accordance with regulations made by the Secretary of State.
+(2) Regulations under subsection (1) may (among other things)—
+(a) make different provision in relation to premises, or parts of premises,
+of different descriptions;
+(b) make provision by reference to a document issued by the Secretary
+of State, or another person, as revised or replaced from time to time;
+(c) confer functions on the regulator (including functions involving the
+exercise of a discretion).
+7 Parts of premises to be disregarded
+(1) For the purposes of any requirement imposed by or under this Act in respect
+of qualifying public premises or a qualifying public event, disregard any part
+of the qualifying public premises or the premises at which the event is to be
+held—
+(a) which is used as a private dwelling;
+(b) which is used as an office or for office purposes;
+(c) in relation to which a transport security regime applies;
+(d) which is of such other description as the Secretary of State may
+prescribe in regulations.
+(2) A transport security regime applies in relation to premises if—
+(a) an aerodrome security plan under section 24AE of the Aviation Security
+Act 1982 is in force in relation to the premises,
+Terrorism (Protection of Premises) Bill 3
+(b) the premises are a relevant asset for the purposes of section 119 of the
+Railways Act 1993 in relation to which an instruction under that section
+is in force,
+(c) a direction under the Channel Tunnel Security (Order) 1994 (S.I.
+1994/570) is in force in relation to the premises, or
+(d) a port security plan is in force in relation to the premises.
+(3) In subsection (2)(d), “port security plan” means—
+(a) a port facility security plan under the Ship and Port Facility (Security)
+Regulations 2004 (S.I. 2004/1495), or
+(b) a port security plan under the Port Security Regulations 2009 (S.I.
+2009/2048).
+8 Powers to amend or modify application of Act
+(1) The Secretary of State may by regulations—
+(a) amend section 2(1)(c), 3(1)(a) or 4(1)(c) so as to substitute a different
+figure for the figure for the time being specified;
+(b) amend Schedule 1 so as to—
+(i) specify a further use of premises,
+(ii) specify qualifying public premises to be treated as standard
+duty premises or enhanced duty premises (regardless of how
+they would otherwise be treated),
+(iii) specify the person responsible for qualifying public premises
+for the purposes of this Act, or
+(iv) remove or modify a provision of that Schedule;
+(c) otherwise provide for this Act, or a prescribed provision of this Act—
+(i) to apply (where it otherwise would not),
+(ii) not to apply (where it otherwise would), or
+(iii) to apply with prescribed modifications,
+to premises or events of a prescribed description.
+(2) But regulations under this section must not provide—
+(a) for any provision of this Act to apply (with or without modifications)
+in relation to premises with a public capacity of fewer than 100
+individuals, or
+(b) for any of section 12, 15 or 16 to apply (with or without modifications)
+in relation to premises with a public capacity of fewer than 500
+individuals.
+(3) In subsection (1), “prescribed” means prescribed in the regulations.
+Registration of premises and notification of events
+9 Registration of qualifying public premises
+(1) The person responsible for qualifying public premises must ensure that the
+premises are registered in accordance with this section.
+4 Terrorism (Protection of Premises) Bill
+(2) On an application by the person responsible for qualifying public premises,
+made in accordance with this section and regulations under this section, the
+regulator must register the premises.
+(3) The regulator must remove premises from the register if it appears to the
+regulator that the premises are not qualifying public premises.
+(4) The Secretary of State may by regulations make provision about applications
+for registration, including in particular provision about—
+(a) the form and content of an application;
+(b) the information that must accompany an application;
+(c) the way in which an application is to be made and anything that is
+to accompany an application is to be provided;
+(d) the circumstances in which an application may be withdrawn or treated
+as withdrawn;
+(e) the way in which an application may be withdrawn.
+(5) The Secretary of State may by regulations make provision about the register,
+including in particular provision about—
+(a) the information to be contained in the register;
+(b) the updating or other revision of information in the register;
+(c) the procedure for removing premises from the register.
+(6) Regulations under subsection (5)(b) may, in particular, require the person
+responsible for qualifying public premises to notify the regulator of prescribed
+matters in prescribed circumstances.
+(7) In subsection (6), “prescribed” means prescribed in the regulations.
+10 Notification of qualifying public events
+(1) The person responsible for a qualifying public event must ensure that the
+regulator is notified of the event in accordance with this section and
+regulations under this section.
+(2) Notification must be given—
+(a) before, or as soon as is reasonably practicable after, details of the event
+are first made available to the public or a section of the public, and
+(b) before the event begins.
+(3) The Secretary of State may by regulations make provision about notifications
+under this section, including in particular provision about—
+(a) the form and content of a notification;
+(b) the information that must accompany a notification;
+(c) the way in which notification is to be made and anything that is to
+accompany a notification is to be provided;
+(d) the updating or other revision of a notification;
+(e) the circumstances in which a notification may be withdrawn or treated
+as withdrawn;
+(f) the way in which a notification may be withdrawn.
+Terrorism (Protection of Premises) Bill 5
+(4) Regulations under subsection (3)(d) may, in particular, require the person
+responsible for a qualifying public event to notify the regulator of prescribed
+matters in prescribed circumstances.
+(5) In subsection (4), “prescribed” means prescribed in the regulations.
+Evaluation and assessment of terrorism risk
+11 Standard terrorism evaluation
+(1) The person responsible for standard duty premises must—
+(a) ensure that a standard terrorism evaluation of the premises has been
+completed,
+(b) ensure that the evaluation is reviewed in accordance with subsection
+(2),
+(c) from time to time revise the evaluation to keep it up to date,
+(d) ensure that a copy of the current evaluation is made available to each
+individual who uses the premises as a place of work, and
+(e) if requested to do so by the regulator, provide the regulator with a
+copy of the current evaluation within such reasonable period as the
+regulator may specify in the request.
+(2) A standard terrorism evaluation of premises must be reviewed—
+(a) each time a material change is made to the premises or to the use of
+the premises, and
+(b) before the end of the period of 12 months, beginning with the day on
+which the evaluation or most recent review (as the case may be) was
+completed.
+(3) For the purposes of subsection (2)(a), a change to premises or to the use of
+premises is “material” if it is reasonable to assume that the change would
+materially effect the standard terrorism evaluation of the premises.
+(4) A “standard terrorism evaluation” of premises is a document, in such form
+as may be specified in a notice issued from time to time by the Secretary of
+State, which provides information about the following matters—
+(a) the types of acts of terrorism most likely to occur at, or in the
+immediate vicinity of, the premises if acts of terrorism were to occur;
+(b) the measures in place in relation to the premises that might be expected
+to reduce the risk of acts of terrorism of those types occurring at, or
+in the immediate vicinity of, the premises;
+(c) the measures in place in relation to the premises that might be expected
+to reduce the risk of physical harm to individuals if acts of terrorism
+of those types were to occur at, or in the immediate vicinity of, the
+premises;
+(d) the procedures to be followed if acts of terrorism were to occur at, or
+in the immediate vicinity of, the premises;
+(e) the ways in which individuals who use the premises as a place of
+work will be made aware of the standard terrorism evaluation of the
+premises, or relevant information in the evaluation;
+6 Terrorism (Protection of Premises) Bill
+(f) such other matters as the Secretary of State may prescribe in
+regulations.
+(5) The Secretary of State may specify different forms of standard terrorism
+evaluation for premises of different descriptions.
+(6) For the purposes of subsection (4)(e), information is “relevant” to an individual
+who uses premises as a place of work if it is relevant to the individual’s
+responsibilities in relation to the premises.
+12 Enhanced terrorism risk assessment
+(1) The person responsible for enhanced duty premises or a qualifying public
+event must—
+(a) ensure that a terrorism risk assessment of the premises or event (as
+the case may be) has been completed, and
+(b) from time to time revise the assessment to keep it up to date.
+(2) A terrorism risk assessment of enhanced duty premises must be reviewed—
+(a) each time a material change is made to the premises or to the use of
+the premises, and
+(b) before the end of the period of 12 months, beginning with the day on
+which the assessment or the most recent review (as the case may be)
+was completed.
+(3) For the purposes of subsection (2)(a), a change to premises or to the use of
+premises is “material” if it is reasonable to assume that the change would
+materially effect the terrorism risk assessment of the premises.
+(4) A terrorism risk assessment of a qualifying public event must be completed—
+(a) at least three months before the date on which the event is to begin,
+or
+(b) where details of the event are first made available to the public, or a
+section of the public, less than three months before the date on which
+the event is to begin—
+(i) as soon as reasonably practicable after the details are first made
+available, and
+(ii) before the event begins.
+(5) A “terrorism risk assessment” of enhanced duty premises or a qualifying
+public event is an assessment of—
+(a) the types of acts of terrorism most likely to occur at, or in the
+immediate vicinity of, the premises or event (if acts of terrorism were
+to occur);
+(b) the reasonably practicable measures that might be expected to reduce
+the risk of acts of terrorism of those types occurring at, or in the
+immediate vicinity of, the premises or event;
+(c) the reasonably practicable measures that might be expected to reduce
+the risk of physical harm to individuals if acts of terrorism of those
+types were to occur at, or in the immediate vicinity of, the premises
+or event;
+Terrorism (Protection of Premises) Bill 7
+(d) such other matters as the Secretary of State may prescribe in
+regulations.
+(6) In carrying out or reviewing a terrorism risk assessment, regard must be had
+to—
+(a) the size and other characteristics of the enhanced duty premises or
+the premises at which the qualifying public event is to be held;
+(b) existing measures in place in relation to the premises or event of a
+kind mentioned in subsection (5)(b) and (c);
+(c) in the case of enhanced duty premises, the current use of the premises
+and any likely future uses;
+(d) in the case of a qualifying public event, the nature of the event.
+Provision of terrorism protection training
+13 Duty to provide terrorism protection training
+(1) The person responsible for qualifying public premises or a qualifying public
+event must ensure that terrorism protection training in relation to the premises
+or event (as the case may be) is provided to each relevant worker in
+accordance with this section.
+(2) “Relevant worker” means an individual who—
+(a) works at, or in connection with, the premises or event, and
+(b) has responsibilities that make it appropriate for them to receive
+terrorism protection training.
+(3) In determining whether an individual is a relevant worker for the purposes
+of this section, it is irrelevant whether or not—
+(a) the individual is an employee;
+(b) the individual works full-time at, or in connection with, the premises
+or event;
+(c) the individual is remunerated for their work at, or in connection with,
+the premises or event.
+(But these matters may be relevant to what training is appropriate).
+(4) Terrorism protection training in relation to qualifying public premises must
+be provided—
+(a) before, or as soon as is reasonably practicable after, the relevant worker
+first assumes the responsibilities mentioned in subsection (2)(b),
+(b) in the case of enhanced duty premises, as soon as is reasonably
+practicable after the completion or any material revision of a terrorism
+risk assessment of the premises (see section 12), and
+(c) in any case, before the end of the period of 12 months, beginning with
+the day on which the relevant worker last completed training provided
+in accordance with this section in relation to the premises.
+(5) For the purposes of subsection (4)(b), a revision of a terrorism risk assessment
+is “material” if it is reasonable to assume that it would materially effect the
+training provided in accordance with this section.
+8 Terrorism (Protection of Premises) Bill
+(6) Terrorism protection training in relation to a qualifying public event must be
+provided before the event begins.
+14 Content of terrorism protection training
+(1) “Terrorism protection training”, in relation to qualifying public premises or
+a qualifying public event, means training in relation to—
+(a) the types of acts of terrorism most likely to occur at, or in the
+immediate vicinity of, the premises or event (if acts of terrorism were
+to occur);
+(b) the indications that an act of terrorism may be occurring at, or in the
+immediate vicinity of, the premises or event;
+(c) the procedures to be followed if acts of terrorism were to occur at, or
+in the immediate vicinity of, the premises or event;
+(d) such other matters as the Secretary of State may prescribe in
+regulations.
+(2) The terrorism protection training provided to a relevant worker in accordance
+with section 13 must be appropriate to—
+(a) the size and other characteristics of the qualifying public premises or
+the premises at which the qualifying public event is to be held;
+(b) in relation to qualifying public premises, the use of the premises
+(including any use of the premises not specified in Schedule 1);
+(c) in relation to a qualifying public event, the nature of the event;
+(d) the responsibilities of the relevant worker in relation to the premises
+or event.
+Enhanced duty to take security measures
+15 Security measures
+(1) The person responsible for enhanced duty premises or a qualifying public
+event must ensure that all such reasonably practicable measures are in place
+in relation to the premises or event as might (taken together) be expected
+to—
+(a) reduce the risk of acts of terrorism occurring at, or in the immediate
+vicinity of, the premises or event, and
+(b) reduce the risk of physical harm to individuals if acts of terrorism
+were to occur at, or in the immediate vicinity of, the premises or event.
+(2) Where a risk assessment has been completed and kept up to date in accordance
+with section 12, references in this section to acts of terrorism are to acts of
+the types identified in the assessment.
+(3) The measures mentioned in subsection (1) must, in particular, include—
+(a) measures in relation to monitoring the premises or event and the
+immediate vicinity of the premises or event;
+(b) measures in relation to the movement of individuals into, out of and
+within the premises or event;
+Terrorism (Protection of Premises) Bill 9
+(c) procedures to be followed if acts of terrorism were to occur at, or in
+the immediate vicinity of, the premises or event;
+(d) measures in relation to the security of sensitive information;
+(e) measures in relation to such other matters as the Secretary of State
+may prescribe in regulations.
+(4) In subsection (3)(d), “sensitive information” means information which it is
+reasonable to consider might assist in the planning, preparation or execution
+of acts of terrorism at, or in the immediate vicinity of, the premises or event.
+(5) Procedures under subsection (3)(c) in relation to enhanced duty premises or
+a qualifying public event must, in particular, include—
+(a) procedures for alerting the emergency services;
+(b) procedures for alerting persons at, or in the immediate vicinity of, the
+premises or event;
+(c) procedures for the evacuation of persons from the premises or event,
+where it is safe and appropriate to do so;
+(d) procedures for bringing persons in the immediate vicinity of the
+premises or event into the premises or event, where it is safe and
+appropriate to do so;
+(e) procedures for securing the premises or event, where it is safe and
+appropriate to do so.
+(6) Nothing in this section requires a person to take any step which—
+(a) is not within the person’s power to take, or
+(b) would place a disproportionate burden on the person (having regard
+to the person’s resources and the premises or event to which the step
+relates).
+Coordinating and recording compliance with enhanced duties
+16 Designated senior officers
+(1) The person responsible for enhanced duty premises or a qualifying public
+event must ensure that—
+(a) an individual is appointed to act as the designated senior officer for
+the premises or event,
+(b) the regulator is notified of the individual’s name and contact details,
+and
+(c) if there is any change in the identity or contact details of the individual
+appointed, the regulator is notified of the change as soon as is
+reasonably practicable.
+(2) Where the person responsible for the premises or event is an individual, the
+designated senior officer may be either—
+(a) that individual, or
+(b) another individual who has management responsibilities in relation
+to the premises or event (as the case may be).
+10 Terrorism (Protection of Premises) Bill
+(3) Where the person responsible for the premises or event is a body corporate,
+the designated senior officer for the premises or event must be a director,
+manager, secretary or other similar officer of the body.
+(4) Where the person responsible for enhanced duty premises or a qualifying
+public event (“R”) is not the designated senior officer for the premises or
+event, R must ensure that the designated senior officer has responsibilities
+which comprise or include the following—
+(a) coordinating the risk assessment of the premises or event in accordance
+with section 12;
+(b) coordinating the preparation and maintenance of the security plan in
+relation to the premises or event (see section 17);
+(c) coordinating the response to any notice or other communication from
+the regulator to R in relation to the premises or event.
+(5) A notice under this Act to the person responsible for enhanced duty premises
+or a qualifying public event may be given to the designated senior officer for
+the premises or event.
+17 Security plans
+(1) The person responsible for enhanced duty premises or a qualifying public
+event must ensure that a security plan in relation to the premises or event is
+prepared and maintained.
+(2) The person must provide a copy of the current plan to the regulator—
+(a) as soon as is reasonably practicable after the completion or revision
+of the terrorism risk assessment of the premises or event, and
+(b) if requested to do so by the regulator, within such reasonable period
+as the regulator may specify in the request.
+(3) A security plan is a document setting out—
+(a) prescribed information about the premises or event;
+(b) prescribed information about the person responsible for the premises
+or event;
+(c) the identity and contact details of the designated senior officer for the
+premises or event;
+(d) prescribed information about the terrorism risk assessment of the
+premises or event;
+(e) prescribed details of the measures in place in relation to the premises
+or event in pursuance of the duty in section 15;
+(f) prescribed details of any proposals for putting in place measures in
+pursuance of that duty (that are not already in place);
+(g) prescribed details of terrorism protection training provided in
+accordance with section 13;
+(h) such other matters as may be prescribed.
+(4) In subsection (3), “prescribed” means prescribed in regulations made by the
+Secretary of State.
+Terrorism (Protection of Premises) Bill 11
+(5) A security plan must be prepared in such form as may be specified in a notice
+issued from time to time by the Secretary of State.
+Cooperation and dispute resolution
+18 Cooperation of other persons with control of premises
+(1) A person (“R”) who is the person responsible for qualifying public premises
+or a qualifying public event may give another person (“P”) a cooperation
+notice if—
+(a) P has, to any extent, control of the qualifying public premises or the
+premises at which the event is to be held (as the case may be),
+(b) a requirement imposed on R by or under this Act relates to a matter
+that is within P’s control, and
+(c) in order to comply with the requirement, R reasonably requires the
+cooperation of P.
+(2) A “cooperation notice” is a notice which specifies—
+(a) the premises mentioned in subsection (1)(a);
+(b) R’s reasons for believing that the conditions in subsection (1) are met;
+(c) the steps that R reasonably requires P to take in relation to the
+premises by way of cooperation with R;
+(d) a reasonable period for P to take those steps (and different periods
+may be specified in relation to different steps);
+(e) such other matters as the Secretary of State may prescribe in
+regulations.
+(3) If R gives P a cooperation notice, R must send a copy of the notice to the
+regulator.
+(4) If P is given a cooperation notice in accordance with this section, P must take
+the steps specified in the notice within the period specified in the notice for
+the taking of those steps.
+(5) Nothing in this section requires P to take any step which—
+(a) is not within P’s power to take, or
+(b) would place a disproportionate burden on P (having regard to P’s
+resources and the premises to which the step relates).
+19 Cooperation with persons responsible for fire safety
+(1) This section applies where—
+(a) a person (“R”) is the person responsible for qualifying public premises
+or a qualifying public event, and
+(b) one or more other persons are responsible persons, within the meaning
+of article 3 of the Regulatory Reform (Fire Safety) Order 2005 (S.I.
+2005/1541), in relation to the qualifying public premises or the premises
+at which the qualifying public event is to be held (“the relevant
+premises”) or a part of the relevant premises (“a relevant part”).
+12 Terrorism (Protection of Premises) Bill
+(2) R must cooperate with each such other person in the performance of that
+person’s duties under that Order in relation to the relevant premises or a
+relevant part of the relevant premises.
+20 Determinations by the tribunal
+(1) An interested person may apply to the tribunal for a determination of any
+of the following matters—
+(a) whether premises are qualifying public premises (and, if so, the
+relevant Schedule 1 use of the premises);
+(b) whether qualifying public premises are enhanced duty premises;
+(c) whether an event is a qualifying public event;
+(d) the person responsible for qualifying public premises or a qualifying
+public event.
+(2) The tribunal may, on the application of an interested person, give directions
+to a person who is responsible for complying with a duty under this Act as
+to how the duty is to be discharged.
+(3) In this section, “interested person” means—
+(a) the regulator, or
+(b) any person who has, to any extent, control of the premises or event
+to which the application relates or the premises at which the event is
+to be held.
+Investigatory powers
+21 Investigatory powers
+Schedule 2 makes provision about investigatory powers.
+Enforcement
+22 Contravention notices
+(1) If the regulator has reasonable grounds to believe that a person is contravening
+or has contravened a relevant requirement, the regulator may give the person
+a contravention notice.
+(2) A contravention notice is a notice under this section requiring the person to
+whom it is given to comply with a specified relevant requirement within a
+specified period.
+(3) A contravention notice given to a person must—
+(a) specify the relevant requirement and the contravention in respect of
+which the notice is given;
+(b) explain the action the regulator may take if the person does not comply
+with the notice;
+(c) explain the rights of appeal under section 25.
+Terrorism (Protection of Premises) Bill 13
+(4) A contravention notice given to a person may—
+(a) require the person to take any specified steps, within a specified period,
+in order to comply with the notice;
+(b) require the person, within a specified period, to provide evidence to
+the satisfaction of the regulator that the person has complied with, or
+is complying with, the notice.
+(5) Before giving a contravention notice to a person, the regulator must—
+(a) notify the person that the regulator intends to give a contravention
+notice to the person, and
+(b) give the person an opportunity to make representations about the
+giving of the notice.
+(6) A contravention notice may not be given to a person more than once in respect
+of the same contravention.
+(7) The regulator may vary or withdraw a contravention notice.
+(8) But the regulator may not vary a contravention notice to make it more
+onerous.
+(9) In this section—
+“relevant requirement” means a requirement imposed by or under any
+of sections 9 to 19;
+“specified” means specified in the contravention notice.
+23 Restriction notices
+(1) The regulator may give a restriction notice to a person mentioned in subsection
+(3) if the regulator has reasonable grounds to believe that—
+(a) a person (whether or not the person to whom the notice is given) is
+contravening or has contravened a relevant requirement,
+(b) the requirement relates to enhanced duty premises or a qualifying
+public event, and
+(c) giving the notice to the person is necessary to protect the public, or a
+section of the public, from the risk of harm arising from acts of
+terrorism at, or in the immediate vicinity of, the premises or event.
+(2) A restriction notice is a notice under this section requiring the person to
+whom it is given to take steps to ensure that the use of specified premises is
+restricted in specified ways.
+(3) A restriction notice may be given to—
+(a) the person responsible for the enhanced duty premises or qualifying
+public event to which the notice relates;
+(b) any other person who, to any extent, has control of the specified
+premises.
+(4) A restriction notice given to a person must—
+(a) identify the premises to which the notice relates;
+(b) set out the regulator’s reasons for giving the notice;
+14 Terrorism (Protection of Premises) Bill
+(c) set out the period for which the notice has effect;
+(d) explain that the period may be extended in accordance with section
+24;
+(e) explain what may happen if the person does not comply with the
+notice;
+(f) explain the rights of appeal under section 25;
+(g) require the person, within a specified period, to provide evidence to
+the satisfaction of the regulator that the person is complying or has
+complied with the notice.
+(5) The ways in which the use of premises may be restricted under a restriction
+notice include (but are not limited to)—
+(a) specifying the purposes for which the premises may be used or must
+not be used;
+(b) specifying the times at which the premises may be used or must not
+be used;
+(c) specifying a description, or maximum number, of members of the
+public who may be permitted access to the premises, or permitted
+access at specified times;
+(d) specifying conditions which must be complied with if the premises
+are used, or are used for specified purposes or at specified times.
+(6) A restriction notice may relate to part only of premises (and references in
+this section and section 24 to “premises” are to be read accordingly).
+(7) Before giving a restriction notice to a person, the regulator must—
+(a) notify the person that the regulator intends to give a restriction notice
+to the person, and
+(b) give the person an opportunity to make representations about the
+giving of the notice.
+(8) Subsection (7) does not apply if the regulator considers that there is an urgent
+need to give a restriction notice to the person.
+(9) The regulator may vary or withdraw a restriction notice.
+(10) But the regulator may not vary a restriction notice to make it more onerous.
+(11) In this section—
+“relevant requirement” means a requirement imposed by or under any
+of sections 9 to 19;
+“specified” means specified in the restriction notice.
+24 Duration of restriction notices
+(1) A restriction notice may not have effect for a period of more than six months,
+unless that period is extended under this section.
+(2) Before a restriction notice is due to expire, the regulator may by further notice
+extend the period for which it has effect if satisfied that the grounds in section
+23(1) continue to apply in relation to the premises or event to which the notice
+relates.
+Terrorism (Protection of Premises) Bill 15
+(3) Before extending the period for which a restriction notice has effect, the
+regulator must—
+(a) notify each person to whom the notice was given, and
+(b) give each such person an opportunity to make representations.
+(4) An extension under this section may not be for a period of more than three
+months.
+(5) A restriction notice may be extended under this section more than once.
+25 Appeals in relation to contravention notices and restriction notices
+(1) A person who is given a contravention notice or restriction notice may appeal
+to the tribunal against the following decisions of the regulator (“relevant
+decisions”)—
+(a) the decision to give the person the notice;
+(b) the decision to include particular provision in the notice;
+(c) a decision to vary the notice;
+(d) a decision to extend the period for which a restriction notice has effect.
+(2) An appeal under this section is to be brought before the end of the period of
+28 days beginning with—
+(a) in the case of an appeal under subsection (1)(a) or (b), the day on
+which the notice was given;
+(b) in the case of an appeal under subsection (1)(c), the day on which the
+notice was varied;
+(c) in the case of an appeal under subsection (1)(d), the first day of the
+extended period.
+(3) On an appeal under this section, if the tribunal is satisfied that any of the
+grounds in subsection (5) applies it may—
+(a) cancel the notice or any provision of it,
+(b) otherwise vary the notice, or
+(c) if the appeal concerns a restriction notice, reduce the period for which
+the notice has effect.
+(4) If the tribunal is not satisfied as mentioned in subsection (3), it must dismiss
+the appeal.
+(5) The grounds referred to in subsection (3) are—
+(a) that the relevant decision was based, wholly or partly, on an error of
+fact;
+(b) that the relevant decision was wrong in law;
+(c) that the relevant decision was unfair or unreasonable for any other
+reason.
+(6) If the tribunal cancels a notice (in whole or in part), it may refer the matter
+back to the regulator with a direction to reconsider and make a new decision
+in accordance with its ruling.
+16 Terrorism (Protection of Premises) Bill
+(7) But the tribunal may not direct the regulator to take any action which the
+regulator would not otherwise have the power to take.
+(8) In determining an appeal under this section, the tribunal may—
+(a) review any determination of fact on which the relevant decision was
+based;
+(b) take into account evidence which was not available to the regulator
+at the time the relevant decision was made.
+(9) Unless the tribunal orders otherwise, on an appeal under this section in respect
+of a relevant decision—
+(a) if the decision concerns a contravention notice, the decision is of no
+effect until the appeal is determined or withdrawn;
+(b) if the decision concerns a restriction notice, the decision continues to
+have effect until the appeal is determined or withdrawn (unless the
+notice expires before the appeal is determined or withdrawn).
+Monetary penalties
+26 Penalty notices
+(1) If the regulator is satisfied, on the balance of probabilities, that a person is
+contravening or has contravened a relevant requirement, the regulator may
+give a penalty notice to the person.
+(2) A penalty notice is a notice under this section requiring the person to pay a
+penalty of a specified amount (the “fixed penalty”) to the regulator within a
+specified period.
+(3) A person may not be given more than one penalty notice in respect of a single
+contravention.
+(4) A penalty notice may not require a person to pay a fixed penalty in respect
+of a single contravention of an amount greater than the maximum determined
+in accordance with section 29.
+(5) A penalty notice may not specify a period for paying a fixed penalty that is
+less than 28 days, beginning with the day on which the notice is given.
+(6) A penalty notice may be given to a person in respect of a contravention
+whether or not the person has been given a contravention notice or restriction
+notice in respect of the contravention.
+(7) The regulator may vary or withdraw a penalty notice.
+(8) But the regulator may not vary a penalty notice so as to—
+(a) increase the amount of the penalty,
+(b) shorten the period within which the penalty must be paid, or
+(c) require the payment of daily penalties (see section 27).
+(9) In this section—
+“relevant requirement” means a requirement imposed by or under any
+of sections 9 to 19, 22 or 23;
+Terrorism (Protection of Premises) Bill 17
+“specified” means specified in the penalty notice.
+27 Daily penalties
+(1) This section applies if a penalty notice is given to a person in respect of a
+contravention of a relevant requirement.
+(2) The notice may, in addition to requiring the person to pay a fixed penalty,
+require the person to pay daily penalties to the regulator.
+(3) A “daily penalty” is a specified amount that must be paid, within a specified
+period, for each day on which the contravention continues after the end of
+the period specified for payment of the fixed penalty.
+(4) The amount of each daily penalty must not exceed—
+(a) if the fixed penalty relates to standard duty premises, £500;
+(b) if the fixed penalty relates to enhanced duty premises or a qualifying
+public event, 1% of the amount of the fixed penalty.
+(5) The total amount of the daily penalties to which the person may be liable in
+respect of the contravention must not exceed the amount of the fixed penalty.
+(6) In this section—
+“relevant requirement” means a requirement imposed by or under any
+of sections 9 to 19, 22 or 23;
+“specified” means specified in the penalty notice.
+28 Determining the amount of a penalty
+(1) A penalty imposed on a person by a penalty notice must be of an amount
+that the regulator considers to be—
+(a) appropriate, and
+(b) proportionate to the contravention in respect of which it is imposed.
+(2) In determining the amount of a penalty to be imposed on a person by a
+penalty notice, the regulator must take into account the following matters
+(among others)—
+(a) the effects of the contravention in respect of which the penalty is
+imposed;
+(b) any action taken by the person to remedy the contravention or mitigate
+its effects;
+(c) any statement issued by the Secretary of State for the purposes of this
+section.
+29 Maximum amounts of fixed penalty
+(1) This section applies for the purpose of determining the maximum amount of
+a fixed penalty imposed on a person by a penalty notice.
+(2) If the fixed penalty relates to standard duty premises, the maximum amount
+is £10,000.
+18 Terrorism (Protection of Premises) Bill
+(3) If the fixed penalty relates to enhanced duty premises or a qualifying public
+event, the maximum amount is whichever is the greater of—
+(a) £18 million, and
+(b) 5% of the person’s qualifying worldwide revenue.
+(4) For the purposes of subsection (3)(b), a person’s qualifying worldwide revenue
+is to be determined in accordance with regulations made by the Secretary of
+State.
+(5) Regulations under subsection (4) may, in particular, make provision as to—
+(a) the amounts which are, or which are not, to be treated as comprising
+a person’s qualifying worldwide revenue;
+(b) the period by reference to which a person’s qualifying worldwide
+revenue is to be determined;
+(c) the circumstances in which a person’s qualifying worldwide revenue
+may be determined by reference to estimated amounts (including
+amounts estimated by the regulator);
+(d) the determination of a person’s qualifying worldwide revenue (in
+whole or in part) by reference to accounting rules prescribed, or of a
+description prescribed, in the regulations.
+(6) The Secretary of State may by regulations amend—
+(a) subsection (2), or
+(b) subsection (3)(a),
+so as to substitute a different figure for the figure for the time being specified.
+30 Penalty notices: procedure
+(1) Before giving a penalty notice to a person, the regulator must—
+(a) notify the person of the regulator’s intention to give a penalty notice
+to the person, and
+(b) give the person an opportunity to make representations about the
+giving of the notice.
+(2) The regulator may not give a penalty notice to the person before the end of
+the period of 28 days, beginning with the day on which notification under
+subsection (1)(a) is given.
+(3) A penalty notice must contain the following information—
+(a) the reasons for giving the penalty notice;
+(b) the amount of the fixed penalty;
+(c) the amount of any daily penalty;
+(d) how payments may be made;
+(e) the period within which payments must be made;
+(f) the rights of appeal under section 31;
+(g) the consequences of failing to pay the penalty.
+Terrorism (Protection of Premises) Bill 19
+31 Appeals against penalties
+(1) A person who is given a penalty notice may appeal to the tribunal against—
+(a) the giving of the notice;
+(b) a penalty imposed by the notice or the amount of such a penalty;
+(c) the period within which such a penalty must paid;
+(d) a variation of the notice.
+(2) An appeal under this section is to be brought before the end of the period of
+28 days, beginning with—
+(a) the day on which the penalty notice was given, or
+(b) if the appeal concerns a variation of the notice, the day on which the
+notice was varied.
+(3) On an appeal under this section—
+(a) if the tribunal is satisfied that any of the grounds in subsection (4)
+applies, it may—
+(i) cancel the penalty notice or a penalty imposed by the penalty
+notice,
+(ii) vary the amount of a penalty imposed by the penalty notice,
+or
+(iii) vary the period within which such a penalty must be paid;
+(b) if the tribunal is not so satisfied, it must confirm the penalty notice.
+(4) The grounds referred to in subsection (3)(a) are—
+(a) that the decision appealed against was based, wholly or partly, on an
+error of fact;
+(b) that the decision appealed against was wrong in law;
+(c) that the decision appealed against was unfair or unreasonable for any
+other reason.
+(5) If the tribunal cancels a penalty notice or a penalty imposed by a penalty
+notice, it may refer the matter back to the regulator with a direction to
+reconsider and make a new decision in accordance with its ruling.
+(6) But the tribunal may not direct the regulator to take any action which the
+regulator would not otherwise have the power to take.
+(7) In determining an appeal under this section, the tribunal may—
+(a) review any determination of fact on which the decision appealed
+against was based;
+(b) take into account evidence which was not available to the regulator.
+(8) Where an appeal is made under this section in respect of a penalty notice, or
+the variation of a notice, the notice or variation is of no effect until the appeal
+is determined or withdrawn, unless the tribunal orders otherwise.
+32 Recovery of penalties
+(1) In England and Wales, a penalty is recoverable as if it were payable under
+an order of the High Court.
+20 Terrorism (Protection of Premises) Bill
+(2) In Scotland, a penalty may be enforced in the same manner as an extract
+registered decree arbitral bearing a warrant for execution issued by the sheriff
+court of any sheriffdom in Scotland.
+(3) In Northern Ireland, a penalty is recoverable as if it were payable under an
+order of the High Court.
+(4) Where action is taken under this section for the recovery of a penalty, the
+penalty—
+(a) in relation to England and Wales, is to be treated for the purposes of
+section 98 of the Courts Act 2003 (register of judgments and orders
+etc) as if it were a judgment entered in the High Court;
+(b) in relation to Northern Ireland, is to be treated for the purposes of
+Article 116 of the Judgments Enforcement (Northern Ireland) Order
+1981 (S.I. 1981/226 (N.I. 6)) (register of judgments) as if it were a
+judgment in respect of which an application has been accepted under
+Article 22 or 23(1) of that Order.
+(5) Any sums received by the regulator by way of a penalty or interest on a
+penalty are to be paid into the Consolidated Fund.
+(6) In this section “penalty” means a penalty imposed by a penalty notice.
+33 Double jeopardy
+A person is not liable to a monetary penalty under this Act in respect of
+anything in respect of which the person has been convicted of an offence
+under this Act.
+Offences
+34 Offences
+(1) A person who is given a contravention notice commits an offence if—
+(a) the notice relates to enhanced duty premises or a qualifying public
+event, and
+(b) the person fails to comply with the notice.
+(2) A person who is given a restriction notice commits an offence if the person
+fails to comply with the notice.
+(3) It is a defence for a person (“P”) charged with an offence under subsection
+(1) or (2) to show that P took all reasonable steps to comply with the notice.
+(4) P is to be taken to have shown the fact mentioned in subsection (3) if—
+(a) sufficient evidence of the fact is adduced to raise an issue with respect
+to it, and
+(b) the contrary is not proved beyond reasonable doubt.
+(5) P may not rely on a defence under subsection (3) which involves a third party
+allegation unless P has—
+Terrorism (Protection of Premises) Bill 21
+(a) given a notice to the prosecutor in accordance with subsections (7) to
+(10), or
+(b) obtained the permission of the court.
+(6) In subsection (5) “third party allegation” means an allegation that the failure
+was due to—
+(a) the act or omission of another person, or
+(b) P’s reliance on information provided by another person.
+(7) The notice under subsection (5)(a) must give any information in P’s possession
+which identifies, or may assist in identifying, the person mentioned in
+subsection (6).
+(8) In the case of proceedings in England and Wales or Northern Ireland, the
+notice under subsection (5)(a) must be given to the prosecutor no later than
+7 clear days before the hearing of the proceedings.
+(9) In the case of summary proceedings in Scotland, the notice under subsection
+(5)(a) must be given to the prosecutor—
+(a) where an intermediate diet is to be held, at or before that diet;
+(b) where such a diet is not to be held, no later than 10 clear days before
+the trial diet.
+(10) In the case of solemn proceedings in Scotland, the notice under subsection
+(5)(a) must be given to the prosecutor—
+(a) where the proceedings are in the sheriff court, at or before the first
+diet;
+(b) where the proceedings are in the High Court, at or before the
+preliminary hearing.
+(11) A person commits an offence if—
+(a) the person provides false or misleading information to the regulator
+in compliance, or purported compliance, with a requirement imposed
+by or under this Act, and
+(b) the person knows that, or is reckless as to whether, the information
+is false or misleading.
+(12) A person who commits an offence under this section is liable—
+(a) on summary conviction in England and Wales, to imprisonment for
+a term not exceeding the general limit in a magistrates’ court or a fine
+(or both);
+(b) on summary conviction in Scotland, to imprisonment for a term not
+exceeding 12 months or a fine not exceeding the statutory maximum
+(or both);
+(c) on summary conviction in Northern Ireland, to imprisonment for a
+term not exceeding six months or a fine not exceeding the statutory
+maximum (or both);
+(d) on conviction on indictment, to imprisonment for a term not exceeding
+two years or a fine (or both).
+22 Terrorism (Protection of Premises) Bill
+35 Offences by directors, partners etc
+(1) Where an offence under this Act has been committed by a body corporate
+and it is proved that the offence—
+(a) has been committed with the consent or connivance of a person listed
+in subsection (2), or
+(b) is attributable to any neglect on the part of such a person,
+that person (as well as the body corporate) is guilty of that offence and liable
+to be proceeded against and punished accordingly.
+(2) The persons referred to in subsection (1)(a) are—
+(a) a director, manager, secretary or other similar officer of the body;
+(b) any person who was purporting to act in such a capacity.
+(3) Where the affairs of a body corporate are managed by its members, subsection
+(1) applies in relation to the acts and defaults of a member, in connection
+with that management, as if the member were a director of the body corporate.
+(4) Where an offence under this Act has been committed by a Scottish partnership
+and it is proved that the offence—
+(a) has been committed with the consent or connivance of a partner in
+the partnership or a person purporting to act as such a partner, or
+(b) is attributable to any neglect on the part of such a person,
+that person (as well as the partnership) is guilty of that offence and liable to
+be proceeded against and punished accordingly.
+Guidance
+36 Guidance about requirements
+(1) The Secretary of State—
+(a) must issue guidance about the discharge of requirements imposed on
+persons by or under this Act;
+(b) may from time to time revise and reissue the guidance.
+(2) The guidance—
+(a) may be in such form as the Secretary of State considers appropriate
+(and in particular, may include online training materials);
+(b) may make provision by reference to a document issued by the
+Secretary of State, or another person, as revised or replaced from time
+to time.
+(3) Subsection (4) applies where—
+(a) in any proceedings, it is alleged that a person is contravening or has
+contravened a requirement imposed on the person by or under this
+Act, and
+(b) guidance has been issued under this section in relation to the discharge
+of the requirement (“relevant guidance”).
+(4) Proof of compliance with the relevant guidance may be relied on as tending
+to establish that there was no such contravention.
+Terrorism (Protection of Premises) Bill 23
+37 Guidance about the exercise of the regulator’s functions
+(1) The regulator must issue guidance about how the regulator proposes to
+exercise functions under this Act.
+(2) The regulator—
+(a) must keep the guidance under review, and
+(b) may from time to time revise and reissue the guidance.
+(3) The regulator must not issue guidance, or revised guidance, under this section
+unless—
+(a) where the regulator is not the Secretary of State, a draft of the guidance
+or revised guidance has been sent to, and approved by, the Secretary
+of State, and
+(b) the Secretary of State has laid a copy of the guidance, or revised
+guidance, before Parliament.
+Licensing of premises at heightened terrorism risk
+38 Licensing of premises at heightened terrorism risk
+Schedule 3 amends the Licensing Act 2003 to make provision about the
+disclosure of plans of premises considered to be at heightened risk of being
+a target of terrorist activity.
+General
+39 Data protection
+(1) A disclosure of information under this Act, or regulations made under this
+Act, does not breach—
+(a) any obligation of confidence owed by the person making the disclosure,
+or
+(b) any other restriction on the disclosure of information (however
+imposed).
+(2) Nothing in this Act requires or authorises a disclosure of information if the
+disclosure would contravene the data protection legislation (but in determining
+whether a disclosure would do so, take into account the duties imposed, and
+powers conferred, by and under this Act).
+(3) In this section “the data protection legislation” has the same meaning as in
+the Data Protection Act 2018 (see section 3 of that Act).
+40 Means of giving notices
+(1) A notice under this Act may be given to a person by—
+(a) handing it to the person,
+(b) leaving it at the person’s proper address,
+(c) sending it by post to the person at that address, or
+24 Terrorism (Protection of Premises) Bill
+(d) subject to subsection (7), sending it to the person by electronic means.
+(2) A notice to a body corporate may be given to the secretary or clerk of that
+body.
+(3) A notice to a partnership may be given to a partner or a person who has the
+control or management of the partnership business.
+(4) For the purposes of this section and of section 7 of the Interpretation Act 1978
+(service of documents by post) in its application to this section, the proper
+address of a person is—
+(a) in the case of a body corporate or its secretary or clerk, the address
+of the body’s registered or principal office;
+(b) in the case of a partnership, a partner or a person having the control
+or management of the partnership business, the address of the principal
+office of the partnership;
+(c) in any other case, the person’s last known address.
+(5) For the purposes of subsection (4) the principal office of a company registered
+outside the United Kingdom, or of a partnership carrying on business outside
+the United Kingdom, is its principal office within the United Kingdom.
+(6) If a person has specified an address in the United Kingdom, other than the
+person’s proper address within the meaning of subsection (4), as the one at
+which the person or someone on the person’s behalf will accept notices of
+the same description as a notice under this Act, that address is also treated
+for the purposes of this section and section 7 of the Interpretation Act 1978
+as the person’s proper address.
+(7) A notice may be sent to a person by electronic means only if—
+(a) the person has indicated that notices of the same description as a
+notice under this Act may be given to the person by being sent to an
+electronic address and in an electronic form specified for that purpose,
+and
+(b) the notice is sent to that address in that form.
+(8) A notice sent to a person by electronic means is, unless the contrary is proved,
+to be treated as having been given at 9am on the working day immediately
+following the day on which it was sent.
+(9) In this section—
+“electronic address” means any number or address used for the purposes
+of sending or receiving information by electronic means;
+“working day” means a day other than a Saturday, a Sunday, Christmas
+Day, Good Friday or a bank holiday under the Banking and Financial
+Dealings Act 1971 in any part of the United Kingdom.
+41 Further provision about notices
+(1) The Secretary of State may by regulations make further provision about notices
+under this Act.
+(2) The regulations may in particular make provision about—
+Terrorism (Protection of Premises) Bill 25
+(a) the form and content of notices;
+(b) the variation or withdrawal of notices.
+42 Civil liability
+(1) Except so far as this Act or regulations under this Act provide, nothing in
+this Act confers a right of action in any civil proceedings in respect of any
+contravention or a requirement imposed on any person by or under this Act.
+(2) Subsection (1) is without prejudice to any right of action which exists apart
+from the provisions of this Act.
+43 Interpretation
+(1) In this Act—
+“authorised inspector” has the meaning given by paragraph 2(2) of
+Schedule 2;
+“contravention” includes a failure to comply;
+“contravention notice” means a notice under section 22;
+“document” includes information recorded in any form;
+“enhanced duty premises” has the meaning given by section 3;
+“information” includes documents, and any reference to providing
+information includes a reference to producing a document;
+“penalty notice”, “fixed penalty” and “daily penalty” have the meanings
+given by sections 26 and 27;
+“relevant Schedule 1 use” has the meaning given by section 5;
+“relevant worker” has the meaning given by section 13;
+“restriction notice” means a notice under section 23;
+“standard duty premises” has the meaning given by section 3;
+“terrorism” has the same meaning as in the Terrorism Act 2000 (see
+section 1 of that Act);
+“the tribunal” means the First-Tier Tribunal or, where determined by or
+under Tribunal Procedure Rules, the Upper Tribunal.
+(2) References in this Act to acts of terrorism (however expressed) include the
+use or threat of action which it is reasonable to suspect may be being carried
+out in the course of, or in the planning or preparation of, an act of terrorism.
+(3) For the purposes of this Act, “premises” means—
+(a) a building, including land occupied with the building;
+(b) any other land which has a readily identifiable physical boundary
+(whether permanent or not).
+(4) In subsection (3)(a), “building” includes part of a building or a group of
+buildings (and the reference to land occupied with the building is to be read
+accordingly).
+(5) Any reference in this Act to a person having control of premises is a reference
+to the person having control as occupier or otherwise.
+26 Terrorism (Protection of Premises) Bill
+(6) References in this Act to “measures” in place in relation to premises include
+measures of any sort (whether physical or otherwise) put in place for any
+purpose, and it is irrelevant whether a measure—
+(a) is permanent or temporary;
+(b) is put in place by the person for the time being responsible for the
+premises or another person;
+(c) is put in place before or after the passing of this Act.
+44 Regulations
+(1) This section applies to regulations under any provision of this Act except
+section 46 (commencement and transitional provision).
+(2) A power to make regulations includes power to make—
+(a) consequential, supplementary, incidental, transitional or saving
+provision;
+(b) different provision for different purposes or for different areas.
+(3) Regulations are to be made by statutory instrument.
+(4) A statutory instrument containing any of the regulations specified in subsection
+(5) (with or without other provision) may not be made unless a draft of the
+instrument has been laid before and approved by a resolution of each House
+of Parliament.
+(5) The regulations are—
+(a) regulations under section 1;
+(b) regulations under section 8;
+(c) regulations under section 29(6) which increase or decrease the
+maximum amount of a penalty by more than is necessary to reflect
+changes in the value of money.
+(6) Any other statutory instrument containing regulations is subject to annulment
+in pursuance of a resolution of either House of Parliament.
+45 Extent
+(1) Subject to subsection (2), this Act extends to England and Wales, Scotland
+and Northern Ireland.
+(2) Section 38 and Schedule 3 extend to England and Wales only.
+46 Commencement and transitional provision
+(1) The following provisions come into force on the day on which this Act is
+passed—
+(a) sections 39 to 45;
+(b) this section;
+(c) section 47.
+Terrorism (Protection of Premises) Bill 27
+(2) The other provisions of this Act come into force on such day as the Secretary
+of State may by regulations appoint, and different days may be appointed
+for different purposes or different areas.
+(3) The Secretary of State may by regulations make transitional or saving provision
+in connection with the coming into force of any provision of this Act.
+(4) The power to make regulations under subsection (3) includes power to make
+different provision for different purposes or for different areas.
+(5) Regulations under this section are to be made by statutory instrument.
+47 Short title
+This Act may be cited as the Terrorism (Protection of Premises) Act 2023.
+28 Terrorism (Protection of Premises) Bill
+SCHEDULES
+SCHEDULE 1 Section 2
+SPECIFIED USES OF PREMISES
+Shops etc
+1 Use for—
+(a) the retail sale of goods,
+(b) the display of goods for sale, or
+(c) the provision of a service,
+where the sale, display or service is principally to visiting members of the
+public.
+Food and drink
+2 Use for the sale of food or drink, where the food or drink is principally
+for consumption on the premises by visiting members of the public.
+Nightclubs etc
+3 Use as a nightclub, social club or dance hall.
+Entertainment activities
+4 Use for the provision of entertainment of a description mentioned in
+sub-paragraph (2) where the condition in sub-paragraph (3) is met.
+(1)
+(2) The descriptions of entertainment are—
+(a) a performance of a play,
+(b) a performance of comedy,
+(c) an exhibition of a film,
+(d) an indoor sporting event,
+(e) a boxing or wrestling entertainment,
+(f) a performance of live music,
+(g) any playing of recorded music,
+(h) a performance of dance or acrobatics, or
+(i) entertainment of a similar description to that falling within any of
+paragraphs (a) to (h).
+(3) The condition in this sub-paragraph is that the entertainment—
+(a) takes place in the presence of an audience, and
+(b) is provided for the purpose, or for purposes which include the
+purpose, of entertaining that audience.
+Terrorism (Protection of Premises) Bill 29
+Schedule 1—Specified uses of premises
+Sports grounds
+5 (1) Use as a sports ground.
+(2) In this paragraph, “sports ground”—
+(a) in relation to England and Wales and Scotland, has the meaning
+given by section 17(1) of the Safety of Sports Grounds Act 1975;
+(b) in relation to Northern Ireland, has the meaning given by Article
+2(2) of the Safety of Sports Grounds (Northern Ireland) Order 2006
+(S.I. 2006/313 (N.I. 2)).
+Recreation, exercise or leisure
+6 Use for recreation, exercise or leisure by visiting members of the public.
+Libraries, museums and galleries etc
+7 (1) Use as a library, museum or gallery.
+(2) In this paragraph, “museum or gallery” includes—
+(a) an archive, and
+(b) a site where a collection of objects or works (or a single object or
+work) considered to be of scientific, historic, artistic or cultural
+interest is exhibited outdoors or partly outdoors.
+Exhibition halls etc
+8 Use as—
+(a) an exhibition hall,
+(b) a conference centre, or
+(c) a venue for hire for events or activities.
+Visitor attractions
+9 Use as a visitor attraction of cultural, historic, touristic or educational value.
+Hotels etc
+10 Use as—
+(a) a hotel,
+(b) a hostel,
+(c) a boarding house,
+(d) a guest house, or
+(e) a holiday park.
+Places of worship
+11 (1) Use for—
+(a) communal worship, or
+(b) other communal religious practice,
+30 Terrorism (Protection of Premises) Bill
+Schedule 1—Specified uses of premises
+in accordance with the tenets of a particular religion or religious
+denomination.
+(2) In a case where the relevant Schedule 1 use of qualifying public premises
+is the use mentioned in sub-paragraph (1), the premises are to be treated
+for the purposes of this Act as standard duty premises (and not enhanced
+duty premises, even if they meet the definition of that expression in section
+3).
+(3) But sub-paragraph (2) does not apply if persons visiting the premises
+otherwise than in connection with their relevant Schedule 1 use are charged
+a fee for admission.
+Health care
+12 (1) Use as a hospital or for the provision of health care.
+(2) In a case where the relevant Schedule 1 use of qualifying public premises
+is use as a hospital, the person responsible for the premises for the purposes
+of this Act is—
+(a) where the hospital is operated by an NHS trust or NHS foundation
+trust, that trust;
+(b) in any other case, the governing body of the hospital.
+(3) In this paragraph—
+“health care” means all forms of health care provided to individuals,
+whether relating to physical or mental health, and including ancillary
+care;
+“hospital”—
+(a) in relation to England and Wales, has the meaning given by
+section 275 of the National Health Service Act 2006;
+(b) in relation to Scotland, has the meaning given by section
+108(1) of the National Health Service (Scotland) Act 1978;
+(c) in relation to Northern Ireland, has the meaning given by
+Article 2(2) of the Health and Personal Social Services
+(Northern Ireland) Order 1972 (S.I. 1972/1265 (N.I. 14));
+“NHS trust” and “NHS foundation trust” have the same meanings as
+in the National Health Service Act 2006.
+Bus stations, railway stations etc
+13 Use as—
+(a) a station within the meaning given by section 83 of the Railways
+Act 1993,
+(b) a bus or coach station,
+(c) a tramway station, or
+(d) any other station forming part of a transport system which uses a
+mode of guided transport and is not a trolley vehicle system.
+Terrorism (Protection of Premises) Bill 31
+Schedule 1—Specified uses of premises
+Aerodromes
+14 Use for affording facilities for the landing and departure of aircraft
+(including those capable of descending or climbing vertically), other than
+use exclusively for military purposes.
+Childcare
+15 (1) Use for the provision of—
+(a) in England—
+(i) early years provision in respect of which a person is required
+to be registered under section 34 of the Childcare Act 2006,
+(ii) later years provision in respect of which a person is required
+to be registered under section 53 that Act, or
+(iii) education or childcare in a maintained nursery school within
+the meaning of section 22 of the School Standards and
+Framework Act 1998;
+(b) in Wales—
+(i) day care for children within the meaning of Part 2 of the
+Children and Families (Wales) Measure 2010 (nawm 1), or
+(ii) childcare in a school in Wales within the meaning of the
+Education Act 1996 as it applies in relation to Wales (see
+section 4 of that Act);
+(c) in Scotland—
+(i) early learning and childcare within the meaning of Part 6 of
+the Children and Young People (Scotland) Act 2014 (asp 8)
+(see section 46 of that Act), or
+(ii) the day care of children within the meaning of Part 5 of the
+Public Services Reform (Scotland) Act 2010 (asp 8) (see
+paragraph 13 of Schedule 12 to that Act);
+(d) in Northern Ireland—
+(i) day care for children within the meanings given by Article
+2(2) of the Children (Northern Ireland) Order 2005 (S.I.
+1995/755 (N.I. 2)),
+(ii) pre-school education, within the meaning given by Article
+17(8) of the Education (Northern Ireland) Order 1998 (S.I.
+1998/594 (N.I. 13)), or
+(iii) education in a nursery school, within the meaning given by
+Article 2(2) of the Education and Libraries (Northern Ireland)
+Order 1986 (S.I. 1986/594 (N.I. 3)).
+(2) In sub-paragraph (1)(a), “childcare”, “early years provision” and “later years
+provision” have the same meanings as in Part 3 of the Childcare Act 2006
+Act (see section 98 of that Act).
+(3) In a case where the relevant Schedule 1 use of qualifying public premises
+is a use mentioned in sub-paragraph (1), the premises are to be treated for
+the purposes of this Act as standard duty premises (and not enhanced duty
+premises, even if they meet the definition of that expression in section 3).
+32 Terrorism (Protection of Premises) Bill
+Schedule 1—Specified uses of premises
+Primary and secondary education
+16 (1) Use for the purposes of a primary or secondary education institution.
+(2) In this paragraph, “primary or secondary education institution” means—
+(a) an institution in England or Wales which is—
+(i) a school that has been approved under section 342 of the
+Education Act 1996,
+(ii) a maintained school within the meaning given by section
+20(7) of the School Standards and Framework Act 1998,
+(iii) an independent school registered under section 158 of the
+Education Act 2002,
+(iv) an independent educational institution registered under
+section 95(1) of the Education and Skills Act 2008,
+(v) an Academy school within the meaning given by section 1A
+of the Academies Act 2010,
+(vi) an alternative provision Academy within the meaning given
+by section 1C of that Act, or
+(vii) a pupil referral unit or other institution at which education
+is provided in pursuance of arrangements made under
+section 19 or 19A of the Education Act 1996;
+(b) in Scotland, a grant-aided school, independent school or public
+school within the meanings given by section 135 of the Education
+(Scotland) Act 1980;
+(c) in Northern Ireland, a school within the meaning given by Article
+2(2) of the Education and Libraries (Northern Ireland) Order 1986
+(S.I. 1986/594 (N.I. 3)) at which full‐time education is provided for
+pupils of compulsory school age (whether or not full-time or
+part-time education is also provided for pupils under or over that
+age).
+(3) In a case where the relevant Schedule 1 use of qualifying public premises
+is use for the purposes of a primary or secondary education institution—
+(a) the person responsible for the premises for the purposes of this Act
+is—
+(i) in a case where the institution is a pupil referral unit, the
+local authority by which it is maintained, and
+(ii) in any other case, the governing body or, where there is no
+governing body, proprietor of the institution, and
+(b) the premises are to be treated for the purposes of this Act as
+standard duty premises (and not enhanced duty premises, even if
+they meet the definition of that expression in section 3).
+Further education
+17 (1) Use for the provision of—
+Terrorism (Protection of Premises) Bill 33
+Schedule 1—Specified uses of premises
+(a) further education in an institution in England within the further
+education sector (within the meaning of section 91(3) of the Further
+and Higher Education Act 1992),
+(b) education in a 16 to 19 Academy in England,
+(c) education in England by an independent training provider,
+(d) further education for persons under 19 by a local authority in
+England,
+(e) further education in an institution in Wales within the further
+education sector (within the meaning of section 91(3) of the Further
+and Higher Education Act 1992),
+(f) any other post-16 education or training in Wales, the facilities for
+which are secured under section 31(1)(a) or (b) or 32(1)(a) or (b) of
+the Learning and Skills Act 2000, that is funded by the Welsh
+Ministers or a local authority in Wales, but that is not provided
+by—
+(i) an institution in Wales within the higher education sector
+(within the meaning of section 91(5) of the Further and
+Higher Education Act 1992), or
+(ii) a person who is a provider of such post-16 education or
+training only by reason of providing such education or
+training to the person’s employees,
+(g) further education in Scotland by a body listed under the heading
+“Institutions formerly eligible for funding by the Scottish Further
+Education Funding Council” or “Other institutions” in Schedule 2
+to the Further and Higher Education (Scotland) Act 2005 (asp 6),
+(h) further education in Scotland by a college of further education which
+is assigned to a regional strategic body by an order made under
+section 7C of that Act, or
+(i) further education at an institution recognised under Article 8 of the
+Further Education (Northern Ireland) Order 1997 (S.I. 1997/1772
+(N.I. 15)).
+(2) In a case where the relevant Schedule 1 use of qualifying public premises
+is a use mentioned in sub-paragraph (1)—
+(a) the person responsible for the premises for the purposes of this Act
+is—
+(i) in a case within paragraph (a), (e), (h) or (i) of that
+sub-paragraph, the governing body of the institution, college
+or institute concerned;
+(ii) in a case within paragraph (b), the proprietor of the 16 to
+19 Academy concerned;
+(iii) in a case within paragraph (c) of that sub-paragraph, the
+independent training provider concerned;
+(iv) in a case within paragraph (d) of that sub-paragraph, the
+local authority in England concerned;
+(v) in a case within paragraph (f) of that sub-paragraph, the
+person providing the education concerned;
+34 Terrorism (Protection of Premises) Bill
+Schedule 1—Specified uses of premises
+(vi) in a case within paragraph (g) of that sub-paragraph, the
+listed body concerned, and
+(b) the premises are to be treated for the purposes of this Act as
+standard duty premises (and not enhanced duty premises, even if
+they meet the definition of that expression in section 3).
+(3) In this paragraph—
+“16 to 19 Academy” has the meaning given by section 1B of the
+Academies Act 2010;
+“further education”—
+(a) in relation to provision in England or Wales, has the same
+meaning as in the Education Act 1996 (see section 2 of that
+Act);
+(b) in relation to provision in Scotland, has the same meaning
+as in Part 1 of the Further and Higher Education (Scotland)
+Act 1992 (see sections 1(3) and 6 of that Act);
+(c) in relation to provision in Northern Ireland, has the meaning
+given by Article 3 of the Further Education (Northern
+Ireland) Order 1997 (S.I. 1997/1772 (N.I. 15)).
+“independent training provider” means a provider—
+(a) that is a provider of post-16 education or training in
+England—
+(i) to which Chapter 3 of Part 8 of the Education and
+Inspections Act 2006 (inspection of further education
+and training etc) applies, and
+(ii) which is funded, wholly or partly, by the Secretary
+of State, a local authority in England or a combined
+authority established under section 103 of the Local
+Democracy, Economic Development and Construction
+Act 2009, and
+(b) that is not—
+(i) an employer who only provides such education or
+training to its employees,
+(ii) a 16 to 19 Academy,
+(iii) a school (within the meaning of section 4(1) of the
+Education Act 1996),
+(iv) a local authority in England,
+(v) an institution within the further education sector
+(within the meaning given by section 91(3) of the
+Further and Higher Education Act 1992), or
+(vi) a higher education provider (within the meaning
+given by section 83(1) of the Higher Education and
+Research Act 2017);
+“local authority in England” has the same meaning as in the Education
+Act 1996 (see sections 579(1) and 581 of that Act);
+“local authority in Wales” has the same meaning as in the Education
+Act 1996 (see section 579(1) of that Act).
+Terrorism (Protection of Premises) Bill 35
+Schedule 1—Specified uses of premises
+Higher education
+18 (1) Use for the purposes of a higher education institution.
+(2) In a case where the relevant Schedule 1 use of qualifying public premises
+is use for the purposes of a higher education institution the person
+responsible for the premises for the purposes of this Act is the governing
+body of the institution.
+(3) In this paragraph—
+“higher education institution” means—
+(a) an institution in England or Wales which is—
+(i) a qualifying institution within the meaning of section
+11 of the Higher Education Act 2004, or
+(ii) an institution principally concerned with the
+provision of education by means of courses of a
+description mentioned in Schedule 6 to the Education
+Reform Act 1988 (higher education courses);
+(b) an institution in Scotland which is listed under the heading
+“Institutions formerly eligible for funding by the Scottish
+Higher Education Funding Council” or “Other institutions”
+in Schedule 2 to the Further and Higher Education (Scotland)
+2005 Act (asp 6);
+(c) an institution in Northern Ireland which provides higher
+education within the meaning given by Article 2(2) of the
+Further Education (Northern Ireland) Order 1997 (S.I.
+1997/1772 (N.I. 15));
+“institution”, in relation to England, includes—
+(a) a training provider who would not otherwise be regarded
+as an institution;
+(b) a provider of higher education designated under section 84
+of the Higher Education and Research Act 2017;
+“governing body”—
+(a) in relation to a higher education institution in England or
+Wales, has the meaning given by section 85 of the Higher
+Education and Research Act 2017;
+(b) in relation to a higher education institution in Scotland, has
+the meaning given by section 35(2) of the Further and Higher
+Education (Scotland) Act 2005;
+(c) in relation to an institution in Northern Ireland, has the
+meaning given by Article 30(3) of the Education and Libraries
+(Northern Ireland) Order 1993 (S.I. 1993/2810 (N.I. 12));
+“training provider” means a person who provides training in England
+or Wales for members of the school workforce within the meaning
+of Part 3 of the Education Act 2005 (see section 100 of that Act).
+36 Terrorism (Protection of Premises) Bill
+Schedule 1—Specified uses of premises
+Public authorities
+19 Use (other than use mentioned elsewhere in this Schedule) for the purposes
+of a public authority.
+(1)
+(2) In a case where the relevant Schedule 1 use of qualifying public premises
+is the use mentioned in sub-paragraph (1), the person responsible for the
+premises is the public authority.
+(3) In this paragraph, “public authority” means a person exercising functions
+of a public nature.
+SCHEDULE 2 Section 21
+INVESTIGATORY POWERS
+Terrorism protection investigations
+1 In this Schedule, a “terrorism protection investigation” means an
+investigation by the regulator to determine whether a person—
+(a) is contravening or has contravened a requirement under this Act,
+or
+(b) is committing, or has committed, an offence under this Act.
+Authorised inspectors
+2 (1) The regulator may authorise persons to—
+(a) exercise information gathering powers under paragraph 3;
+(b) exercise powers of entry and inspection under paragraph 4;
+(c) apply for a warrant to be issued under paragraph 5, and execute
+such a warrant.
+(2) In this Act, “authorised inspector” means—
+(a) in paragraph 3, a person authorised under sub-paragraph (1)(a);
+(b) in paragraph 4, a person authorised under sub-paragraph (1)(b);
+(c) in paragraphs 5 to 7, a person authorised under sub-paragraph
+(1)(c).
+(3) A person may be authorised to exercise a power under this Schedule only
+if the person appears to the regulator to be suitably qualified to exercise
+the power.
+(4) An authorisation under this paragraph—
+(a) must be in writing;
+(b) may be varied or revoked by an instrument in writing.
+(5) When exercising or seeking to exercise a power under this Schedule, an
+authorised inspector must, if asked, produce the authorisation (including
+any instrument varying it) or a duly authenticated copy.
+Terrorism (Protection of Premises) Bill 37
+Schedule 2—Investigatory powers
+Information gathering powers
+3 (1) An authorised inspector may by notice require a person—
+(a) to provide specified information or information of specified
+descriptions, by a specified date, or
+(b) to attend at a specified time and place and provide information by
+answering questions.
+(2) If a notice under sub-paragraph (1)(a) requires a person to provide
+information which is kept in electronic form, the notice may require it to
+be provided in a form in which it is legible.
+(3) An authorised inspector may give a person a notice under sub-paragraph
+(1)(a) only if the inspector reasonably believes that—
+(a) the information specified, or of the descriptions specified, in the
+notice are required by the regulator for the purposes of a terrorism
+protection investigation, and
+(b) the person is able to provide the information specified, or
+information of the descriptions specified, in the notice.
+(4) An authorised inspector may give a person a notice under sub-paragraph
+(1)(b) only if the inspector reasonably believes that the person is able to
+provide information required by the regulator for the purposes of a
+terrorism protection investigation.
+(5) But a person is not required under this paragraph to provide any
+information which might incriminate the person (and see paragraph 10).
+(6) A notice under this paragraph must—
+(a) specify that it is a notice containing a requirement under this
+paragraph;
+(b) explain the grounds for the inspector believing the matters in
+sub-paragraph (3) or (4) (as the case may be);
+(c) explain the consequences of failing to comply with the requirement;
+(d) attach evidence of the inspector’s authority to exercise the powers
+under this paragraph.
+(7) An authorised inspector may withdraw a notice under this paragraph by
+giving notice of withdrawal to the person to whom the notice was given.
+(8) Information provided by a person under this paragraph is not admissible
+in evidence against that person in criminal proceedings except—
+(a) in proceedings for a false statement offence, or
+(b) if in the proceedings—
+(i) in giving evidence the person makes a statement inconsistent
+with the information, and
+(ii) evidence as to the information that was provided is adduced,
+or a question relating to it is asked, by or on behalf of the
+person.
+(9) In this paragraph—
+“false statement offence” means an offence under—
+38 Terrorism (Protection of Premises) Bill
+Schedule 2—Investigatory powers
+(a) section 2 or 5 of the Perjury Act 1911 (false statements made
+on oath otherwise than in judicial proceedings or made
+otherwise than on oath),
+(b) section 44(1) or (2) of the Criminal Law (Consolidation)
+(Scotland) Act 1995 (false statements made on oath or
+otherwise than on oath), or
+(c) Article 10 of the Perjury (Northern Ireland) Order 1979 (S.I.
+1979/1714 (N.I. 19)) (false statutory declarations and other
+false unsworn statements);
+“specified” means specified in the notice.
+Powers to enter premises without a warrant
+4 An authorised inspector may enter premises and do any of the following
+things—
+(1)
+(a) inspect the premises;
+(b) observe the carrying on of activities at the premises;
+(c) view any document at, or capable of being viewed using equipment
+at, the premises;
+(d) inspect any equipment or other item at the premises;
+(e) require any person on the premises to provide an explanation of
+any document or to state where it can be found;
+(f) take copies of any document found or produced;
+(g) take measurements and photographs, and make recordings.
+(2) The powers under this paragraph may be exercised in relation to premises
+only if an authorised inspector reasonably believes that—
+(a) the premises are qualifying public premises or premises at which
+a qualifying public event is to be held, and
+(b) the exercise of the powers is necessary for the purposes of a
+terrorism protection investigation.
+(3) Before exercising a power under this paragraph in relation to premises, an
+authorised inspector must give the occupier of the premises at least 72
+hours’ notice in writing of the proposal to exercise the power.
+(4) When exercising a power under this paragraph in relation to premises, an
+authorised inspector must, if requested to do so by a person at the
+premises—
+(a) produce evidence of the inspector’s identity, and
+(b) explain the purpose for which the power is to be exercised.
+(5) The powers conferred by this paragraph must be exercised at a reasonable
+hour (having regard to the way in which the premises are used).
+(6) The inspector may be accompanied by any person, and bring anything,
+required for any purpose for which the inspector is exercising the power
+of entry.
+Terrorism (Protection of Premises) Bill 39
+Schedule 2—Investigatory powers
+Conditions for issue of warrant to enter premises
+5 A justice may issue a warrant in respect of premises only if satisfied on an
+application made by an authorised inspector that—
+(1)
+(a) the premises are in the United Kingdom,
+(b) the premises are not used wholly or mainly as a private dwelling,
+(c) it is necessary for an authorised inspector to enter the premises for
+the purposes of a terrorism protection investigation, and
+(d) any of the conditions in sub-paragraph (2) are met in relation to
+the premises.
+(2) The conditions are that—
+(a) the premises are not qualifying public premises or premises at which
+a qualifying public event is to be held;
+(b) the premises are qualifying public premises or premises at which
+a qualifying public event is to be held, and an inspection without
+a warrant has been frustrated;
+(c) giving notice to enter the premises would defeat the object of entry;
+(d) the regulator requires access to the premises urgently.
+(3) For the purposes of sub-paragraph (2)(b), an inspection of premises without
+a warrant has been frustrated if—
+(a) an authorised inspector has given notice to enter the premises, as
+required under paragraph 4, and
+(b) access has been denied or an authorised inspector has been
+prevented from doing any other thing mentioned in paragraph 4(1).
+(4) In this paragraph, “justice” means—
+(a) in England and Wales, a justice of the peace;
+(b) in Scotland, a justice of the peace or a sheriff;
+(c) in Northern Ireland, a lay magistrate.
+Powers exercisable by warrant
+6 (1) A warrant issued under paragraph 5 in respect of premises—
+(a) authorises any authorised inspector to enter the premises and do
+any other thing mentioned in paragraph 4(1), and
+(b) confers such additional powers as may be specified in the warrant.
+(2) A power of entry under a warrant issued under paragraph 5 may be
+exercised—
+(a) at the times specified in the warrant, or
+(b) if no times are specified in the warrant, at any time.
+(3) “Additional powers” means—
+(a) the power to enter by force (if necessary);
+(b) the power to seize documents, equipment or other items.
+(4) The inspector may only seize a document, equipment or other item if it
+appears to the inspector that—
+40 Terrorism (Protection of Premises) Bill
+Schedule 2—Investigatory powers
+(a) the document, equipment or other item is evidence of an offence
+under this Act, and
+(b) the seizure is necessary to prevent that evidence being concealed,
+lost, altered or destroyed.
+(5) The inspector may be accompanied by any person, and bring anything,
+required for any purpose for which the inspector is exercising the power
+of entry.
+Evidence of authority
+7 Before exercising power under a warrant issued under paragraph 5 in
+respect of premises, an authorised inspector must—
+(1)
+(a) produce a copy of the warrant;
+(b) supply the occupier (if present), or any other person appearing to
+the inspector to be in charge of the premises, with a copy of the
+warrant.
+(2) If requested to do so by a person at the premises, the inspector must also—
+(a) produce evidence of the inspector’s identity;
+(b) explain the purpose for which the power is exercised.
+(3) If neither the occupier nor any other person appearing to the inspector to
+be in charge of the premises is present, the authorised inspector must leave
+a copy of the warrant in a prominent place on the premises.
+Retention of evidence etc
+8 A document, equipment or another item obtained under this Schedule in
+connection with a terrorism protection investigation may be retained by
+the regulator for so long as is necessary for the purposes of the investigation.
+(1)
+(2) But no document, equipment or other item may be retained by the regulator
+if a copy, photograph or other recording of the document, equipment or
+item would be sufficient for the purposes of the investigation.
+Offences in relation to investigations
+9 A person who is given a notice under paragraph 3 commits an offence if
+the person fails to comply with it.
+(1)
+(2) It is a defence for a person charged with an offence under sub-paragraph
+(1) to show that the person took all reasonable steps to comply with the
+notice, and subsections (4) to (10) of section 34 apply in relation to a defence
+under this sub-paragraph.
+(3) A person commits an offence if the person—
+(a) intentionally obstructs an authorised inspector in the performance
+of a power conferred by this Schedule;
+(b) with intent to deceive, falsely pretends to be an authorised inspector.
+(4) A person who commits an offence under sub-paragraph (1) is liable—
+(a) on summary conviction in England and Wales, to a fine;
+Terrorism (Protection of Premises) Bill 41
+Schedule 2—Investigatory powers
+(b) on summary conviction in Scotland, to a fine not exceeding level 5
+on the standard scale;
+(c) on summary conviction in Northern Ireland, to a fine not exceeding
+level 5 on the standard scale.
+(5) A person who commits an offence under sub-paragraph (3) is liable—
+(a) on summary conviction in England and Wales, to imprisonment for
+a term not exceeding the general limit in a magistrates’ court or a
+fine (or both);
+(b) on summary conviction in Scotland, to imprisonment for a term not
+exceeding 12 months or a fine not exceeding the statutory maximum
+(or both);
+(c) on summary conviction in Northern Ireland, to imprisonment for
+a term not exceeding six months or a fine not exceeding the statutory
+maximum (or both);
+(d) on conviction on indictment, to imprisonment for a term not
+exceeding two years or a fine (or both).
+Saving for material subject to legal professional privilege
+10 Nothing in this Schedule confers power to—
+(a) require any person to provide information, or
+(b) seize anything,
+in respect of which a claim to legal professional privilege (or in Scotland
+to confidentiality of communications) could be maintained in legal
+proceedings.
+SCHEDULE 3 Section 38
+LICENSING OF PREMISES AT HEIGHTENED TERRORISM RISK
+1 The Licensing Act 2003 is amended as follows.
+2 In section 8 (requirement to keep a register), after subsection (4) insert—
+“(4A) Subsections (3) and (4) are subject to section 8A.”
+3 After section 8 insert—
+“8A Terrorism protection statements
+(1) This section applies where—
+(a) a relevant record in a register kept by a licensing authority
+under section 8 contains a plan of premises, and
+(b) a relevant person has given the authority a terrorism
+protection statement in relation to the premises (and the
+statement has not been withdrawn).
+(2) The licensing authority must not—
+42 Terrorism (Protection of Premises) Bill
+Schedule 3—Licensing of premises at heightened terrorism risk
+(a) make the plan of the premises available for inspection under
+section 8(3), or
+(b) supply any person with a copy of the plan of the premises
+under section 8(4).
+(3) A “terrorism protection statement”, in relation to premises, is a
+statement that, in the opinion of an appropriate security adviser,
+the premises are at heightened risk of being a target of terrorist
+activity.
+(4) A terrorism protection statement must be—
+(a) in the prescribed form, and
+(b) certified by an appropriate security adviser in the prescribed
+manner.
+(5) Before certifying a terrorism protection statement, an appropriate
+security adviser must have regard to any statement issued by the
+Secretary of State for the purposes of this section.
+(6) Where a person is appointed pursuant to arrangements under section
+8(6)—
+(a) this section applies in relation to a central register kept by
+the person as it applies in relation to a register kept by a
+licensing authority, and
+(b) subsection (2) applies to the appointed person as it applies
+to a licensing authority.
+(7) Nothing in this section prevents a licensing authority from making
+a plan of premises available—
+(a) to a responsible authority in relation to the premises, for the
+purposes of any function of the responsible authority,
+(b) for the purposes of, or in connection with, legal proceedings
+(including prospective legal proceedings),
+(c) for the purposes of obtaining legal advice, or
+(d) otherwise for the purposes of establishing, exercising or
+defending legal rights.
+(8) Where the plan of premises mentioned in subsection (1)(a) was
+received by the licensing authority before 26 March 2013, subsection
+(2) applies as if for “must not” there were substituted “is not
+required to”.
+(9) In this section—
+“appropriate security adviser” means a person of a description
+prescribed as such for the purposes of this Act;
+“relevant person” means—
+(a) the applicant, in relation to an application for a
+premises licence or club premises certificate, or
+(b) (if different) the person who is for the time being the
+holder of the license or certificate;
+Terrorism (Protection of Premises) Bill 43
+Schedule 3—Licensing of premises at heightened terrorism risk
+“relevant record”, in relation to a register kept by a licensing
+authority under section 8, means a record contained in the
+register of—
+(a) an application made to the authority for a premises
+licence or club premises certificate (whether or not a
+licence or certificate is issued),
+(b) an application made to the authority to vary a
+premises licence or club premises certificate (whether
+or not the licence or certificate is varied), or
+(c) a premises licence or club premises certificate issued
+by the authority;
+“responsible authority”, in relation to premises, has the meaning
+given by section 13.”
+4 (1) Section 17 (application for premises licence), is amended as follows.
+(2) In subsection (3), omit the “and” at the end of paragraph (b) and insert—
+“(ba) if, in the opinion of an appropriate security adviser, the
+premises are at heightened risk of being a target of terrorist
+activity, by a statement under section 8A (terrorism
+protection statements), and”.
+(3) After subsection (6) insert—
+“(7) In subsection (3)(ba), “appropriate security adviser” has the same
+meaning as in section 8A.”
+5 (1) Section 71 (application for club premises certificate) is amended as follows.
+(2) In subsection (4), omit the “and” at the end of paragraph (b) and insert—
+“(ba) if, in the opinion of an appropriate security adviser, the
+premises are at heightened risk of being a target of terrorist
+activity, by a statement under section 8A (terrorism
+protection statements), and”.
+(3) After subsection (7) insert—
+“(8) In subsection (4)(ba), “appropriate security adviser” has the same
+meaning as in section 8A.”
+6 After section 33 insert—
+“33A Withdrawal of terrorism protection statement
+(1) This section applies where—
+(a) a premises licence has been issued by a licensing authority,
+(b) the authority has been given a statement under section 8A
+(terrorism protection statement) in relation to the premises
+to which the licence relates,
+(c) the statement has not been withdrawn, and,
+(d) the holder of the licence becomes aware that, in the opinion
+of an appropriate security adviser, the premises are not (or
+44 Terrorism (Protection of Premises) Bill
+Schedule 3—Licensing of premises at heightened terrorism risk
+are no longer) at heightened risk of being a target of terrorist
+activity.
+(2) The holder of the licence must, as soon as is reasonably practicable,
+notify the licensing authority that the statement is withdrawn.
+(3) Notification under subsection (2) must be—
+(a) in the prescribed form, and
+(b) certified by an appropriate security adviser in the prescribed
+manner.
+(4) Before certifying a notification under subsection (2), an appropriate
+security adviser must have regard to any statement issued by the
+Secretary of State for the purposes of this section.
+(5) In this section, “appropriate security adviser” has the same meaning
+as in section 8A.”
+7 After section 83 insert—
+“83A Withdrawal of terrorism protection statement
+(1) This section applies where—
+(a) a club premises certificate has been issued by a licensing
+authority,
+(b) the authority has been given a statement under section 8A
+(terrorism protection statements) in relation to the premises
+to which the certificate relates,
+(c) the statement has not been withdrawn, and
+(d) the holder of the certificate becomes aware that, in the
+opinion of an appropriate security adviser, the premises are
+not (or are no longer) at heightened risk of being a target of
+terrorist activity.
+(2) The holder of the certificate must, as soon as is reasonably
+practicable, notify the licensing authority that the statement is
+withdrawn.
+(3) Notification under subsection (2) must be—
+(a) in the prescribed form, and
+(b) certified by an appropriate security adviser in the prescribed
+manner.
+(4) Before certifying a notification under subsection (2), an appropriate
+security adviser must have regard to any statement issued by the
+Secretary of State for the purposes of this section.
+(5) In this section, “appropriate security adviser” has the same meaning
+as in section 8A.”
+8 In section 193 (other definitions), in subsection (1), at the appropriate place
+insert—
+““terrorism” has the same meaning as in the Terrorism Act 2000;”.
+Terrorism (Protection of Premises) Bill 45
+Schedule 3—Licensing of premises at heightened terrorism risk
+E02903755
+978-1-5286-4082-4
+[END CONTEXT]

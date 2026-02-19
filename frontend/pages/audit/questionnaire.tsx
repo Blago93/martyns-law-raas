@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import MarketingHeader from '../../components/marketing/Header';
 import { Shield, ArrowRight, CheckCircle, AlertTriangle } from 'lucide-react';
 
 export default function Questionnaire() {
@@ -76,7 +75,7 @@ export default function Questionnaire() {
                 <title>Pre-Audit Check | RaaS Platform</title>
             </Head>
 
-            <MarketingHeader />
+            {/* Header handled by Layout */}
 
             <main className="pt-32 pb-20 px-4 max-w-3xl mx-auto">
 

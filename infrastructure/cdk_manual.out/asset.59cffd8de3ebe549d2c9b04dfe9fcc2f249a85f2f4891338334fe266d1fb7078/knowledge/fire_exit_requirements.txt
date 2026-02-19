@@ -1,0 +1,63 @@
+# UK Fire Exit Requirements (BS 5499-4:2013)
+
+## What Constitutes a Legal Fire Exit
+
+A fire exit in the UK MUST have:
+
+1. **Green "Running Man" Sign** (BS 5499-4:2013)
+   - Pictogram showing a person running towards a door
+   - White symbol on green background
+   - Illuminated or photoluminescent
+   - Visible from all approach angles
+
+2. **Directional Arrow** (if not immediately visible)
+   - Points toward the exit route
+   - Green background with white arrow
+
+3. **"Fire Exit" or "Emergency Exit" Text** (optional but common)
+   - Usually accompanies the running man symbol
+
+4. **Push Bar or Panic Hardware** (for final exits)
+   - Must open in direction of escape
+   - No locks requiring keys from inside
+
+5. **Clear, Unobstructed Path**
+   - Minimum 750mm width for single person
+   - No storage, furniture, or obstacles
+
+## What is NOT a Fire Exit
+
+- **Regular doors** without signage
+- **Locked doors** requiring keys
+- **Doors to cupboards, offices, or rooms**
+- **Doors that open inward** (toward the room)
+- **Unmarked exits** (even if they lead outside)
+
+## Counter-Terrorism Considerations (Martyn's Law)
+
+Fire exits present a security dilemma:
+- **Must remain accessible** for emergency evacuation
+- **Can be exploited** for hostile reconnaissance or unauthorized entry
+- **Require monitoring** (CCTV, alarms) without impeding egress
+
+### Reasonably Practicable Mitigations:
+- Alarmed fire exits (sound when opened)
+- CCTV coverage of exit routes
+- Staff training on suspicious behavior
+- Regular checks that exits are clear
+
+### NOT Reasonably Practicable:
+- Locking fire exits
+- Removing fire exit signage
+- Blocking exits with security barriers
+
+## Assessment Guidance
+
+When analyzing an image:
+1. **Look for the green running man sign** - this is the definitive indicator
+2. **Check for "Fire Exit" text** - secondary indicator
+3. **Verify the door type** - push bars, panic hardware
+4. **Assess the context** - does it lead to a corridor or outside?
+5. **Do NOT assume** - a regular door is not a fire exit unless marked
+
+**If no signage is visible, it is NOT a fire exit.**

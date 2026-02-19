@@ -30,7 +30,7 @@ const pool = new Pool({
     database: process.env.DB_NAME || 'martyns_law_db',
     password,
     port: parseInt(process.env.DB_PORT || '5432', 10),
-    ssl: {
+    ssl: process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1' ? false : {
         rejectUnauthorized: false // Required for AWS RDS connections
     }
 });

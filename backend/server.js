@@ -4,7 +4,12 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const ffmpeg = require('fluent-ffmpeg');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const authenticateToken = require('./middleware/auth');
 const cors = require('cors');
+
+const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_key_123';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -124,8 +129,16 @@ app.get('/api/health/db', async (req, res) => {
 const initDB = async () => {
     try {
         await db.query(`
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                password_hash VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+
             CREATE TABLE IF NOT EXISTS findings (
                 id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES users(id),
                 digital_thread_id VARCHAR(255),
                 hazard_type VARCHAR(255),
                 severity VARCHAR(50),
@@ -134,11 +147,13 @@ const initDB = async () => {
                 reasonably_practicable BOOLEAN,
                 status VARCHAR(50) DEFAULT 'PENDING_REVIEW', -- PENDING_REVIEW, VALIDATED, OVERRIDDEN
                 justification TEXT,
+                model_used VARCHAR(255),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
             CREATE TABLE IF NOT EXISTS venue_settings (
-                id INTEGER PRIMARY KEY,
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER UNIQUE REFERENCES users(id),
                 venue_name VARCHAR(255),
                 max_capacity INTEGER,
                 address TEXT,
@@ -147,6 +162,7 @@ const initDB = async () => {
 
             CREATE TABLE IF NOT EXISTS responsible_persons (
                 id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES users(id),
                 name VARCHAR(255),
                 role VARCHAR(255),
                 email VARCHAR(255),
@@ -154,13 +170,51 @@ const initDB = async () => {
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         `);
-        console.log("✅ Database tables verified/created.");
+        console.log("✅ Database tables verified/created (Multi-Tenant Schema).");
     } catch (err) {
         console.error("❌ Database Schema Error:", err);
     }
 };
 
 initDB();
+
+// Route: Register User
+app.post('/api/auth/register', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ error: 'Email and password required' });
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const result = await db.query(
+            'INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email',
+            [email, hashedPassword]
+        );
+        res.status(201).json({ message: 'User registered successfully', user: result.rows[0] });
+    } catch (error) {
+        if (error.code === '23505') { // Unique violation
+            return res.status(409).json({ error: 'Email already registered' });
+        }
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Route: Login User
+app.post('/api/auth/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+        const user = result.rows[0];
+
+        if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '24h' });
+        res.json({ token, user: { id: user.id, email: user.email } });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 // Route: /api/audit/analyze
 // Triggers AI Risk Assessment on the uploaded video
@@ -169,7 +223,8 @@ const { analyzeRisk } = require('./services/bedrock');
 const { getSatelliteMap } = require('./services/maps');
 
 // 5. Audit Analysis Route (Hybrid)
-app.post('/api/audit/analyze', upload.fields([{ name: 'frame', maxCount: 1 }, { name: 'evidence_docs', maxCount: 5 }]), async (req, res) => {
+// 5. Audit Analysis Route (Hybrid) - Protected
+app.post('/api/audit/analyze', authenticateToken, upload.fields([{ name: 'frame', maxCount: 1 }, { name: 'evidence_docs', maxCount: 5 }]), async (req, res) => {
     try {
         if (!req.files || !req.files['frame'] || req.files['frame'].length === 0) {
             return res.status(400).json({ error: 'No video frame uploaded' });
@@ -224,17 +279,19 @@ app.post('/api/audit/analyze', upload.fields([{ name: 'frame', maxCount: 1 }, { 
 
         try {
             const insertQuery = `
-                INSERT INTO findings (digital_thread_id, hazard_type, severity, description, mitigation, reasonably_practicable, status)
-                VALUES ($1, $2, $3, $4, $5, $6, 'PENDING_REVIEW')
+                INSERT INTO findings (user_id, digital_thread_id, hazard_type, severity, description, mitigation, reasonably_practicable, status, model_used)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, 'PENDING_REVIEW', $8)
                 RETURNING *;
             `;
             const values = [
+                req.user.id,
                 digitalThreadId,
                 riskAssessment.hazard_type,
                 riskAssessment.severity,
                 riskAssessment.description,
                 riskAssessment.mitigation,
-                riskAssessment.reasonably_practicable
+                riskAssessment.reasonably_practicable,
+                riskAssessment._model_used
             ];
 
             const dbResult = await db.query(insertQuery, values);
@@ -265,9 +322,10 @@ app.post('/api/audit/analyze', upload.fields([{ name: 'frame', maxCount: 1 }, { 
 });
 
 // Route: Get Findings
-app.get('/api/audit/findings', async (req, res) => {
+// Route: Get Findings - Protected
+app.get('/api/audit/findings', authenticateToken, async (req, res) => {
     try {
-        const result = await db.query('SELECT * FROM findings ORDER BY created_at DESC');
+        const result = await db.query('SELECT * FROM findings WHERE user_id = $1 ORDER BY created_at DESC', [req.user.id]);
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching findings:', error);
@@ -276,15 +334,21 @@ app.get('/api/audit/findings', async (req, res) => {
 });
 
 // Route: Update Finding Status (Accept/Override)
-app.put('/api/audit/findings/:id', async (req, res) => {
+// Route: Update Finding Status (Accept/Override) - Protected
+app.put('/api/audit/findings/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
     const { status, justification } = req.body;
 
     try {
         const result = await db.query(
-            'UPDATE findings SET status = $1, justification = $2 WHERE id = $3 RETURNING *',
-            [status, justification, id]
+            'UPDATE findings SET status = $1, justification = $2 WHERE id = $3 AND user_id = $4 RETURNING *',
+            [status, justification, id, req.user.id]
         );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Finding not found or unauthorized' });
+        }
+
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error updating finding:', error);
@@ -293,7 +357,8 @@ app.put('/api/audit/findings/:id', async (req, res) => {
 });
 
 // Route: Get Audit History (Grouped by Digital Thread)
-app.get('/api/audit/history', async (req, res) => {
+// Route: Get Audit History (Grouped by Digital Thread) - Protected
+app.get('/api/audit/history', authenticateToken, async (req, res) => {
     try {
         const query = `
             SELECT 
@@ -303,10 +368,11 @@ app.get('/api/audit/history', async (req, res) => {
                 COUNT(CASE WHEN status = 'PENDING_REVIEW' THEN 1 END) as pending_count,
                 COUNT(CASE WHEN severity = 'CRITICAL' THEN 1 END) as critical_count
             FROM findings
+            WHERE user_id = $1
             GROUP BY digital_thread_id
             ORDER BY date DESC
         `;
-        const result = await db.query(query);
+        const result = await db.query(query, [req.user.id]);
         res.json(result.rows);
     } catch (error) {
         console.error('Error fetching history:', error);
@@ -317,10 +383,11 @@ app.get('/api/audit/history', async (req, res) => {
 // --- SETTINGS API ---
 
 // Route: Get Venue Settings & Responsible Persons
-app.get('/api/settings', async (req, res) => {
+// Route: Get Venue Settings & Responsible Persons - Protected
+app.get('/api/settings', authenticateToken, async (req, res) => {
     try {
-        // 1. Get Venue Config (Singleton - ID 1)
-        const venueRes = await db.query('SELECT * FROM venue_settings WHERE id = 1');
+        // 1. Get Venue Config (User Specific)
+        const venueRes = await db.query('SELECT * FROM venue_settings WHERE user_id = $1', [req.user.id]);
         let venue = venueRes.rows[0];
 
         // Default if not exists
@@ -329,7 +396,7 @@ app.get('/api/settings', async (req, res) => {
         }
 
         // 2. Get Responsible Persons
-        const personsRes = await db.query('SELECT * FROM responsible_persons ORDER BY created_at ASC');
+        const personsRes = await db.query('SELECT * FROM responsible_persons WHERE user_id = $1 ORDER BY created_at ASC', [req.user.id]);
 
         res.json({
             venue,
@@ -342,32 +409,34 @@ app.get('/api/settings', async (req, res) => {
 });
 
 // Route: Save Venue Settings
-app.post('/api/settings', async (req, res) => {
+// Route: Save Venue Settings - Protected
+app.post('/api/settings', authenticateToken, async (req, res) => {
     const { venue, responsiblePersons } = req.body;
 
     try {
         await db.query('BEGIN');
 
-        // 1. Upsert Venue Settings (Force ID 1)
+        // 1. Upsert Venue Settings (Key off user_id)
         const venueQuery = `
-            INSERT INTO venue_settings (id, venue_name, max_capacity, address, updated_at)
-            VALUES (1, $1, $2, $3, NOW())
-            ON CONFLICT (id) DO UPDATE 
+            INSERT INTO venue_settings (user_id, venue_name, max_capacity, address, updated_at)
+            VALUES ($1, $2, $3, $4, NOW())
+            ON CONFLICT (user_id) DO UPDATE 
             SET venue_name = EXCLUDED.venue_name, 
                 max_capacity = EXCLUDED.max_capacity,
                 address = EXCLUDED.address,
                 updated_at = NOW()
             RETURNING *;
         `;
-        await db.query(venueQuery, [venue.venue_name, venue.max_capacity, venue.address]);
+        await db.query(venueQuery, [req.user.id, venue.venue_name, venue.max_capacity, venue.address]);
 
-        // 2. Sync Responsible Persons (Delete all & Re-insert strategy for simplicity)
-        // In a real app with relationships, we would be more careful, but this ensures the list matches UI exactly.
-        await db.query('DELETE FROM responsible_persons');
+        // 2. Sync Responsible Persons (Delete all for user & Re-insert)
+        await db.query('DELETE FROM responsible_persons WHERE user_id = $1', [req.user.id]);
 
         if (responsiblePersons && responsiblePersons.length > 0) {
-            const personValues = responsiblePersons.map(p => `('${p.name}', '${p.role}', '${p.email}', '${p.phone || ''}')`).join(',');
-            await db.query(`INSERT INTO responsible_persons (name, role, email, phone) VALUES ${personValues}`);
+            const personValues = responsiblePersons.map((p, i) => `($${i * 5 + 1}, $${i * 5 + 2}, $${i * 5 + 3}, $${i * 5 + 4}, $${i * 5 + 5})`).join(',');
+            const queryParams = responsiblePersons.flatMap(p => [req.user.id, p.name, p.role, p.email, p.phone || '']);
+
+            await db.query(`INSERT INTO responsible_persons (user_id, name, role, email, phone) VALUES ${personValues}`, queryParams);
         }
 
         await db.query('COMMIT');

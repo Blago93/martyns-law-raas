@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SianNotification from '../../components/SianNotification';
-import MarketingHeader from '../../components/marketing/Header';
 import { Camera, AlertCircle, CheckCircle, RefreshCw, Pause, Play, Square } from 'lucide-react';
 
 export default function RecordAudit() {
@@ -256,7 +255,7 @@ export default function RecordAudit() {
 
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-sans">
-            <MarketingHeader />
+            {/* Header handled by Layout */}
 
             <main className="pt-24 pb-20 px-4 max-w-6xl mx-auto grid md:grid-cols-2 gap-8 min-h-[calc(100vh-80px)]">
 

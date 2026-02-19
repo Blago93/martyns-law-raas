@@ -22,18 +22,18 @@ const client = new BedrockRuntimeClient({
 // ---------------------------------------------------------------------------
 const MODEL_CASCADE = [
     {
-        id: "anthropic.claude-3-5-sonnet-20240620-v1:0",
-        label: "Claude 3.5 Sonnet",
+        id: "us.anthropic.claude-3-5-sonnet-20241022-v2:0", // US Inference Profile
+        label: "Claude 3.5 Sonnet v2",
         maxTokens: 1024,
     },
     {
-        id: "anthropic.claude-3-sonnet-20240229-v1:0",
-        label: "Claude 3 Sonnet",
+        id: "us.anthropic.claude-3-7-sonnet-20250219-v1:0", // US Inference Profile (Hypothetical, keeping for consistency if available)
+        label: "Claude 3.7 Sonnet",
         maxTokens: 1024,
     },
     {
-        id: "anthropic.claude-3-haiku-20240307-v1:0",
-        label: "Claude 3 Haiku",
+        id: "us.anthropic.claude-3-5-haiku-20241022-v1:0", // US Inference Profile
+        label: "Claude 3.5 Haiku",
         maxTokens: 1000,
     },
     {
@@ -273,9 +273,13 @@ async function analyzeRisk(
                 };
             }
 
-            if (error.message && error.message.includes('access to the model')) {
-                // Model not enabled — skip to next in cascade
-                console.warn(`[Bedrock] Model access not granted for ${model.label}, trying next...`);
+            if (error.message && (
+                error.message.includes('access to the model') ||
+                error.message.includes('is not supported') ||
+                error.message.includes('inference profile')
+            )) {
+                // Model not enabled or requires profile — skip to next in cascade
+                console.warn(`[Bedrock] Model ${model.label} not supported or access denied, trying next...`);
                 continue;
             }
 

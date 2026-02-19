@@ -1,0 +1,713 @@
+{
+ "Resources": {
+  "RaasVpc3D794FF8": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc"
+     }
+    ]
+   }
+  },
+  "RaasVpcPublicSubnet1SubnetA18ED6AB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-west-2a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPublicSubnet1RouteTable57DB4997": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPublicSubnet1RouteTableAssociation122B9603": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "RaasVpcPublicSubnet1RouteTable57DB4997"
+    },
+    "SubnetId": {
+     "Ref": "RaasVpcPublicSubnet1SubnetA18ED6AB"
+    }
+   }
+  },
+  "RaasVpcPublicSubnet1DefaultRoute95A26BCE": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "RaasVpcIGWDB28A1F7"
+    },
+    "RouteTableId": {
+     "Ref": "RaasVpcPublicSubnet1RouteTable57DB4997"
+    }
+   },
+   "DependsOn": [
+    "RaasVpcVPCGW2E0657D2"
+   ]
+  },
+  "RaasVpcPublicSubnet1EIPD5ADFB92": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+     }
+    ]
+   }
+  },
+  "RaasVpcPublicSubnet1NATGateway585E085B": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "RaasVpcPublicSubnet1EIPD5ADFB92",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "RaasVpcPublicSubnet1SubnetA18ED6AB"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "RaasVpcPublicSubnet1DefaultRoute95A26BCE",
+    "RaasVpcPublicSubnet1RouteTableAssociation122B9603"
+   ]
+  },
+  "RaasVpcPublicSubnet2Subnet6568C2B5": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-west-2b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPublicSubnet2RouteTableA98E98E9": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPublicSubnet2RouteTableAssociationC9FC7B35": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "RaasVpcPublicSubnet2RouteTableA98E98E9"
+    },
+    "SubnetId": {
+     "Ref": "RaasVpcPublicSubnet2Subnet6568C2B5"
+    }
+   }
+  },
+  "RaasVpcPublicSubnet2DefaultRoute04BA60CC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "RaasVpcIGWDB28A1F7"
+    },
+    "RouteTableId": {
+     "Ref": "RaasVpcPublicSubnet2RouteTableA98E98E9"
+    }
+   },
+   "DependsOn": [
+    "RaasVpcVPCGW2E0657D2"
+   ]
+  },
+  "RaasVpcPrivateSubnet1Subnet4233ACDA": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-west-2a",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet1RouteTable59C51CAD": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet1RouteTableAssociation2DFA0B56": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "RaasVpcPrivateSubnet1RouteTable59C51CAD"
+    },
+    "SubnetId": {
+     "Ref": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet1DefaultRoute23D09943": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "RaasVpcPublicSubnet1NATGateway585E085B"
+    },
+    "RouteTableId": {
+     "Ref": "RaasVpcPrivateSubnet1RouteTable59C51CAD"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet2Subnet73518A6A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "eu-west-2b",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet2RouteTableCEB72A58": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet2RouteTableAssociation09263073": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "RaasVpcPrivateSubnet2RouteTableCEB72A58"
+    },
+    "SubnetId": {
+     "Ref": "RaasVpcPrivateSubnet2Subnet73518A6A"
+    }
+   }
+  },
+  "RaasVpcPrivateSubnet2DefaultRoute445F9583": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "RaasVpcPublicSubnet1NATGateway585E085B"
+    },
+    "RouteTableId": {
+     "Ref": "RaasVpcPrivateSubnet2RouteTableCEB72A58"
+    }
+   }
+  },
+  "RaasVpcIGWDB28A1F7": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MartynsLawRaasStack/RaasVpc"
+     }
+    ]
+   }
+  },
+  "RaasVpcVPCGW2E0657D2": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "RaasVpcIGWDB28A1F7"
+    },
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "AppRunnerSGAFD09FB7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for App Runner service",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "DatabaseSG2A23C222": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for RDS Database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "RaasVpc3D794FF8"
+    }
+   }
+  },
+  "DatabaseSGfromMartynsLawRaasStackAppRunnerSG39B290CE54326179DFB6": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Allow Postgres from App Runner",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "DatabaseSG2A23C222",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "AppRunnerSGAFD09FB7",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   }
+  },
+  "RaasDatabaseSubnetGroupD6757BF9": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for RaasDatabase database",
+    "SubnetIds": [
+     {
+      "Ref": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+     },
+     {
+      "Ref": "RaasVpcPrivateSubnet2Subnet73518A6A"
+     }
+    ]
+   }
+  },
+  "MartynsLawRaasStackRaasDatabaseSecret67C95F803fdaad7efa858a3daf9490cf0a702aeb": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"postgres\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "RaasDatabaseSecretAttachment073B4A49": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "MartynsLawRaasStackRaasDatabaseSecret67C95F803fdaad7efa858a3daf9490cf0a702aeb"
+    },
+    "TargetId": {
+     "Ref": "RaasDatabaseFCC1C206"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   }
+  },
+  "RaasDatabaseFCC1C206": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "20",
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t3.micro",
+    "DBName": "martyns_law_db",
+    "DBSubnetGroupName": {
+     "Ref": "RaasDatabaseSubnetGroupD6757BF9"
+    },
+    "DeletionProtection": false,
+    "Engine": "postgres",
+    "EngineVersion": "16",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "MartynsLawRaasStackRaasDatabaseSecret67C95F803fdaad7efa858a3daf9490cf0a702aeb"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": "postgres",
+    "PubliclyAccessible": false,
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "DatabaseSG2A23C222",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "RaasAppRunnerTaskRoleBD91C743": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "tasks.apprunner.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "RaasAppRunnerTaskRoleDefaultPolicyEA96CD2C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:ApplyGuardrail"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "RaasDatabaseSecretAttachment073B4A49"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "RaasAppRunnerTaskRoleDefaultPolicyEA96CD2C",
+    "Roles": [
+     {
+      "Ref": "RaasAppRunnerTaskRoleBD91C743"
+     }
+    ]
+   }
+  },
+  "RaasAppRunnerECRRoleD53BEE1E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "build.apprunner.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
+    ]
+   }
+  },
+  "VpcConnector": {
+   "Type": "AWS::AppRunner::VpcConnector",
+   "Properties": {
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "AppRunnerSGAFD09FB7",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "RaasVpcPrivateSubnet1Subnet4233ACDA"
+     },
+     {
+      "Ref": "RaasVpcPrivateSubnet2Subnet73518A6A"
+     }
+    ]
+   }
+  },
+  "RaasBackendService": {
+   "Type": "AWS::AppRunner::Service",
+   "Properties": {
+    "InstanceConfiguration": {
+     "Cpu": "1 vCPU",
+     "InstanceRoleArn": {
+      "Fn::GetAtt": [
+       "RaasAppRunnerTaskRoleBD91C743",
+       "Arn"
+      ]
+     },
+     "Memory": "2 GB"
+    },
+    "NetworkConfiguration": {
+     "EgressConfiguration": {
+      "EgressType": "VPC",
+      "VpcConnectorArn": {
+       "Fn::GetAtt": [
+        "VpcConnector",
+        "VpcConnectorArn"
+       ]
+      }
+     }
+    },
+    "SourceConfiguration": {
+     "AuthenticationConfiguration": {
+      "AccessRoleArn": {
+       "Fn::GetAtt": [
+        "RaasAppRunnerECRRoleD53BEE1E",
+        "Arn"
+       ]
+      }
+     },
+     "AutoDeploymentsEnabled": true,
+     "ImageRepository": {
+      "ImageConfiguration": {
+       "Port": "3001",
+       "RuntimeEnvironmentSecrets": [
+        {
+         "Name": "DB_SECRET",
+         "Value": {
+          "Ref": "RaasDatabaseSecretAttachment073B4A49"
+         }
+        }
+       ],
+       "RuntimeEnvironmentVariables": [
+        {
+         "Name": "NODE_ENV",
+         "Value": "production"
+        },
+        {
+         "Name": "DB_HOST",
+         "Value": {
+          "Fn::GetAtt": [
+           "RaasDatabaseFCC1C206",
+           "Endpoint.Address"
+          ]
+         }
+        },
+        {
+         "Name": "DB_PORT",
+         "Value": {
+          "Fn::GetAtt": [
+           "RaasDatabaseFCC1C206",
+           "Endpoint.Port"
+          ]
+         }
+        },
+        {
+         "Name": "DB_NAME",
+         "Value": "martyns_law_db"
+        }
+       ]
+      },
+      "ImageIdentifier": {
+       "Fn::Sub": "728768429638.dkr.ecr.eu-west-2.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-728768429638-eu-west-2:20f2c606a8c0eb0b34d83f6231ef9320707a64221086c711caff640d1ee7ed40"
+      },
+      "ImageRepositoryType": "ECR"
+     }
+    }
+   }
+  }
+ },
+ "Outputs": {
+  "AppRunnerUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Fn::GetAtt": [
+        "RaasBackendService",
+        "ServiceUrl"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "DatabaseEndpoint": {
+   "Value": {
+    "Fn::GetAtt": [
+     "RaasDatabaseFCC1C206",
+     "Endpoint.Address"
+    ]
+   }
+  },
+  "DatabaseSecretArn": {
+   "Value": {
+    "Ref": "RaasDatabaseSecretAttachment073B4A49"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

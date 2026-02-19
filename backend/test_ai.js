@@ -5,8 +5,8 @@ const path = require('path');
 const { BedrockRuntimeClient, InvokeModelCommand } = require("@aws-sdk/client-bedrock-runtime");
 
 // ⚡️ OVERRIDE: Try Haiku directly in this test script
-const HAIKU_ID = "anthropic.claude-3-haiku-20240307-v1:0";
-const SONNET_ID = "anthropic.claude-3-sonnet-20240229-v1:0";
+const HAIKU_ID = "us.anthropic.claude-3-5-haiku-20241022-v1:0";
+const SONNET_ID = "us.anthropic.claude-3-5-sonnet-20241022-v2:0";
 
 async function testAI() {
     console.log("🧪 Testing AI Risk Engine...");
@@ -15,7 +15,8 @@ async function testAI() {
     // Create dummy image buffer
     const dummyBuffer = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
 
-    // --- TEST 1: Haiku ---
+    // --- TEST 1: Haiku (Skipped - Requires Inference Profile) ---
+    /*
     try {
         console.log(`\nAttempting with Haiku (${HAIKU_ID})...`);
         const result = await analyzeRiskWithModel(dummyBuffer, { name: "Test Venue", capacity: 50 }, HAIKU_ID);
@@ -25,6 +26,7 @@ async function testAI() {
     } catch (err) {
         console.log("❌ Haiku Failed:", err.message);
     }
+    */
 
     // --- TEST 2: Sonnet ---
     try {

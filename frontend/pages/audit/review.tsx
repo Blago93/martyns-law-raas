@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import MarketingHeader from '../../components/marketing/Header';
 import { Shield, AlertTriangle, CheckCircle, XCircle, FileText, ChevronRight, Lock, Play, Camera, Loader2 } from 'lucide-react';
 import mockData from '../../data/mock_assessment.json';
 
@@ -326,7 +325,7 @@ export default function ReviewAudit() {
                 <title>Audit Review | RaaS</title>
             </Head>
 
-            <MarketingHeader />
+            {/* Header handled by Layout */}
 
             <main className="pt-32 pb-20 px-4 max-w-7xl mx-auto">
 

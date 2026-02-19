@@ -1,0 +1,35 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "5ea5f2e3420d7ae1e51abbe941da00c173468c602a0d7bd255fbf9a1ef708013": {
+      "source": {
+        "path": "MartynsLawRaasStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "728768429638-eu-west-2": {
+          "bucketName": "cdk-hnb659fds-assets-728768429638-eu-west-2",
+          "objectKey": "5ea5f2e3420d7ae1e51abbe941da00c173468c602a0d7bd255fbf9a1ef708013.json",
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::728768429638:role/cdk-hnb659fds-file-publishing-role-728768429638-eu-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "20f2c606a8c0eb0b34d83f6231ef9320707a64221086c711caff640d1ee7ed40": {
+      "source": {
+        "directory": "asset.20f2c606a8c0eb0b34d83f6231ef9320707a64221086c711caff640d1ee7ed40",
+        "platform": "linux/amd64"
+      },
+      "destinations": {
+        "728768429638-eu-west-2": {
+          "repositoryName": "cdk-hnb659fds-container-assets-728768429638-eu-west-2",
+          "imageTag": "20f2c606a8c0eb0b34d83f6231ef9320707a64221086c711caff640d1ee7ed40",
+          "region": "eu-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::728768429638:role/cdk-hnb659fds-image-publishing-role-728768429638-eu-west-2"
+        }
+      }
+    }
+  }
+}
